@@ -22,7 +22,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/mahmudz/laravel-shadcn-app-panel.git`
+1. Clone the repository: `git clone https://github.com/dan0788/components-dashboard-laravel-shadcn.git`
 2. Navigate into the project directory: `cd [project directory]`
 3. Install PHP dependencies: `composer install`
 4. Copy `.env.example` to `.env` and configure your environment variables, including database settings and application key.
