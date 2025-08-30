@@ -9,6 +9,7 @@ import {
   LifeBuoy,
   Map,
   PieChart,
+  Puzzle,
   Send,
   Settings2,
   SquareTerminal,
@@ -32,14 +33,14 @@ const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/yelan.jpg",
+    avatar: "/avatars/nilou.png"
   },
   navMain: [
     {
       title: "Playground",
       url: "#",
       icon: SquareTerminal,
-      isActive: true,
+      isActive: false,
       items: [
         {
           title: "History",
@@ -120,6 +121,220 @@ const data = {
         },
       ],
     },
+    {
+      title: "Components",
+      url: "#",
+      icon: Puzzle,
+      items: [
+        {
+          title: "Accordion",
+          url: route('profile.edit'),
+        },
+
+        {
+          title: "Alert",
+          url: "#",
+        },
+        {
+          title: "Alert Dialog",
+          url: "#",
+        },
+        {
+          title: "Aspect Ratio",
+          url: "#",
+        },
+        {
+          title: "Avatar",
+          url: "#",
+        },
+        {
+          title: "Badge",
+          url: "#",
+        },
+        {
+          title: "Breadcrumb",
+          url: "#",
+        },
+        {
+          title: "Button",
+          url: "#",
+        },
+        {
+          title: "Calendar",
+          url: "#",
+        },
+        {
+          title: "Card",
+          url: "#",
+        },
+        {
+          title: "Carousel",
+          url: "#",
+        },
+        {
+          title: "Chart",
+          url: "#",
+        },
+        {
+          title: "Checkbox",
+          url: "#",
+        },
+        {
+          title: "Collapsible",
+          url: "#",
+        },
+        {
+          title: "Combobox",
+          url: "#",
+        },
+        {
+          title: "Command",
+          url: "#",
+        },
+        {
+          title: "Context Menu",
+          url: "#",
+        },
+        {
+          title: "Data Table",
+          url: "#",
+        },
+        {
+          title: "Date Picker",
+          url: "#",
+        },
+        {
+          title: "Dialog",
+          url: "#",
+        },
+        {
+          title: "Drawer",
+          url: "#",
+        },
+        {
+          title: "Dropdown Menu",
+          url: "#",
+        },
+        {
+          title: "React Hook Form",
+          url: "#",
+        },
+        {
+          title: "Hover Card",
+          url: "#",
+        },
+        {
+          title: "Input",
+          url: "#",
+        },
+        {
+          title: "Input OTP",
+          url: "#",
+        },
+        {
+          title: "Label",
+          url: "#",
+        },
+        {
+          title: "Menubar",
+          url: "#",
+        },
+        {
+          title: "Navigation Menu",
+          url: "#",
+        },
+        {
+          title: "Pagination",
+          url: "#",
+        },
+        {
+          title: "Popover",
+          url: "#",
+        },
+        {
+          title: "Progress",
+          url: "#",
+        },
+        {
+          title: "Radio Group",
+          url: "#",
+        },
+        {
+          title: "Resizable",
+          url: "#",
+        },
+        {
+          title: "Scroll-area",
+          url: "#",
+        },
+        {
+          title: "Select",
+          url: "#",
+        },
+        {
+          title: "Separator",
+          url: "#",
+        },
+        {
+          title: "Sheet",
+          url: "#",
+        },
+        {
+          title: "Sidebar",
+          url: "#",
+        },
+        {
+          title: "Skeleton",
+          url: "#",
+        },
+        {
+          title: "Slider",
+          url: "#",
+        },
+        {
+          title: "Sonner",
+          url: "#",
+        },
+        {
+          title: "Switch",
+          url: "#",
+        },
+        {
+          title: "Table",
+          url: "#",
+        },
+        {
+          title: "Tabs",
+          url: "#",
+        },
+        {
+          title: "Textarea",
+          url: "#",
+        },
+        {
+          title: "Toast",
+          url: "#",
+        },
+        {
+          title: "Toggle",
+          url: "#",
+        },
+        {
+          title: "Toggle Group",
+          url: "#",
+        },
+        {
+          title: "Tooltip",
+          url: "#",
+        },
+        {
+          title: "Typography",
+          url: "#",
+        },
+
+
+      ],
+    },
   ],
   navSecondary: [
     {
@@ -162,7 +377,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/dashboard">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <Command className="size-4" />
                 </div>
