@@ -155,7 +155,7 @@ export default function LoginPage({
       {/* Columna de la imagen o placeholder */}
       <div className="relative hidden bg-muted lg:block">
         <img
-          src="/placeholder.svg" // Asegúrate de que esta ruta sea correcta o cámbiala por tu imagen
+          src="/images/login.png" // Asegúrate de que esta ruta sea correcta o cámbiala por tu imagen
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
