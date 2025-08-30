@@ -101,17 +101,38 @@ export function NavUser({
                   Profile
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
+              <DropdownMenuItem asChild>
+                <Link
+                  className="w-full"
+                  href={route('profile.edit')}
+                  method={"get"}
+                  as={"button"}
+                >
+                  <BadgeCheck />
+                  Account
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
+              <DropdownMenuItem asChild>
+                <Link
+                  className="w-full"
+                  href={route('profile.edit')}
+                  method={"get"}
+                  as={"button"}
+                >
+                  <CreditCard />
+                  Billing
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
+              <DropdownMenuItem asChild>
+                <Link
+                  className="w-full"
+                  href="/no-route"
+                  method={"get"}
+                  as={"button"}
+                >
+                  <Bell />
+                  Notifications
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
