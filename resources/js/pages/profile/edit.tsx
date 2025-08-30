@@ -11,64 +11,71 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
+const myBreadcrumbs = [
+  { label: 'Dashboard', href: '/dashboard' },
+  { label: 'Profile', href: '/profile' },
+  { label: 'Edit' }, // El último no tiene link
+];
+
 export default function Edit({
     mustVerifyEmail,
     status,
 }: { mustVerifyEmail: boolean; status?: string }) {
     return (
-        <AuthenticatedLayout
-            header={'Edit Profile'}
-        >
-            <Head title="Profile" />
+        <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
+            <div className="[--header-height:calc(theme(spacing.14))]">
 
-            <div className="space-y-6">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Profile Information</CardTitle>
-                        <CardDescription>
-                            Update your account's profile information and email
-                            address.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                            className="max-w-xl"
-                        />
-                    </CardContent>
-                </Card>
+                <div className="space-y-6">
+                    <Head title="Profile" />
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Profile Information</CardTitle>
+                            <CardDescription>
+                                Update your account's profile information and email
+                                address.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <UpdateProfileInformationForm
+                                mustVerifyEmail={mustVerifyEmail}
+                                status={status}
+                                className="max-w-xl"
+                            />
+                        </CardContent>
+                    </Card>
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Update Password</CardTitle>
-                        <CardDescription>
-                            Ensure your account is using a long, random password
-                            to stay secure.
-                        </CardDescription>
-                    </CardHeader>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Update Password</CardTitle>
+                            <CardDescription>
+                                Ensure your account is using a long, random password
+                                to stay secure.
+                            </CardDescription>
+                        </CardHeader>
 
-                    <CardContent>
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </CardContent>
-                </Card>
+                        <CardContent>
+                            <UpdatePasswordForm className="max-w-xl" />
+                        </CardContent>
+                    </Card>
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Delete Account</CardTitle>
-                        <CardDescription>
-                            Once your account is deleted, all of its resources
-                            and data will be permanently deleted. Before
-                            deleting your account, please download any data or
-                            information that you wish to retain.
-                        </CardDescription>
-                    </CardHeader>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Delete Account</CardTitle>
+                            <CardDescription>
+                                Once your account is deleted, all of its resources
+                                and data will be permanently deleted. Before
+                                deleting your account, please download any data or
+                                information that you wish to retain.
+                            </CardDescription>
+                        </CardHeader>
 
-                    <CardContent>
-                        <DeleteUserForm className="max-w-xl" />
-                    </CardContent>
-                </Card>
+                        <CardContent>
+                            <DeleteUserForm className="max-w-xl" />
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
         </AuthenticatedLayout>
+
     );
 }
