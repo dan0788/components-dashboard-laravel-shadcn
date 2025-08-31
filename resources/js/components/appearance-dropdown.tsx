@@ -1,39 +1,63 @@
+import { useState, useEffect } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
-const AppearanceDropdown = ({ ...props }: React.ComponentProps<"div">) => {
-    const { setTheme, theme } = useTheme();
+const THEMES = ['light', 'dark', 'system', 'blue'] as const;
+type Theme = typeof THEMES[number];
 
-    return (
-        <div {...props}>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className={cn("h-7 w-7")}
-                    >
-                        {theme == 'light' ? <Sun /> : <Moon />}
-                        <span className="sr-only">Toggle theme</span>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => setTheme("light")}>
-                        Light
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        Dark
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTheme("system")}>
-                        System
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
-    );
+const AppearanceDropdown = ({ ...props }: React.ComponentProps<"div">) => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    if (savedTheme && THEMES.includes(savedTheme)) {
+      return savedTheme;
+    }
+    return 'system';
+  });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove(...THEMES);
+
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+      root.classList.add(systemTheme);
+    } else {
+      root.classList.add(theme);
+    }
+
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const currentIcon = (theme === 'light' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: light)').matches)) ? <Sun /> : <Moon />;
+
+  return (
+    <div {...props}>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className={cn("h-7 w-7")}
+          >
+            {currentIcon}
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          {THEMES.map((t) => (
+            <DropdownMenuItem key={t} onClick={() => setTheme(t)}>
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
 };
 
 export default AppearanceDropdown;
