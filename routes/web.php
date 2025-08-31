@@ -32,6 +32,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/components/alert-dialog', function () {
         return Inertia::render('components/alert-dialog');
     })->name('components.alert-dialog');
+    Route::get('/components/aspect-ratio', function () {
+        return Inertia::render('components/aspect-ratio');
+    })->name('components.aspect-ratio');
 
 });
 

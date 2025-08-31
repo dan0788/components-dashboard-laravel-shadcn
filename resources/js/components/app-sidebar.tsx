@@ -141,7 +141,7 @@ const data = {
         },
         {
           title: "Aspect Ratio",
-          url: "#",
+          url: route('components.aspect-ratio'),
         },
         {
           title: "Avatar",

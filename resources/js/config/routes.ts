@@ -38,6 +38,14 @@ const routes: Record<string, PageData> = {
             { label: 'AlertDialog' }
         ],
     },
+    'aspect-ratio': {
+        title: 'AspectRatio',
+        breadcrumbs: [
+            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Components' },
+            { label: 'AspectRatio' }
+        ],
+    },
 };
 
 export default routes;
