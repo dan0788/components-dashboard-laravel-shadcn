@@ -149,7 +149,7 @@ const data = {
         },
         {
           title: "Badge",
-          url: "#",
+          url: route('components.badge'),
         },
         {
           title: "Breadcrumb",

@@ -54,6 +54,14 @@ const routes: Record<string, PageData> = {
             { label: 'Avatar' }
         ],
     },
+    'badge': {
+        title: 'Badge',
+        breadcrumbs: [
+            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Components' },
+            { label: 'Badge' }
+        ],
+    },
 };
 
 export default routes;

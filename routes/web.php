@@ -38,6 +38,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/components/avatar', function () {
         return Inertia::render('components/avatar');
     })->name('components.avatar');
+    Route::get('/components/badge', function () {
+        return Inertia::render('components/badge');
+    })->name('components.badge');
 
 });
 
