@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head, usePage } from "@inertiajs/react";
-import { usePageData } from "@/pages/components/get-page"
+import { Head } from "@inertiajs/react";
+import { usePageData } from "@/hooks/get-page"
 
 export default function Page() {
 

@@ -133,10 +133,10 @@ const data = {
 
         {
           title: "Alert",
-          url: "#",
+          url: route('components.alert'),
         },
         {
-          title: "Alert Dialog",
+          title: "AlertDialog",
           url: route('components.alert-dialog'),
         },
         {

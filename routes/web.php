@@ -26,6 +26,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/components/accordion', function () {
         return Inertia::render('components/accordion');
     })->name('components.accordion');
+    Route::get('/components/alert', function () {
+        return Inertia::render('components/alert');
+    })->name('components.alert');
     Route::get('/components/alert-dialog', function () {
         return Inertia::render('components/alert-dialog');
     })->name('components.alert-dialog');

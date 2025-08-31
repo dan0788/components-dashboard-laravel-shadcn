@@ -1,12 +1,12 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head, usePage } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { usePageData } from "@/pages/components/get-page"
+import { usePageData } from "@/hooks/get-page"
 
 export default function Page() {
   const pageData = usePageData();

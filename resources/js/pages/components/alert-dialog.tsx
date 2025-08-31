@@ -1,52 +1,56 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head, usePage } from "@inertiajs/react";
-import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from "lucide-react"
+import { Head, router } from "@inertiajs/react";
 import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert"
-import { usePageData } from "@/pages/components/get-page"
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { usePageData } from "@/hooks/get-page"
 
 export default function Page() {
 
   const pageData = usePageData();
+
+  const handleRedirect = () => {
+    router.visit(route('dashboard'));
+  };
 
   return (
     <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
-        <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-white p-6">
+        <div className="w-64 max-w-xl mx-auto rounded-lg shadow-md bg-white p-6">
           <div className="grid w-full max-w-xl items-start gap-4">
-      <Alert>
-        <CheckCircle2Icon />
-        <AlertTitle>Success! Your changes have been saved</AlertTitle>
-        <AlertDescription>
-          This is an alert with icon, title and description.
-        </AlertDescription>
-      </Alert>
-      <Alert>
-        <PopcornIcon />
-        <AlertTitle>
-          This Alert has a title and an icon. No description.
-        </AlertTitle>
-      </Alert>
-      <Alert variant="destructive">
-        <AlertCircleIcon />
-        <AlertTitle>Unable to process your payment.</AlertTitle>
-        <AlertDescription>
-          <p>Please verify your billing information and try again.</p>
-          <ul className="list-inside list-disc text-sm">
-            <li>Check your card details</li>
-            <li>Ensure sufficient funds</li>
-            <li>Verify billing address</li>
-          </ul>
-        </AlertDescription>
-      </Alert>
-    </div>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline">Show Dialog</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your
+                    account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleRedirect}>Go to Dashboard</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         </div>
       </div>
+
     </AuthenticatedLayout>
   );
 }

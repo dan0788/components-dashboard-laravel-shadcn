@@ -22,6 +22,14 @@ const routes: Record<string, PageData> = {
             { label: 'Accordion' }
         ],
     },
+    'alert': {
+        title: 'Alert',
+        breadcrumbs: [
+            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Components' },
+            { label: 'Alert' }
+        ],
+    },
     'alert-dialog': {
         title: 'AlertDialog',
         breadcrumbs: [
