@@ -6,13 +6,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const myBreadcrumbs = [
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Accordion" },
-];
+import routes from "@/config/routes";
 
 export default function AccordionPage() {
+
+  const ROUTE_KEY = 'components.accordion';
+  const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs;
+
   return (
     <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
       <Head title="Accordion" />
