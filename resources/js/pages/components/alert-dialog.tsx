@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from "lucide-react"
 import {
   Alert,
@@ -10,14 +10,16 @@ import routes from "@/config/routes";
 
 export default function AccordionPage() {
 
-  const ROUTE_KEY = 'components.alert-dialog';
+  const { component } = usePage();
+  const pathParts = component.split('/');
+  const ROUTE_KEY = pathParts[pathParts.length - 1];
   const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs;
 
   return (
     <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
       <Head title="AlertDialog" />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: Accordion</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: AlertDialog</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-white p-6">
           <div className="grid w-full max-w-xl items-start gap-4">
       <Alert>

@@ -14,7 +14,7 @@ const routes: Record<string, PageData> = {
             { label: 'Dashboard' }
         ],
     },
-    'components.accordion': {
+    'accordion': {
         title: 'Accordion',
         breadcrumbs: [
             { label: 'Dashboard', href: '/dashboard' },
@@ -23,7 +23,7 @@ const routes: Record<string, PageData> = {
         ],
     },
     // Añade aquí más rutas y sus migas de pan
-    'components.alert-dialog': {
+    'alert-dialog': {
         title: 'AlertDialog',
         breadcrumbs: [
             { label: 'Dashboard', href: '/dashboard' },
