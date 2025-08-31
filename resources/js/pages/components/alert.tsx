@@ -17,7 +17,7 @@ export default function Page() {
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
-        <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-white p-6">
+        <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-card p-6">
           <div className="grid w-full max-w-xl items-start gap-4">
       <Alert>
         <CheckCircle2Icon />

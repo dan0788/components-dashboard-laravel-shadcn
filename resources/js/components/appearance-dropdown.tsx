@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const THEMES = ['light', 'dark', 'system', 'blue', 'daltonic'] as const;
+const THEMES = ['light', 'dark', 'system', 'blue', 'daltonic', 'rainbow'] as const;
 type Theme = typeof THEMES[number];
 
 const AppearanceDropdown = ({ ...props }: React.ComponentProps<"div">) => {

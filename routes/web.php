@@ -35,6 +35,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/components/aspect-ratio', function () {
         return Inertia::render('components/aspect-ratio');
     })->name('components.aspect-ratio');
+    Route::get('/components/avatar', function () {
+        return Inertia::render('components/avatar');
+    })->name('components.avatar');
 
 });
 

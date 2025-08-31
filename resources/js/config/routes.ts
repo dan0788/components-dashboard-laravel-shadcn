@@ -46,6 +46,14 @@ const routes: Record<string, PageData> = {
             { label: 'AspectRatio' }
         ],
     },
+    'avatar': {
+        title: 'Avatar',
+        breadcrumbs: [
+            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Components' },
+            { label: 'Avatar' }
+        ],
+    },
 };
 
 export default routes;

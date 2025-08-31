@@ -145,7 +145,7 @@ const data = {
         },
         {
           title: "Avatar",
-          url: "#",
+          url: route('components.avatar'),
         },
         {
           title: "Badge",
