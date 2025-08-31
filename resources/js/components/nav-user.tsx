@@ -104,7 +104,7 @@ export function NavUser({
               <DropdownMenuItem asChild>
                 <Link
                   className="w-full"
-                  href={route('profile.edit')}
+                  href="/no-route"
                   method={"get"}
                   as={"button"}
                 >
@@ -115,7 +115,7 @@ export function NavUser({
               <DropdownMenuItem asChild>
                 <Link
                   className="w-full"
-                  href={route('profile.edit')}
+                  href="/no-route"
                   method={"get"}
                   as={"button"}
                 >

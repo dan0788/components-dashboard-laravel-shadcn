@@ -128,7 +128,7 @@ const data = {
       items: [
         {
           title: "Accordion",
-          url: route('profile.edit'),
+          url: "#"
         },
 
         {
