@@ -14,9 +14,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return Inertia::render('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
+
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('dashboard');
+    })->name('dashboard');
+
+    Route::get('/components/accordion', function () {
+        return Inertia::render('components/accordion-page');
+    })->name('components.accordion');
+
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

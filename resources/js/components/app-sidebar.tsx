@@ -128,7 +128,7 @@ const data = {
       items: [
         {
           title: "Accordion",
-          url: "#"
+          url: route('components.accordion'),
         },
 
         {
