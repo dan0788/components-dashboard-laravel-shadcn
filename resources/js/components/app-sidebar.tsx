@@ -137,7 +137,7 @@ const data = {
         },
         {
           title: "Alert Dialog",
-          url: "#",
+          url: route('components.alert-dialog'),
         },
         {
           title: "Aspect Ratio",

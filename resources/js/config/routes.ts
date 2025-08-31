@@ -23,11 +23,12 @@ const routes: Record<string, PageData> = {
         ],
     },
     // Añade aquí más rutas y sus migas de pan
-    'components.button': {
-        title: 'Botón',
+    'components.alert-dialog': {
+        title: 'AlertDialog',
         breadcrumbs: [
             { label: 'Dashboard', href: '/dashboard' },
-            { label: 'Button' }
+            { label: 'Components' },
+            { label: 'AlertDialog' }
         ],
     },
 };

@@ -1,11 +1,12 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
 import { Head } from "@inertiajs/react";
-
-const myBreadcrumbs = [
-  { label: 'Dashboard'}, // El último no tiene link
-];
+import routes from "@/config/routes";
 
 export default function Page() {
+
+  const ROUTE_KEY = 'components.accordion';
+  const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs;
+  
   return (
     <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
       <Head title="Dashboard" />
