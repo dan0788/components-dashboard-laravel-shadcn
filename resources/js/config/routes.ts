@@ -22,7 +22,6 @@ const routes: Record<string, PageData> = {
             { label: 'Accordion' }
         ],
     },
-    // Añade aquí más rutas y sus migas de pan
     'alert-dialog': {
         title: 'AlertDialog',
         breadcrumbs: [

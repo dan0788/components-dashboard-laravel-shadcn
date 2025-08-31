@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/alert"
 import routes from "@/config/routes";
 
-export default function AccordionPage() {
+export default function Page() {
 
   const { component } = usePage();
   const pathParts = component.split('/');

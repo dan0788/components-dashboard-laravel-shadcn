@@ -6,18 +6,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import routes from "@/config/routes";
+import { usePageData } from "@/pages/components/get-page"
 
-export default function AccordionPage() {
+export default function Page() {
+  const pageData = usePageData();
 
-  const { component } = usePage();
-  const pathParts = component.split('/');
-  const ROUTE_KEY = pathParts[pathParts.length - 1];
-  const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs;
 
   return (
-    <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
-      <Head title="Accordion" />
+    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+      <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: Accordion</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-white p-6">
