@@ -1,17 +1,14 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
 import { Head, usePage } from "@inertiajs/react";
-import routes from "@/config/routes";
+import { usePageData } from "@/pages/components/get-page"
 
 export default function Page() {
 
-  const { component } = usePage();
-  const pathParts = component.split('/');
-  const ROUTE_KEY = pathParts[pathParts.length - 1];
-  const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs;
+  const pageData = usePageData();
 
   return (
-    <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
-      <Head title="Dashboard" />
+    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+      <Head title={pageData.title} />
       <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" >
       
       </div>

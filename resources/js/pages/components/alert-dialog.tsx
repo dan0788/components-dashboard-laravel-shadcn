@@ -6,20 +6,17 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
-import routes from "@/config/routes";
+import { usePageData } from "@/pages/components/get-page"
 
 export default function Page() {
 
-  const { component } = usePage();
-  const pathParts = component.split('/');
-  const ROUTE_KEY = pathParts[pathParts.length - 1];
-  const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs;
+  const pageData = usePageData();
 
   return (
-    <AuthenticatedLayout breadcrumbs={myBreadcrumbs}>
-      <Head title="AlertDialog" />
+    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+      <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: AlertDialog</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-white p-6">
           <div className="grid w-full max-w-xl items-start gap-4">
       <Alert>
