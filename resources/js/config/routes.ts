@@ -94,6 +94,14 @@ const routes: Record<string, PageData> = {
             { label: 'Card' }
         ],
     },
+    'carousel': {
+        title: 'Carousel',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Carousel' }
+        ],
+    },
 };
 
 export default routes;

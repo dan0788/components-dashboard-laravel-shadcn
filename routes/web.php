@@ -53,6 +53,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/card', function () {
         return Inertia::render('components/card');
     })->name('components.card');
+    Route::get('/components/carousel', function () {
+        return Inertia::render('components/carousel');
+    })->name('components.carousel');
 
 });
 
