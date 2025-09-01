@@ -32,6 +32,16 @@
         --sidebar-accent-foreground: 240 5.9% 10%;
         --sidebar-border: 220 13% 91%;
         --sidebar-ring: 217.2 91.2% 59.8%;
+        --chart-1: hsl(340, 85%, 55%);
+        --chart-2: hsl(260, 85%, 60%);
+        --chart-3: hsl(180, 85%, 60%);
+        --chart-4: hsl(60, 85%, 60%);
+        --chart-5: hsl(10, 85%, 60%);
+        --chart-6: hsl(280, 85%, 65%);
+        --chart-7: hsl(300, 85%, 60%);
+        --chart-8: hsl(240, 85%, 70%);
+        --chart-9: hsl(150, 85%, 55%);
+        --chart-10: hsl(40, 85%, 60%);
     }
 
     .dark {
@@ -62,6 +72,16 @@
         --sidebar-accent-foreground: 240 4.8% 95.9%;
         --sidebar-border: 240 3.7% 15.9%;
         --sidebar-ring: 217.2 91.2% 59.8%;
+        --chart-1: hsl(340, 85%, 55%);
+        --chart-2: hsl(260, 85%, 60%);
+        --chart-3: hsl(180, 85%, 60%);
+        --chart-4: hsl(60, 85%, 60%);
+        --chart-5: hsl(10, 85%, 60%);
+        --chart-6: hsl(280, 85%, 65%);
+        --chart-7: hsl(300, 85%, 60%);
+        --chart-8: hsl(240, 85%, 70%);
+        --chart-9: hsl(150, 85%, 55%);
+        --chart-10: hsl(40, 85%, 60%);
     }
 
     .blue {
@@ -92,6 +112,16 @@
         --sidebar-accent-foreground: 210 40% 98%;
         --sidebar-border: 215 30% 25%;
         --sidebar-ring: 215 80% 60%;
+        --chart-1: hsl(340, 85%, 55%);
+        --chart-2: hsl(260, 85%, 60%);
+        --chart-3: hsl(180, 85%, 60%);
+        --chart-4: hsl(60, 85%, 60%);
+        --chart-5: hsl(10, 85%, 60%);
+        --chart-6: hsl(280, 85%, 65%);
+        --chart-7: hsl(300, 85%, 60%);
+        --chart-8: hsl(240, 85%, 70%);
+        --chart-9: hsl(150, 85%, 55%);
+        --chart-10: hsl(40, 85%, 60%);
     }
 
     .daltonic {
@@ -122,6 +152,16 @@
         --sidebar-accent-foreground: 45 60% 95%;
         --sidebar-border: 210 20% 30%;
         --sidebar-ring: 45 80% 65%;
+        --chart-1: hsl(200, 85%, 55%);
+        --chart-2: hsl(30, 85%, 50%);
+        --chart-3: hsl(270, 60%, 50%);
+        --chart-4: hsl(120, 40%, 40%);
+        --chart-5: hsl(220, 20%, 65%);
+        --chart-6: hsl(240, 40%, 45%);
+        --chart-7: hsl(120, 30%, 35%);
+        --chart-8: hsl(20, 60%, 55%);
+        --chart-9: hsl(280, 40%, 65%);
+        --chart-10: hsl(0, 0%, 50%);
     }
 
     .rainbow {
@@ -152,6 +192,16 @@
         --sidebar-accent-foreground: 0 0% 98%;
         --sidebar-border: 220 10% 30%;
         --sidebar-ring: 340 85% 55%;
+        --chart-1: hsl(340, 85%, 55%);
+        --chart-2: hsl(260, 85%, 60%);
+        --chart-3: hsl(180, 85%, 60%);
+        --chart-4: hsl(60, 85%, 60%);
+        --chart-5: hsl(10, 85%, 60%);
+        --chart-6: hsl(280, 85%, 65%);
+        --chart-7: hsl(300, 85%, 60%);
+        --chart-8: hsl(240, 85%, 70%);
+        --chart-9: hsl(150, 85%, 55%);
+        --chart-10: hsl(40, 85%, 60%);
     }
 }
 

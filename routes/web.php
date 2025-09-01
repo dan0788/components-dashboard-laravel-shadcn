@@ -56,6 +56,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/carousel', function () {
         return Inertia::render('components/carousel');
     })->name('components.carousel');
+    Route::get('/components/chart', function () {
+        return Inertia::render('components/chart');
+    })->name('components.chart');
 
 });
 

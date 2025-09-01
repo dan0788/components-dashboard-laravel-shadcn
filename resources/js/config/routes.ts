@@ -102,6 +102,14 @@ const routes: Record<string, PageData> = {
             { label: 'Carousel' }
         ],
     },
+    'chart': {
+        title: 'Chart',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Chart' }
+        ],
+    },
 };
 
 export default routes;

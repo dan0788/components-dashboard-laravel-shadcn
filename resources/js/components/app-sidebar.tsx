@@ -173,7 +173,7 @@ const data = {
         },
         {
           title: "Chart",
-          url: "#",
+          url: route('components.chart'),
         },
         {
           title: "Checkbox",
