@@ -50,6 +50,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/calendar', function () {
         return Inertia::render('components/calendar');
     })->name('components.calendar');
+    Route::get('/components/card', function () {
+        return Inertia::render('components/card');
+    })->name('components.card');
 
 });
 

@@ -165,7 +165,7 @@ const data = {
         },
         {
           title: "Card",
-          url: "#",
+          url: route('components.card'),
         },
         {
           title: "Carousel",
