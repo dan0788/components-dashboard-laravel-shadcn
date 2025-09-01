@@ -157,7 +157,7 @@ const data = {
         },
         {
           title: "Button",
-          url: "#",
+          url: route('components.button'),
         },
         {
           title: "Calendar",

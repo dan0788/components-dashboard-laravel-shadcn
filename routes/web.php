@@ -44,6 +44,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/breadcrumb', function () {
         return Inertia::render('components/breadcrumb');
     })->name('components.breadcrumb');
+    Route::get('/components/button', function () {
+        return Inertia::render('components/button');
+    })->name('components.button');
 
 });
 

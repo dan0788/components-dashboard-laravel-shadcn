@@ -70,6 +70,14 @@ const routes: Record<string, PageData> = {
             { label: 'Breadcrumb' }
         ],
     },
+    'button': {
+        title: 'Button',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Button' }
+        ],
+    },
 };
 
 export default routes;
