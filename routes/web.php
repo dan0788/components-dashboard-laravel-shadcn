@@ -47,6 +47,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/button', function () {
         return Inertia::render('components/button');
     })->name('components.button');
+    Route::get('/components/calendar', function () {
+        return Inertia::render('components/calendar');
+    })->name('components.calendar');
 
 });
 

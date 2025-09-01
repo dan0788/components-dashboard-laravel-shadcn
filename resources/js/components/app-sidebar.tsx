@@ -161,7 +161,7 @@ const data = {
         },
         {
           title: "Calendar",
-          url: "#",
+          url: route('components.calendar'),
         },
         {
           title: "Card",

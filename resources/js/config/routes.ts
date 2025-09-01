@@ -78,6 +78,14 @@ const routes: Record<string, PageData> = {
             { label: 'Button' }
         ],
     },
+    'calendar': {
+        title: 'Calendar',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Calendar' }
+        ],
+    },
 };
 
 export default routes;
