@@ -5,23 +5,23 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard'); */
 
-Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+        return Inertia::render('home');
+    })->name('home');
 
     Route::get('/components/accordion', function () {
         return Inertia::render('components/accordion');
@@ -41,6 +41,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('/components/badge', function () {
         return Inertia::render('components/badge');
     })->name('components.badge');
+    Route::get('/components/breadcrumb', function () {
+        return Inertia::render('components/breadcrumb');
+    })->name('components.breadcrumb');
 
 });
 

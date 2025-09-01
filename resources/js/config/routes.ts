@@ -8,16 +8,16 @@ interface PageData {
 
 // Mapa de rutas global
 const routes: Record<string, PageData> = {
-    'dashboard': {
-        title: 'Dashboard',
+    'home': {
+        title: 'Home',
         breadcrumbs: [
-            { label: 'Dashboard' }
+            { label: 'Home' }
         ],
     },
     'accordion': {
         title: 'Accordion',
         breadcrumbs: [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Home', href: '/home' },
             { label: 'Components' },
             { label: 'Accordion' }
         ],
@@ -25,7 +25,7 @@ const routes: Record<string, PageData> = {
     'alert': {
         title: 'Alert',
         breadcrumbs: [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Home', href: '/home' },
             { label: 'Components' },
             { label: 'Alert' }
         ],
@@ -33,7 +33,7 @@ const routes: Record<string, PageData> = {
     'alert-dialog': {
         title: 'AlertDialog',
         breadcrumbs: [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Home', href: '/home' },
             { label: 'Components' },
             { label: 'AlertDialog' }
         ],
@@ -41,7 +41,7 @@ const routes: Record<string, PageData> = {
     'aspect-ratio': {
         title: 'AspectRatio',
         breadcrumbs: [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Home', href: '/home' },
             { label: 'Components' },
             { label: 'AspectRatio' }
         ],
@@ -49,7 +49,7 @@ const routes: Record<string, PageData> = {
     'avatar': {
         title: 'Avatar',
         breadcrumbs: [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Home', href: '/home' },
             { label: 'Components' },
             { label: 'Avatar' }
         ],
@@ -57,9 +57,17 @@ const routes: Record<string, PageData> = {
     'badge': {
         title: 'Badge',
         breadcrumbs: [
-            { label: 'Dashboard', href: '/dashboard' },
+            { label: 'Home', href: '/home' },
             { label: 'Components' },
             { label: 'Badge' }
+        ],
+    },
+    'breadcrumb': {
+        title: 'Breadcrumb',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Breadcrumb' }
         ],
     },
 };

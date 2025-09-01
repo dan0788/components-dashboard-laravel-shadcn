@@ -28,7 +28,7 @@
             <div class="errorhnyhny-info flex justify-center mt-6">
                 <h2 class="err-text">Página No Encontrada</h2>
                 <p>Hm, la página que buscabas parece que ya no existe.</p>
-                <a href="{{ url('/dashboard') }}" class="btn btn-style btn-outline-light mt-sm-5 mt-4">
+                <a href="{{ url('/welcome') }}" class="btn btn-style btn-outline-light mt-sm-5 mt-4">
                     Volver a la página de inicio
                 </a>
             </div>

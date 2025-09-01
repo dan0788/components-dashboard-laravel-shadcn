@@ -19,7 +19,7 @@ export default function Page() {
   const pageData = usePageData();
 
   const handleRedirect = () => {
-    router.visit(route('dashboard'));
+    router.visit(route('home'));
   };
 
   return (
