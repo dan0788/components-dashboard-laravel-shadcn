@@ -134,6 +134,14 @@ const routes: Record<string, PageData> = {
             { label: 'Combobox' }
         ],
     },
+    'command': {
+        title: 'Command',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Command' }
+        ],
+    },
 };
 
 export default routes;

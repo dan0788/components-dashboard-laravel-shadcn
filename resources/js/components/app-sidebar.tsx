@@ -189,7 +189,7 @@ const data = {
         },
         {
           title: "Command",
-          url: "#",
+          url: route('components.command'),
         },
         {
           title: "Context Menu",

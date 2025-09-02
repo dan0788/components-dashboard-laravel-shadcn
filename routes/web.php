@@ -68,6 +68,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/combobox', function () {
         return Inertia::render('components/combobox');
     })->name('components.combobox');
+    Route::get('/components/command', function () {
+        return Inertia::render('components/command');
+    })->name('components.command');
 
 });
 
