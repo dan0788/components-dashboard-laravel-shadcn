@@ -71,6 +71,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/command', function () {
         return Inertia::render('components/command');
     })->name('components.command');
+    Route::get('/components/context-menu', function () {
+        return Inertia::render('components/context-menu');
+    })->name('components.context-menu');
 
 });
 

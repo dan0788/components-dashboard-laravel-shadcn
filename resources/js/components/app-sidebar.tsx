@@ -193,7 +193,7 @@ const data = {
         },
         {
           title: "Context Menu",
-          url: "#",
+          url: route('components.context-menu'),
         },
         {
           title: "Data Table",

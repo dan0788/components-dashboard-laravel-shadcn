@@ -142,6 +142,14 @@ const routes: Record<string, PageData> = {
             { label: 'Command' }
         ],
     },
+    'context-menu': {
+        title: 'ContextMenu',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'ContextMenu' }
+        ],
+    },
 };
 
 export default routes;
