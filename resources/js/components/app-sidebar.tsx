@@ -185,7 +185,7 @@ const data = {
         },
         {
           title: "Combobox",
-          url: "#",
+          url: route('components.combobox'),
         },
         {
           title: "Command",

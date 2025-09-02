@@ -126,6 +126,14 @@ const routes: Record<string, PageData> = {
             { label: 'Collapsible' }
         ],
     },
+    'combobox': {
+        title: 'Combobox',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Combobox' }
+        ],
+    },
 };
 
 export default routes;

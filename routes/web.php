@@ -65,6 +65,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/collapsible', function () {
         return Inertia::render('components/collapsible');
     })->name('components.collapsible');
+    Route::get('/components/combobox', function () {
+        return Inertia::render('components/combobox');
+    })->name('components.combobox');
 
 });
 
