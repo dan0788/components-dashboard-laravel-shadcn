@@ -177,7 +177,7 @@ const data = {
         },
         {
           title: "Checkbox",
-          url: "#",
+          url: route('components.checkbox'),
         },
         {
           title: "Collapsible",

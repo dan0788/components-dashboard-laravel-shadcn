@@ -59,6 +59,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/chart', function () {
         return Inertia::render('components/chart');
     })->name('components.chart');
+    Route::get('/components/checkbox', function () {
+        return Inertia::render('components/checkbox');
+    })->name('components.checkbox');
 
 });
 

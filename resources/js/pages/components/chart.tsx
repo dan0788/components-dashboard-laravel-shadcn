@@ -398,7 +398,7 @@ export default function Page() {
         </div>
       </div>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div className="aspect-video rounded-xl bg-muted/50 min-h-min" >
+        <div className="aspect-video rounded-xl bg-muted/50" >
           <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">
               <CardTitle>Pie Chart</CardTitle>
@@ -415,6 +415,10 @@ export default function Page() {
                     content={<ChartTooltipContent hideLabel />}
                   />
                   <Pie data={chartDataPie} dataKey="visitors" nameKey="browser" />
+                  <ChartLegend
+                    content={<ChartLegendContent />}
+                    className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                  />
                 </PieChart>
               </ChartContainer>
             </CardContent>
@@ -428,7 +432,7 @@ export default function Page() {
             </CardFooter>
           </Card>
         </div>
-        <div className="aspect-video rounded-xl bg-muted/50 min-h-min" >
+        <div className="aspect-video rounded-xl bg-muted/50" >
           <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">
               <CardTitle>Radial Chart</CardTitle>
@@ -458,7 +462,7 @@ export default function Page() {
             </CardFooter>
           </Card>
         </div>
-        <div className="aspect-video rounded-xl bg-muted/50 min-h-min" >
+        <div className="aspect-video rounded-xl bg-muted/50" >
           <Card>
             <CardHeader>
               <CardTitle>Bar Chart - Mixed</CardTitle>
@@ -507,10 +511,3 @@ export default function Page() {
     </AuthenticatedLayout>
   );
 }
-
-
-
-
-
-
-

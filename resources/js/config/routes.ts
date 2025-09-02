@@ -110,6 +110,14 @@ const routes: Record<string, PageData> = {
             { label: 'Chart' }
         ],
     },
+    'checkbox': {
+        title: 'Checkbox',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Checkbox' }
+        ],
+    },
 };
 
 export default routes;
