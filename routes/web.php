@@ -62,6 +62,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/checkbox', function () {
         return Inertia::render('components/checkbox');
     })->name('components.checkbox');
+    Route::get('/components/collapsible', function () {
+        return Inertia::render('components/collapsible');
+    })->name('components.collapsible');
 
 });
 

@@ -118,6 +118,14 @@ const routes: Record<string, PageData> = {
             { label: 'Checkbox' }
         ],
     },
+    'collapsible': {
+        title: 'Collapsible',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Collapsible' }
+        ],
+    },
 };
 
 export default routes;

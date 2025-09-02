@@ -181,7 +181,7 @@ const data = {
         },
         {
           title: "Collapsible",
-          url: "#",
+          url: route('components.collapsible'),
         },
         {
           title: "Combobox",
