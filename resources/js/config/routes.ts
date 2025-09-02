@@ -150,6 +150,14 @@ const routes: Record<string, PageData> = {
             { label: 'ContextMenu' }
         ],
     },
+    'data-table': {
+        title: 'DataTable',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'DataTable' }
+        ],
+    },
 };
 
 export default routes;

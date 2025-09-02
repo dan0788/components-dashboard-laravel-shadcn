@@ -197,7 +197,7 @@ const data = {
         },
         {
           title: "Data Table",
-          url: "#",
+          url: route('components.data-table'),
         },
         {
           title: "Date Picker",
