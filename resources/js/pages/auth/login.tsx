@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { InputError } from "@/components/ui/input-error";
+import AppearanceDropdown from "@/components/appearance-dropdown";
 // Puedes importar Separator si lo has añadido con shadcn-ui add separator
 import { Separator } from "@/components/ui/separator"; 
 
@@ -49,6 +50,7 @@ export default function LoginPage({
             </div>
             Acme Inc.
           </a>
+          <AppearanceDropdown className="w-full sm:ml-auto sm:w-auto" />
         </div>
 
         {/* Contenedor central para el formulario */}
