@@ -77,6 +77,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/data-table', function () {
         return Inertia::render('components/data-table');
     })->name('components.data-table');
+    Route::get('/components/date-picker', function () {
+        return Inertia::render('components/date-picker');
+    })->name('components.date-picker');
 
 });
 

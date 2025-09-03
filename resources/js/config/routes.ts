@@ -158,6 +158,14 @@ const routes: Record<string, PageData> = {
             { label: 'DataTable' }
         ],
     },
+    'date-picker': {
+        title: 'DatePicker',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'DatePicker' }
+        ],
+    },
 };
 
 export default routes;

@@ -201,7 +201,7 @@ const data = {
         },
         {
           title: "Date Picker",
-          url: "#",
+          url: route('components.date-picker'),
         },
         {
           title: "Dialog",
