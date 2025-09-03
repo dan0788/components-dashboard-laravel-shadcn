@@ -174,6 +174,14 @@ const routes: Record<string, PageData> = {
             { label: 'Dialog' }
         ],
     },
+    'drawer': {
+        title: 'Drawer',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Drawer' }
+        ],
+    },
 };
 
 export default routes;

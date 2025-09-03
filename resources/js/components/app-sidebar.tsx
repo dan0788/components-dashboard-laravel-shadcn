@@ -209,7 +209,7 @@ const data = {
         },
         {
           title: "Drawer",
-          url: "#",
+          url: route('components.drawer'),
         },
         {
           title: "Dropdown Menu",

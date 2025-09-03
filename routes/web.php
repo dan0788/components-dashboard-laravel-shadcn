@@ -83,6 +83,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/dialog', function () {
         return Inertia::render('components/dialog');
     })->name('components.dialog');
+    Route::get('/components/drawer', function () {
+        return Inertia::render('components/drawer');
+    })->name('components.drawer');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
