@@ -182,6 +182,14 @@ const routes: Record<string, PageData> = {
             { label: 'Drawer' }
         ],
     },
+    'dropdown-menu': {
+        title: 'DropdownMenu',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'DropdownMenu' }
+        ],
+    },
 };
 
 export default routes;
