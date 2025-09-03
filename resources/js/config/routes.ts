@@ -166,6 +166,14 @@ const routes: Record<string, PageData> = {
             { label: 'DatePicker' }
         ],
     },
+    'dialog': {
+        title: 'Dialog',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Dialog' }
+        ],
+    },
 };
 
 export default routes;

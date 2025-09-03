@@ -80,7 +80,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/date-picker', function () {
         return Inertia::render('components/date-picker');
     })->name('components.date-picker');
-
+    Route::get('/components/dialog', function () {
+        return Inertia::render('components/dialog');
+    })->name('components.dialog');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

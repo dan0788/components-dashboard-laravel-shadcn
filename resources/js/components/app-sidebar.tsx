@@ -205,7 +205,7 @@ const data = {
         },
         {
           title: "Dialog",
-          url: "#",
+          url: route('components.dialog'),
         },
         {
           title: "Drawer",
