@@ -89,6 +89,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/dropdown-menu', function () {
         return Inertia::render('components/dropdown-menu');
     })->name('components.dropdown-menu');
+    Route::get('/components/hover-card', function () {
+        return Inertia::render('components/hover-card');
+    })->name('components.hover-card');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

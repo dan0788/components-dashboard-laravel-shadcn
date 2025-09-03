@@ -216,12 +216,8 @@ const data = {
           url: route('components.dropdown-menu'),
         },
         {
-          title: "React Hook Form",
-          url: "#",
-        },
-        {
           title: "Hover Card",
-          url: "#",
+          url: route('components.hover-card'),
         },
         {
           title: "Input",

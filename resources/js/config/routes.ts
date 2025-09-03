@@ -190,6 +190,14 @@ const routes: Record<string, PageData> = {
             { label: 'DropdownMenu' }
         ],
     },
+    'hover-card': {
+        title: 'HoverCard',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'HoverCard' }
+        ],
+    },
 };
 
 export default routes;
