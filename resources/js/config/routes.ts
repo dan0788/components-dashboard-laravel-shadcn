@@ -198,6 +198,14 @@ const routes: Record<string, PageData> = {
             { label: 'HoverCard' }
         ],
     },
+    'input': {
+        title: 'Input',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Input' }
+        ],
+    },
 };
 
 export default routes;

@@ -92,6 +92,10 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/hover-card', function () {
         return Inertia::render('components/hover-card');
     })->name('components.hover-card');
+    Route::get('/components/input', function () {
+        return Inertia::render('components/input');
+    })->name('components.input');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
