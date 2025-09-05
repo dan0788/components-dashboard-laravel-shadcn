@@ -269,7 +269,7 @@ const data = {
         },
         {
           title: "Separator",
-          url: "#",
+          url: route('components.separator'),
         },
         {
           title: "Sheet",

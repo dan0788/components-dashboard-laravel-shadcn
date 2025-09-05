@@ -128,6 +128,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/select', function () {
         return Inertia::render('components/select');
     })->name('components.select');
+    Route::get('/components/separator', function () {
+        return Inertia::render('components/separator');
+    })->name('components.separator');
 
 });
 

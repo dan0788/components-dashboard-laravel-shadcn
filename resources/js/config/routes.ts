@@ -294,6 +294,14 @@ const routes: Record<string, PageData> = {
             { label: 'Select' }
         ],
     },
+    'separator': {
+        title: 'Separator',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Separator' }
+        ],
+    },
 };
 
 export default routes;
