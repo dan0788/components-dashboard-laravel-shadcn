@@ -261,7 +261,7 @@ const data = {
         },
         {
           title: "Scroll-area",
-          url: "#",
+          url: route('components.scroll-area'),
         },
         {
           title: "Select",

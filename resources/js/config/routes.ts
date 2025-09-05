@@ -278,6 +278,14 @@ const routes: Record<string, PageData> = {
             { label: 'Resizable' }
         ],
     },
+    'scroll-area': {
+        title: 'ScrollArea',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'ScrollArea' }
+        ],
+    },
 };
 
 export default routes;

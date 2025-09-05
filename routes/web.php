@@ -122,6 +122,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/resizable', function () {
         return Inertia::render('components/resizable');
     })->name('components.resizable');
+    Route::get('/components/scroll-area', function () {
+        return Inertia::render('components/scroll-area');
+    })->name('components.scroll-area');
 
 });
 
