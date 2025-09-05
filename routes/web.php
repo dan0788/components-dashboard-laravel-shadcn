@@ -113,6 +113,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/popover', function () {
         return Inertia::render('components/popover');
     })->name('components.popover');
+    Route::get('/components/progress', function () {
+        return Inertia::render('components/progress');
+    })->name('components.progress');
 
 });
 

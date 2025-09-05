@@ -249,7 +249,7 @@ const data = {
         },
         {
           title: "Progress",
-          url: "#",
+          url: route('components.progress'),
         },
         {
           title: "Radio Group",
