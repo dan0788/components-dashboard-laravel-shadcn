@@ -128,148 +128,148 @@ const data = {
       items: [
         {
           title: "Accordion",
-          url: route('components.accordion'),
+          url: route('components.show', 'accordion'),
         },
 
         {
           title: "Alert",
-          url: route('components.alert'),
+          url: route('components.show', 'alert'),
         },
         {
           title: "AlertDialog",
-          url: route('components.alert-dialog'),
+          url: route('components.show', 'alert-dialog'),
         },
         {
           title: "Aspect Ratio",
-          url: route('components.aspect-ratio'),
+          url: route('components.show', 'aspect-ratio'),
         },
         {
           title: "Avatar",
-          url: route('components.avatar'),
+          url: route('components.show', 'avatar'),
         },
         {
           title: "Badge",
-          url: route('components.badge'),
+          url: route('components.show', 'badge'),
         },
         {
           title: "Breadcrumb",
-          url: route('components.breadcrumb'),
+          url: route('components.show', 'breadcrumb'),
         },
         {
           title: "Button",
-          url: route('components.button'),
+          url: route('components.show', 'button'),
         },
         {
           title: "Calendar",
-          url: route('components.calendar'),
+          url: route('components.show', 'calendar'),
         },
         {
           title: "Card",
-          url: route('components.card'),
+          url: route('components.show', 'card'),
         },
         {
           title: "Carousel",
-          url: route('components.carousel'),
+          url: route('components.show', 'carousel'),
         },
         {
           title: "Chart",
-          url: route('components.chart'),
+          url: route('components.show', 'chart'),
         },
         {
           title: "Checkbox",
-          url: route('components.checkbox'),
+          url: route('components.show', 'checkbox'),
         },
         {
           title: "Collapsible",
-          url: route('components.collapsible'),
+          url: route('components.show', 'collapsible'),
         },
         {
           title: "Combobox",
-          url: route('components.combobox'),
+          url: route('components.show', 'combobox'),
         },
         {
           title: "Command",
-          url: route('components.command'),
+          url: route('components.show', 'command'),
         },
         {
           title: "Context Menu",
-          url: route('components.context-menu'),
+          url: route('components.show', 'context-menu'),
         },
         {
           title: "Data Table",
-          url: route('components.data-table'),
+          url: route('components.show', 'data-table'),
         },
         {
           title: "Date Picker",
-          url: route('components.date-picker'),
+          url: route('components.show', 'date-picker'),
         },
         {
           title: "Dialog",
-          url: route('components.dialog'),
+          url: route('components.show', 'dialog'),
         },
         {
           title: "Drawer",
-          url: route('components.drawer'),
+          url: route('components.show', 'drawer'),
         },
         {
           title: "Dropdown Menu",
-          url: route('components.dropdown-menu'),
+          url: route('components.show', 'dropdown-menu'),
         },
         {
           title: "Hover Card",
-          url: route('components.hover-card'),
+          url: route('components.show', 'hover-card'),
         },
         {
           title: "Input",
-          url: route('components.input'),
+          url: route('components.show', 'input'),
         },
         {
           title: "Input OTP",
-          url: route('components.input-otp'),
+          url: route('components.show', 'input-otp'),
         },
         {
           title: "Label",
-          url: route('components.label'),
+          url: route('components.show', 'label'),
         },
         {
           title: "Menubar",
-          url: route('components.menubar'),
+          url: route('components.show', 'menubar'),
         },
         {
           title: "Navigation Menu",
-          url: route('components.navigation-menu'),
+          url: route('components.show', 'navigation-menu'),
         },
         {
           title: "Pagination",
-          url: route('components.pagination'),
+          url: route('components.show', 'pagination'),
         },
         {
           title: "Popover",
-          url: route('components.popover'),
+          url: route('components.show', 'popover'),
         },
         {
           title: "Progress",
-          url: route('components.progress'),
+          url: route('components.show', 'progress'),
         },
         {
           title: "Radio Group",
-          url: route('components.radio-group'),
+          url: route('components.show', 'radio-group'),
         },
         {
           title: "Resizable",
-          url: route('components.resizable'),
+          url: route('components.show', 'resizable'),
         },
         {
           title: "Scroll-area",
-          url: route('components.scroll-area'),
+          url: route('components.show', 'scroll-area'),
         },
         {
           title: "Select",
-          url: route('components.select'),
+          url: route('components.show', 'select'),
         },
         {
           title: "Separator",
-          url: route('components.separator'),
+          url: route('components.show', 'separator'),
         },
         {
           title: "Sheet",
@@ -397,3 +397,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   )
 }
+
+const getComponentName = (title: String) => {
+    // Convierte el título a minúsculas y reemplaza los espacios con guiones
+    return title.toLowerCase().replace(/\s/g, '-');
+};
