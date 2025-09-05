@@ -313,7 +313,7 @@ const data = {
         },
         {
           title: "Tooltip",
-          url: "#",
+          url: route('components.show', 'tooltip'),
         },
         {
           title: "Typography",
