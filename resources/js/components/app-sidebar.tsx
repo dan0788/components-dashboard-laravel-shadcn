@@ -293,7 +293,7 @@ const data = {
         },
         {
           title: "Table",
-          url: "#",
+          url: route('components.show', 'table'),
         },
         {
           title: "Tabs",
