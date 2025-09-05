@@ -238,6 +238,14 @@ const routes: Record<string, PageData> = {
             { label: 'NavigationMenu' }
         ],
     },
+    'pagination': {
+        title: 'Pagination',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Pagination' }
+        ],
+    },
 };
 
 export default routes;

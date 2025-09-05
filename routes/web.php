@@ -107,6 +107,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/navigation-menu', function () {
         return Inertia::render('components/navigation-menu');
     })->name('components.navigation-menu');
+    Route::get('/components/pagination', function () {
+        return Inertia::render('components/pagination');
+    })->name('components.pagination');
 
 });
 

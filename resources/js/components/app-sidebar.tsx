@@ -241,7 +241,7 @@ const data = {
         },
         {
           title: "Pagination",
-          url: "#",
+          url: route('components.pagination'),
         },
         {
           title: "Popover",
