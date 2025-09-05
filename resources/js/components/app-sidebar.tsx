@@ -245,7 +245,7 @@ const data = {
         },
         {
           title: "Popover",
-          url: "#",
+          url: route('components.popover'),
         },
         {
           title: "Progress",

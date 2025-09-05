@@ -110,6 +110,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/pagination', function () {
         return Inertia::render('components/pagination');
     })->name('components.pagination');
+    Route::get('/components/popover', function () {
+        return Inertia::render('components/popover');
+    })->name('components.popover');
 
 });
 

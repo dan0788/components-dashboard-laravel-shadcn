@@ -246,6 +246,14 @@ const routes: Record<string, PageData> = {
             { label: 'Pagination' }
         ],
     },
+    'popover': {
+        title: 'Popover',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Popover' }
+        ],
+    },
 };
 
 export default routes;
