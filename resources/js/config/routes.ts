@@ -25,7 +25,7 @@ const componentKeys = [
     'input-otp', 'label', 'menubar', 'navigation-menu', 'pagination', 
     'popover', 'progress', 'radio-group', 'resizable', 'scroll-area', 
     'select', 'separator', 'sheet', 'skeleton', 'slider', 'sonner', 'switch', 'table', 'tabs',
-    'text-area'
+    'text-area', 'toggle'
 ];
 
 // Función para formatear el título y el breadcrumb a partir del nombre

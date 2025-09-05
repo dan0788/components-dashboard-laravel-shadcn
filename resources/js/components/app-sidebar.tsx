@@ -305,7 +305,7 @@ const data = {
         },
         {
           title: "Toggle",
-          url: "#",
+          url: route('components.show', 'toggle'),
         },
         {
           title: "Toggle Group",
