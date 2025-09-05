@@ -285,7 +285,7 @@ const data = {
         },
         {
           title: "Sonner",
-          url: "#",
+          url: route('components.show', 'sonner'),
         },
         {
           title: "Switch",
