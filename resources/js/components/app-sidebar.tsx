@@ -297,7 +297,7 @@ const data = {
         },
         {
           title: "Tabs",
-          url: "#",
+          url: route('components.show', 'tabs'),
         },
         {
           title: "Textarea",
