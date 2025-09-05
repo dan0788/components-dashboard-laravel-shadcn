@@ -281,7 +281,7 @@ const data = {
         },
         {
           title: "Slider",
-          url: "#",
+          url: route('components.show', 'slider'),
         },
         {
           title: "Sonner",
