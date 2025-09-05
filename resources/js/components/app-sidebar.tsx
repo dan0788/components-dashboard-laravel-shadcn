@@ -301,11 +301,7 @@ const data = {
         },
         {
           title: "Textarea",
-          url: "#",
-        },
-        {
-          title: "Toast",
-          url: "#",
+          url: route('components.show', 'text-area'),
         },
         {
           title: "Toggle",
