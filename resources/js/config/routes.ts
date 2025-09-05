@@ -214,6 +214,14 @@ const routes: Record<string, PageData> = {
             { label: 'InputOTP' }
         ],
     },
+    'label': {
+        title: 'Label',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Label' }
+        ],
+    },
 };
 
 export default routes;

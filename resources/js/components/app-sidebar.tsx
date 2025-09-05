@@ -229,7 +229,7 @@ const data = {
         },
         {
           title: "Label",
-          url: "#",
+          url: route('components.label'),
         },
         {
           title: "Menubar",
