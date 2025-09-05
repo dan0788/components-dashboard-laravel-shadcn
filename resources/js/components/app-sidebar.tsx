@@ -265,7 +265,7 @@ const data = {
         },
         {
           title: "Select",
-          url: "#",
+          url: route('components.select'),
         },
         {
           title: "Separator",

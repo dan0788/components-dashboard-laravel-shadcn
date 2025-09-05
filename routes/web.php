@@ -125,6 +125,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/scroll-area', function () {
         return Inertia::render('components/scroll-area');
     })->name('components.scroll-area');
+    Route::get('/components/select', function () {
+        return Inertia::render('components/select');
+    })->name('components.select');
 
 });
 

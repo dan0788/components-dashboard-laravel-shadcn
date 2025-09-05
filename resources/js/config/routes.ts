@@ -286,6 +286,14 @@ const routes: Record<string, PageData> = {
             { label: 'ScrollArea' }
         ],
     },
+    'select': {
+        title: 'Select',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Select' }
+        ],
+    },
 };
 
 export default routes;
