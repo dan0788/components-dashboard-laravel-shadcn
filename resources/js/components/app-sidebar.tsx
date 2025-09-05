@@ -276,12 +276,8 @@ const data = {
           url: route('components.show', 'sheet'),
         },
         {
-          title: "Sidebar",
-          url: "#",
-        },
-        {
           title: "Skeleton",
-          url: "#",
+          url: route('components.show', 'skeleton'),
         },
         {
           title: "Slider",
