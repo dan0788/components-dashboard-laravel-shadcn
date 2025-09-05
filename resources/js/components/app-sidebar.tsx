@@ -233,7 +233,7 @@ const data = {
         },
         {
           title: "Menubar",
-          url: "#",
+          url: route('components.menubar'),
         },
         {
           title: "Navigation Menu",

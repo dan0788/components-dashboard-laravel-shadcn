@@ -222,6 +222,14 @@ const routes: Record<string, PageData> = {
             { label: 'Label' }
         ],
     },
+    'menubar': {
+        title: 'Menubar',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Menubar' }
+        ],
+    },
 };
 
 export default routes;

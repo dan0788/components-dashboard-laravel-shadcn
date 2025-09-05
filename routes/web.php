@@ -101,6 +101,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/label', function () {
         return Inertia::render('components/label');
     })->name('components.label');
+    Route::get('/components/menubar', function () {
+        return Inertia::render('components/menubar');
+    })->name('components.menubar');
 
 });
 
