@@ -309,7 +309,7 @@ const data = {
         },
         {
           title: "Toggle Group",
-          url: "#",
+          url: route('components.show', 'toggle-group'),
         },
         {
           title: "Tooltip",
