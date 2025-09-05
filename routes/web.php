@@ -95,6 +95,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/input', function () {
         return Inertia::render('components/input');
     })->name('components.input');
+    Route::get('/components/input-otp', function () {
+        return Inertia::render('components/input-otp');
+    })->name('components.input-otp');
 
 });
 

@@ -225,7 +225,7 @@ const data = {
         },
         {
           title: "Input OTP",
-          url: "#",
+          url: route('components.input-otp'),
         },
         {
           title: "Label",
