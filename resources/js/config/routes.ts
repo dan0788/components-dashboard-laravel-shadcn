@@ -270,6 +270,14 @@ const routes: Record<string, PageData> = {
             { label: 'RadioGroup' }
         ],
     },
+    'resizable': {
+        title: 'Resizable',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'Resizable' }
+        ],
+    },
 };
 
 export default routes;

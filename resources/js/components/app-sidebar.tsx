@@ -257,7 +257,7 @@ const data = {
         },
         {
           title: "Resizable",
-          url: "#",
+          url: route('components.resizable'),
         },
         {
           title: "Scroll-area",

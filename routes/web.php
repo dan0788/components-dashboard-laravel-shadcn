@@ -119,6 +119,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/radio-group', function () {
         return Inertia::render('components/radio-group');
     })->name('components.radio-group');
+    Route::get('/components/resizable', function () {
+        return Inertia::render('components/resizable');
+    })->name('components.resizable');
 
 });
 
