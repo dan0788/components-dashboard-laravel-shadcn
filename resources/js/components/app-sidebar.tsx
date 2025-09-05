@@ -253,7 +253,7 @@ const data = {
         },
         {
           title: "Radio Group",
-          url: "#",
+          url: route('components.radio-group'),
         },
         {
           title: "Resizable",

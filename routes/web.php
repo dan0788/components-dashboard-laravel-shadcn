@@ -116,6 +116,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/progress', function () {
         return Inertia::render('components/progress');
     })->name('components.progress');
+    Route::get('/components/radio-group', function () {
+        return Inertia::render('components/radio-group');
+    })->name('components.radio-group');
 
 });
 

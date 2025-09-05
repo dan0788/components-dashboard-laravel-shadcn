@@ -262,6 +262,14 @@ const routes: Record<string, PageData> = {
             { label: 'Progress' }
         ],
     },
+    'radio-group': {
+        title: 'RadioGroup',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'RadioGroup' }
+        ],
+    },
 };
 
 export default routes;
