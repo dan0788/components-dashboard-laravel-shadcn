@@ -289,7 +289,7 @@ const data = {
         },
         {
           title: "Switch",
-          url: "#",
+          url: route('components.show', 'switch'),
         },
         {
           title: "Table",
