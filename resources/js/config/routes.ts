@@ -230,6 +230,14 @@ const routes: Record<string, PageData> = {
             { label: 'Menubar' }
         ],
     },
+    'navigation-menu': {
+        title: 'NavigationMenu',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: 'NavigationMenu' }
+        ],
+    },
 };
 
 export default routes;

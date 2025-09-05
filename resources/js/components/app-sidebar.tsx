@@ -237,7 +237,7 @@ const data = {
         },
         {
           title: "Navigation Menu",
-          url: "#",
+          url: route('components.navigation-menu'),
         },
         {
           title: "Pagination",

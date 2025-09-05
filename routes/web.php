@@ -104,6 +104,9 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components/menubar', function () {
         return Inertia::render('components/menubar');
     })->name('components.menubar');
+    Route::get('/components/navigation-menu', function () {
+        return Inertia::render('components/navigation-menu');
+    })->name('components.navigation-menu');
 
 });
 
