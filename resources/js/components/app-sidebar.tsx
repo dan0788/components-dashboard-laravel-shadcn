@@ -273,7 +273,7 @@ const data = {
         },
         {
           title: "Sheet",
-          url: "#",
+          url: route('components.show', 'sheet'),
         },
         {
           title: "Sidebar",

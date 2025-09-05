@@ -14,294 +14,41 @@ const routes: Record<string, PageData> = {
             { label: 'Home' }
         ],
     },
-    'accordion': {
-        title: 'Accordion',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Accordion' }
-        ],
-    },
-    'alert': {
-        title: 'Alert',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Alert' }
-        ],
-    },
-    'alert-dialog': {
-        title: 'AlertDialog',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'AlertDialog' }
-        ],
-    },
-    'aspect-ratio': {
-        title: 'AspectRatio',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'AspectRatio' }
-        ],
-    },
-    'avatar': {
-        title: 'Avatar',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Avatar' }
-        ],
-    },
-    'badge': {
-        title: 'Badge',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Badge' }
-        ],
-    },
-    'breadcrumb': {
-        title: 'Breadcrumb',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Breadcrumb' }
-        ],
-    },
-    'button': {
-        title: 'Button',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Button' }
-        ],
-    },
-    'calendar': {
-        title: 'Calendar',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Calendar' }
-        ],
-    },
-    'card': {
-        title: 'Card',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Card' }
-        ],
-    },
-    'carousel': {
-        title: 'Carousel',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Carousel' }
-        ],
-    },
-    'chart': {
-        title: 'Chart',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Chart' }
-        ],
-    },
-    'checkbox': {
-        title: 'Checkbox',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Checkbox' }
-        ],
-    },
-    'collapsible': {
-        title: 'Collapsible',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Collapsible' }
-        ],
-    },
-    'combobox': {
-        title: 'Combobox',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Combobox' }
-        ],
-    },
-    'command': {
-        title: 'Command',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Command' }
-        ],
-    },
-    'context-menu': {
-        title: 'ContextMenu',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'ContextMenu' }
-        ],
-    },
-    'data-table': {
-        title: 'DataTable',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'DataTable' }
-        ],
-    },
-    'date-picker': {
-        title: 'DatePicker',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'DatePicker' }
-        ],
-    },
-    'dialog': {
-        title: 'Dialog',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Dialog' }
-        ],
-    },
-    'drawer': {
-        title: 'Drawer',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Drawer' }
-        ],
-    },
-    'dropdown-menu': {
-        title: 'DropdownMenu',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'DropdownMenu' }
-        ],
-    },
-    'hover-card': {
-        title: 'HoverCard',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'HoverCard' }
-        ],
-    },
-    'input': {
-        title: 'Input',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Input' }
-        ],
-    },
-    'input-otp': {
-        title: 'InputOTP',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'InputOTP' }
-        ],
-    },
-    'label': {
-        title: 'Label',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Label' }
-        ],
-    },
-    'menubar': {
-        title: 'Menubar',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Menubar' }
-        ],
-    },
-    'navigation-menu': {
-        title: 'NavigationMenu',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'NavigationMenu' }
-        ],
-    },
-    'pagination': {
-        title: 'Pagination',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Pagination' }
-        ],
-    },
-    'popover': {
-        title: 'Popover',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Popover' }
-        ],
-    },
-    'progress': {
-        title: 'Progress',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Progress' }
-        ],
-    },
-    'radio-group': {
-        title: 'RadioGroup',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'RadioGroup' }
-        ],
-    },
-    'resizable': {
-        title: 'Resizable',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Resizable' }
-        ],
-    },
-    'scroll-area': {
-        title: 'ScrollArea',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'ScrollArea' }
-        ],
-    },
-    'select': {
-        title: 'Select',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Select' }
-        ],
-    },
-    'separator': {
-        title: 'Separator',
-        breadcrumbs: [
-            { label: 'Home', href: '/home' },
-            { label: 'Components' },
-            { label: 'Separator' }
-        ],
-    },
 };
+
+// Arreglo de los nombres de los componentes con guiones (para las claves)
+const componentKeys = [
+    'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar', 'badge', 
+    'breadcrumb', 'button', 'calendar', 'card', 'carousel', 'chart', 'checkbox', 
+    'collapsible', 'combobox', 'command', 'context-menu', 'data-table', 
+    'date-picker', 'dialog', 'drawer', 'dropdown-menu', 'hover-card', 'input', 
+    'input-otp', 'label', 'menubar', 'navigation-menu', 'pagination', 
+    'popover', 'progress', 'radio-group', 'resizable', 'scroll-area', 
+    'select', 'separator', 'sheet'
+];
+
+// Función para formatear el título y el breadcrumb a partir del nombre
+const formatName = (key: string): string => {
+    // Convierte 'alert-dialog' a 'Alert Dialog' y 'button' a 'Button'
+    return key
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+};
+
+// Itera sobre el arreglo para generar las rutas dinámicamente
+componentKeys.forEach(key => {
+    const formattedName = formatName(key);
+    
+    // Asigna la información al objeto de rutas
+    routes[key] = {
+        title: formattedName.replace(/\s/g, ''), // Título sin espacios
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Components' },
+            { label: formattedName }
+        ],
+    };
+});
 
 export default routes;
