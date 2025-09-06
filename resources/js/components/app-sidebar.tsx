@@ -317,7 +317,7 @@ const data = {
         },
         {
           title: "Typography",
-          url: "#",
+          url: route('components.show', 'typography'),
         },
 
 
