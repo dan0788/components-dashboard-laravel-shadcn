@@ -1,6 +1,5 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
 import { Head } from "@inertiajs/react";
-import { AppWindowIcon, CodeIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Card,

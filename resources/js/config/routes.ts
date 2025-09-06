@@ -14,16 +14,24 @@ const routes: Record<string, PageData> = {
             { label: 'Home' }
         ],
     },
+    'edit': {
+        title: 'Profile',
+        breadcrumbs: [
+            { label: 'Home', href: '/home' },
+            { label: 'Profile', href: '/profile' },
+            { label: 'Edit' },
+        ],
+    },
 };
 
 // Arreglo de los nombres de los componentes con guiones (para las claves)
 const componentKeys = [
-    'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar', 'badge', 
-    'breadcrumb', 'button', 'calendar', 'card', 'carousel', 'chart', 'checkbox', 
-    'collapsible', 'combobox', 'command', 'context-menu', 'data-table', 
-    'date-picker', 'dialog', 'drawer', 'dropdown-menu', 'hover-card', 'input', 
-    'input-otp', 'label', 'menubar', 'navigation-menu', 'pagination', 
-    'popover', 'progress', 'radio-group', 'resizable', 'scroll-area', 
+    'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar', 'badge',
+    'breadcrumb', 'button', 'calendar', 'card', 'carousel', 'chart', 'checkbox',
+    'collapsible', 'combobox', 'command', 'context-menu', 'data-table',
+    'date-picker', 'dialog', 'drawer', 'dropdown-menu', 'hover-card', 'input',
+    'input-otp', 'label', 'menubar', 'navigation-menu', 'pagination',
+    'popover', 'progress', 'radio-group', 'resizable', 'scroll-area',
     'select', 'separator', 'sheet', 'skeleton', 'slider', 'sonner', 'switch', 'table', 'tabs',
     'text-area', 'toggle', 'toggle-group', 'tooltip', 'typography'
 ];
@@ -40,7 +48,7 @@ const formatName = (key: string): string => {
 // Itera sobre el arreglo para generar las rutas dinámicamente
 componentKeys.forEach(key => {
     const formattedName = formatName(key);
-    
+
     // Asigna la información al objeto de rutas
     routes[key] = {
         title: formattedName.replace(/\s/g, ''), // Título sin espacios
