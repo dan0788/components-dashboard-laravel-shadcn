@@ -40,7 +40,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import * as React from "react"
-import { ChevronDownIcon } from "lucide-react"
+import { Bold, ChevronDownIcon, Italic, Phone, Smartphone, TabletSmartphone, Underline } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
@@ -62,6 +62,19 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Label } from "@/components/ui/label";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Switch } from "@/components/ui/switch";
+
+const countries = [
+  { value: "us", label: "Estados Unidos", prefix: "+1", flag: "🇺🇸" },
+  { value: "mx", label: "México", prefix: "+52", flag: "🇲🇽" },
+  { value: "ec", label: "Ecuador", prefix: "+593", flag: "🇪🇨" },
+  // Agrega más países según necesites
+];
 
 const FormSchema = z.object({
   firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/, {
@@ -75,7 +88,13 @@ const FormSchema = z.object({
         message: "Invalid email address.",
     }) */,
   dateofbirth: z.date().optional(),
-  sex: z.string().optional()
+  sex: z.string().optional(),
+  contact: z.object({
+    type: z.enum(["cellphone", "landphone"]).optional(),
+    country: z.string().optional(),
+    number: z.string().optional(),
+  }),
+  notifications: z.boolean(),
 })
 
 export default function Edit({
@@ -84,6 +103,7 @@ export default function Edit({
 }: { mustVerifyEmail: boolean; status?: string }) {
   const pageData = usePageData();
   const [open, setOpen] = React.useState(false)
+  const [openPhone, setOpenPhone] = React.useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -91,7 +111,13 @@ export default function Edit({
       firstname: "",
       lastname: "",
       dateofbirth: undefined,
-      sex: undefined
+      sex: undefined,
+      contact: {
+        type: "cellphone",
+        country: "ec",
+        number: "",
+      },
+      notifications: true,
     },
   })
 
@@ -243,6 +269,122 @@ export default function Edit({
                           )}
                         />
 
+                        {/* campo contactos */}
+                        <FormField
+                          control={form.control}
+                          name="contact"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="sex" className="pl-1 text-text">Contact</FormLabel>
+                              <FormControl>
+                                <div className="flex flex-col gap-3">
+                                  <div className="flex justify-start">
+                                    {/* Toggle Group para el tipo de teléfono */}
+                                    <ToggleGroup
+                                      type="single"
+                                      value={field.value.type}
+                                      onValueChange={(value) => field.onChange({ ...field.value, type: value })}
+                                    >
+                                      <ToggleGroupItem value="cellphone" aria-label="ellphone">
+                                        <Smartphone className="h-4 w-4" />
+                                      </ToggleGroupItem>
+                                      <ToggleGroupItem value="landphone" aria-label="Landphone">
+                                        <Phone className="h-4 w-4" />
+                                      </ToggleGroupItem>
+                                    </ToggleGroup>
+
+                                    {/* Input con el Combobox de país */}
+                                    <div className="flex w-fit px-3">
+                                      <div className="w-fit">
+                                        <Popover open={openPhone} onOpenChange={setOpenPhone}>
+                                          <PopoverTrigger asChild>
+                                            <Button
+                                              variant="outline"
+                                              role="combobox"
+                                              className="w-full justify-between rounded-r-none"
+                                            >
+                                              {field.value.country ? (
+                                                <>
+                                                  {countries.find((country) => country.value === field.value.country)?.flag}{" "}
+                                                  {countries.find((country) => country.value === field.value.country)?.prefix}
+                                                </>
+                                              ) : (
+                                                "Selecciona país"
+                                              )}
+                                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                            </Button>
+                                          </PopoverTrigger>
+                                          <PopoverContent className="w-[200px] p-0">
+                                            <Command>
+                                              <CommandInput placeholder="Buscar país..." />
+                                              <CommandEmpty>País no encontrado.</CommandEmpty>
+                                              <CommandGroup>
+                                                {countries.map((country) => (
+                                                  <CommandItem
+                                                    key={country.value}
+                                                    value={country.value}
+                                                    onSelect={(currentValue) => {
+                                                      field.onChange({ ...field.value, country: currentValue });
+                                                      setOpenPhone(false)
+                                                    }}
+                                                  >
+                                                    <Check
+                                                      className={cn(
+                                                        "mr-2 h-4 w-4",
+                                                        field.value.country === country.value
+                                                          ? "opacity-100"
+                                                          : "opacity-0"
+                                                      )}
+                                                    />
+                                                    {country.flag} {country.label} ({country.prefix})
+                                                  </CommandItem>
+                                                ))}
+                                              </CommandGroup>
+                                            </Command>
+                                          </PopoverContent>
+                                        </Popover>
+                                      </div>
+                                      <Input
+                                        className="flex-grow rounded-l-none"
+                                        id="number"
+                                        type="tel"
+                                        placeholder="Número de teléfono"
+                                        value={field.value.number}
+                                        onChange={(e) => field.onChange({ ...field.value, number: e.target.value })}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* campo notificaciones */}
+                        <FormField
+                          control={form.control}
+                          name="notifications"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="sex" className="pl-1 text-text">Contact</FormLabel>
+                              <FormControl>
+                                <div className="flex items-center space-x-2">
+                                  <Switch
+                                    id="notifications"
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange} />
+                                  <Label htmlFor="notifications">Do you want to receive email notifications?</Label>
+                                </div>
+
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <Button type="button">Submit</Button>
@@ -273,7 +415,7 @@ export default function Edit({
             <TabsContent value="Account Information">
               <Card className="my-5">
                 <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
+                  <CardTitle>Account Information</CardTitle>
                   <CardDescription>
                     Update your account's profile information and email
                     address.
