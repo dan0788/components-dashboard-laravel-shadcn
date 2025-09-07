@@ -23,7 +23,6 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 import { usePageData } from "@/hooks/get-page"
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import {
@@ -48,6 +47,21 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui/radio-group"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 const FormSchema = z.object({
   firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/, {
@@ -61,6 +75,7 @@ const FormSchema = z.object({
         message: "Invalid email address.",
     }) */,
   dateofbirth: z.date().optional(),
+  sex: z.string().optional()
 })
 
 export default function Edit({
@@ -76,17 +91,19 @@ export default function Edit({
       firstname: "",
       lastname: "",
       dateofbirth: undefined,
+      sex: undefined
     },
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast("You submitted the following values", {
+    console.log(data);
+    /* toast("You submitted the following values", {
       description: (
         <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    })
+    }) */
   }
 
   return (
@@ -123,7 +140,7 @@ export default function Edit({
                                     <Input className="w-64" type="text" id="firstname" placeholder="First Name" {...field} />
                                   </TooltipTrigger>
                                   <TooltipContent>
-                                    <p>Add to library</p>
+                                    <p>No special characters allowed</p>
                                   </TooltipContent>
                                 </Tooltip>
                               </FormControl>
@@ -146,7 +163,7 @@ export default function Edit({
                                     <Input className="w-64" type="text" id="lastname" placeholder="Last Name" {...field} />
                                   </TooltipTrigger>
                                   <TooltipContent>
-                                    <p>This is your email.</p>
+                                    <p>No special characters allowed</p>
                                   </TooltipContent>
                                 </Tooltip>
                               </FormControl>
@@ -161,39 +178,90 @@ export default function Edit({
                           name="dateofbirth"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="pl-1 text-text">Date of birth</FormLabel>
                               <FormControl>
-                                <Popover>
-                                  <PopoverTrigger asChild>
-                                    <Button
-                                      variant={"outline"}
-                                      className={"w-48 justify-between font-normal"}
-                                    >
-                                      {field.value ? (
-                                        field.value.toLocaleDateString()
-                                      ) : (
-                                        <span className="text-muted-foreground">Select date</span>
-                                      )}
-                                      <ChevronDownIcon />
-                                    </Button>
-                                  </PopoverTrigger>
-                                  <PopoverContent className="w-auto p-0" align="start">
-                                    <Calendar
-                                      mode="single"
-                                      selected={field.value}
-                                      onSelect={field.onChange} // 💡 Conecta el cambio del calendario al formulario
-                                      initialFocus
-                                      captionLayout="dropdown"
-                                    />
-                                  </PopoverContent>
-                                </Popover>
+                                <div className="flex flex-col gap-3">
+                                  <FormLabel className="pl-1 text-text">Date of birth</FormLabel>
+                                  <Popover open={open} onOpenChange={setOpen}>
+                                    <PopoverTrigger asChild>
+
+                                      <Button
+                                        variant="outline"
+                                        id="dateofbirth"
+                                        className="w-48 justify-between font-normal"
+                                      >
+                                        {field.value ? field.value.toLocaleDateString() : "Select date"}
+                                        <ChevronDownIcon />
+                                      </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                                      <Calendar
+                                        mode="single"
+                                        selected={field.value}
+                                        captionLayout="dropdown"
+                                        onSelect={(date) => {
+                                          field.onChange(date);
+                                          setOpen(false);
+                                        }}
+                                        fromYear={1950}
+                                        toYear={new Date().getFullYear() - 18}
+                                      />
+                                    </PopoverContent>
+                                  </Popover>
+                                </div>
+
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
 
-                        <Button type="submit">Submit</Button>
+                        {/* campo sexo */}
+                        <FormField
+                          control={form.control}
+                          name="sex"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="sex" className="pl-1 text-text">Sex</FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange} // 💡 Conecta el onChange del campo al onValueChange del RadioGroup
+                                  defaultValue={field.value}
+                                  className="flex flex-col space-y-1"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <RadioGroupItem value="male" id="r1" />
+                                    <FormLabel htmlFor="r1" className="pl-1 text-text">Male</FormLabel>
+                                  </div>
+                                  <div className="flex items-center gap-3">
+                                    <RadioGroupItem value="female" id="r2" />
+                                    <FormLabel htmlFor="r2" className="pl-1 text-text">Female</FormLabel>
+                                  </div>
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button type="button">Submit</Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will permanently submit your data.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => form.handleSubmit(onSubmit)()}>
+                                Continue
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </form>
                     </Form>
                   </CardDescription>
