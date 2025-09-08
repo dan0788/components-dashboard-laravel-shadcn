@@ -69,6 +69,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { AvatarPage } from "@/pages/profile/partials/avatar-form"
+import { InputNamePage } from "@/pages/profile/partials/input-name-form";
 
 
 const countries = [
@@ -128,16 +129,16 @@ export default function Edit({
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
     const avatarFileName = formData.avatar
-    ? `imagen_seleccionada_${new Date().getTime()}.${formData.avatar.split(';')[0].split('/')[1]}`
-    : null;
+      ? `imagen_seleccionada_${new Date().getTime()}.${formData.avatar.split(';')[0].split('/')[1]}`
+      : null;
 
-  const formattedDate = formData.dateofbirth
-    ? new Date(formData.dateofbirth).toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    })
-    : null;
+    const formattedDate = formData.dateofbirth
+      ? new Date(formData.dateofbirth).toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      })
+      : null;
 
     const data = {
       avatar: formData.avatar,
@@ -172,7 +173,7 @@ export default function Edit({
                     Update your personal's profile information.
                   </CardDescription>
                 </CardHeader>
-                
+
                 {/* formulario */}
                 <CardHeader className="!pt-0">
                   <CardDescription className="!m-3">
@@ -187,7 +188,7 @@ export default function Edit({
                             <FormItem>
                               <FormLabel htmlFor="avatar" className="pl-1 text-text">Avatar</FormLabel>
                               <FormControl>
-                                <AvatarPage onChange={field.onChange}/>
+                                <AvatarPage onChange={field.onChange} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -202,19 +203,9 @@ export default function Edit({
                           name="firstname"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel htmlFor="firstname" className="pl-1 text-text">First Name</FormLabel>
                               <FormControl>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Input className="w-64" type="text" id="firstname" placeholder="First Name" {...field} />
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    <p>No special characters allowed</p>
-                                  </TooltipContent>
-                                </Tooltip>
+                                <InputNamePage field={field} reference="firstname" value="First Name" />
                               </FormControl>
-
-                              <FormMessage />
                             </FormItem>
                           )}
                         />
@@ -225,16 +216,8 @@ export default function Edit({
                           name="lastname"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel htmlFor="lastname" className="pl-1 text-text">Last Name</FormLabel>
                               <FormControl>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Input className="w-64" type="text" id="lastname" placeholder="Last Name" {...field} />
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    <p>No special characters allowed</p>
-                                  </TooltipContent>
-                                </Tooltip>
+                                <InputNamePage field={field} reference="lastname" value="Last Name" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
