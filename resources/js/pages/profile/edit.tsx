@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/tabs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { toast } from "sonner"
 import { z } from "zod"
 import { usePageData } from "@/hooks/get-page"
 import { Input } from "@/components/ui/input";
@@ -34,14 +33,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import * as React from "react"
-import { ChevronDownIcon, Phone, Smartphone } from "lucide-react"
-import { Calendar } from "@/components/ui/calendar"
+import { Phone, Smartphone } from "lucide-react"
 import {
   Popover,
   PopoverContent,
@@ -71,6 +64,7 @@ import { Switch } from "@/components/ui/switch";
 import { AvatarPage } from "@/pages/profile/partials/avatar-form"
 import { InputNamePage } from "@/pages/profile/partials/input-name-form";
 import { DateBirthPage } from "@/pages/profile/partials/date-birth-form";
+import { RadioSexPage } from "@/pages/profile/partials/radio-sex-form";
 
 
 const countries = [
@@ -244,20 +238,7 @@ export default function Edit({
                             <FormItem>
                               <FormLabel htmlFor="sex" className="pl-1 text-text">Sex</FormLabel>
                               <FormControl>
-                                <RadioGroup
-                                  onValueChange={field.onChange} // 💡 Conecta el onChange del campo al onValueChange del RadioGroup
-                                  defaultValue={field.value}
-                                  className="flex flex-col space-y-1"
-                                >
-                                  <div className="flex items-center gap-3">
-                                    <RadioGroupItem value="male" id="r1" />
-                                    <FormLabel htmlFor="r1" className="pl-1 text-text">Male</FormLabel>
-                                  </div>
-                                  <div className="flex items-center gap-3">
-                                    <RadioGroupItem value="female" id="r2" />
-                                    <FormLabel htmlFor="r2" className="pl-1 text-text">Female</FormLabel>
-                                  </div>
-                                </RadioGroup>
+                                <RadioSexPage field={field}/>
                               </FormControl>
                               <FormMessage />
                             </FormItem>
