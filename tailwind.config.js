@@ -60,6 +60,9 @@ module.exports = {
   				ring: 'hsl(var(--sidebar-ring))'
   			},
 			text: 'hsl(var(--color-text))',
+			icon: {
+				plus: 'hsl(var(--icon-color))'
+			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

@@ -43,6 +43,7 @@
         --chart-9: hsl(150, 85%, 55%);
         --chart-10: hsl(40, 85%, 60%);
         --color-text: 0 0% 0%;
+        --icon-color: 120 90% 60%;
     }
 
     .dark {
@@ -84,6 +85,7 @@
         --chart-9: hsl(150, 85%, 55%);
         --chart-10: hsl(40, 85%, 60%);
         --color-text: 0 0% 100%;
+        --icon-color: 120 90% 60%;
     }
 
     .blue {
@@ -125,6 +127,7 @@
         --chart-9: hsl(150, 85%, 55%);
         --chart-10: hsl(40, 85%, 60%);
         --color-text: 0 0% 100%;
+        --icon-color: 120 90% 60%;
     }
 
     .daltonic {
@@ -166,6 +169,7 @@
         --chart-9: hsl(280, 40%, 65%);
         --chart-10: hsl(0, 0%, 50%);
         --color-text: 0 0% 100%;
+        --icon-color: 120 90% 60%;
     }
 
     .rainbow {
@@ -207,6 +211,7 @@
         --chart-9: hsl(150, 85%, 55%);
         --chart-10: hsl(40, 85%, 60%);
         --color-text: 0 0% 100%;
+        --icon-color: 120 90% 60%;
     }
 }
 
