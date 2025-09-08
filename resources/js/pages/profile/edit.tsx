@@ -70,6 +70,7 @@ import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { AvatarPage } from "@/pages/profile/partials/avatar-form"
 import { InputNamePage } from "@/pages/profile/partials/input-name-form";
+import { DateBirthPage } from "@/pages/profile/partials/date-birth-form";
 
 
 const countries = [
@@ -106,7 +107,6 @@ export default function Edit({
   status,
 }: { mustVerifyEmail: boolean; status?: string }) {
   const pageData = usePageData();
-  const [open, setOpen] = React.useState(false)
   const [openPhone, setOpenPhone] = React.useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -195,8 +195,6 @@ export default function Edit({
                           )}
                         />
 
-
-
                         {/* campo firstname */}
                         <FormField
                           control={form.control}
@@ -231,36 +229,7 @@ export default function Edit({
                           render={({ field }) => (
                             <FormItem>
                               <FormControl>
-                                <div className="flex flex-col gap-3">
-                                  <FormLabel className="pl-1 text-text">Date of birth</FormLabel>
-                                  <Popover open={open} onOpenChange={setOpen}>
-                                    <PopoverTrigger asChild>
-
-                                      <Button
-                                        variant="outline"
-                                        id="dateofbirth"
-                                        className="w-48 justify-between font-normal"
-                                      >
-                                        {field.value ? field.value.toLocaleDateString() : "Select date"}
-                                        <ChevronDownIcon />
-                                      </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-                                      <Calendar
-                                        mode="single"
-                                        selected={field.value}
-                                        captionLayout="dropdown"
-                                        onSelect={(date) => {
-                                          field.onChange(date);
-                                          setOpen(false);
-                                        }}
-                                        fromYear={1950}
-                                        toYear={new Date().getFullYear() - 18}
-                                      />
-                                    </PopoverContent>
-                                  </Popover>
-                                </div>
-
+                                <DateBirthPage field={field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
