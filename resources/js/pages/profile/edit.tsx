@@ -40,7 +40,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import * as React from "react"
-import { Bold, CameraIcon, ChevronDownIcon, Italic, Phone, PlusIcon, Smartphone, TabletSmartphone, Underline, UploadIcon } from "lucide-react"
+import { ChevronDownIcon, Phone, Smartphone } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
@@ -68,9 +68,8 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRef, ChangeEvent } from 'react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { AvatarPage } from "@/pages/profile/partials/avatar-form"
+
 
 const countries = [
   { value: "us", label: "Estados Unidos", prefix: "+1", flag: "🇺🇸" },
@@ -108,8 +107,6 @@ export default function Edit({
   const pageData = usePageData();
   const [open, setOpen] = React.useState(false)
   const [openPhone, setOpenPhone] = React.useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [avatarPreviewUrl, setAvatarPreviewUrl] = React.useState<string>("https://github.com/shadcn.png");
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -128,36 +125,30 @@ export default function Edit({
     },
   })
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarPreviewUrl(reader.result as string); // Actualiza la URL de previsualización
-      };
-      reader.readAsDataURL(file);
-      console.log('Imagen seleccionada del dispositivo:', file);
-      // Aquí puedes subir el archivo a tu estado global del formulario si lo necesitas
-      // Por ejemplo: form.setValue("avatar", file);
+
+  function onSubmit(formData: z.infer<typeof FormSchema>) {
+    const avatarFileName = formData.avatar
+    ? `imagen_seleccionada_${new Date().getTime()}.${formData.avatar.split(';')[0].split('/')[1]}`
+    : null;
+
+  const formattedDate = formData.dateofbirth
+    ? new Date(formData.dateofbirth).toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    })
+    : null;
+
+    const data = {
+      avatar: formData.avatar,
+      firstname: formData.firstname,
+      lastname: formData.lastname,
+      dateofbirth: formattedDate,
+      sex: formData.sex,
+      contact: formData.contact,
+      notifications: formData.notifications,
     }
-  };
-
-  const handlePredefinedImageSelect = () => {
-    // Aquí es donde puedes abrir tu AlertDialog para seleccionar una imagen predefinida
-    console.log("Seleccionar imagen predefinida (lucide-chart, etc.)");
-    // Por ejemplo:
-    // setShowPredefinedImageDialog(true);
-  };
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-    /* toast("You submitted the following values", {
-      description: (
-        <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    }) */
   }
 
   return (
@@ -181,10 +172,7 @@ export default function Edit({
                     Update your personal's profile information.
                   </CardDescription>
                 </CardHeader>
-
-
-
-
+                
                 {/* formulario */}
                 <CardHeader className="!pt-0">
                   <CardDescription className="!m-3">
@@ -199,58 +187,14 @@ export default function Edit({
                             <FormItem>
                               <FormLabel htmlFor="avatar" className="pl-1 text-text">Avatar</FormLabel>
                               <FormControl>
-                                <div className="flex flex-row flex-wrap items-center gap-12">
-                                  <div className="relative h-40 w-40">
-                                    <Avatar className="h-full w-full">
-                                      {/* Utiliza el valor del formulario para el src. Si no hay valor, usa una URL por defecto. */}
-                                      <AvatarImage src={field.value} alt="Avatar" />
-                                      <AvatarFallback>CN</AvatarFallback>
-                                    </Avatar>
-
-                                    <DropdownMenu>
-                                      <DropdownMenuTrigger asChild>
-                                        <div
-                                          className="absolute bottom-0 right-0 p-1 rounded-full cursor-pointer text-white bg-icon-plus"
-                                        >
-                                          <PlusIcon className="h-6 w-6" />
-                                        </div>
-                                      </DropdownMenuTrigger>
-                                      <DropdownMenuContent>
-                                        <DropdownMenuItem onClick={() => fileInputRef.current?.click()}>
-                                          <UploadIcon className="mr-2 h-4 w-4" />
-                                          <span>Subir del dispositivo</span>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem onClick={handlePredefinedImageSelect}>
-                                          <CameraIcon className="mr-2 h-4 w-4" />
-                                          <span>Seleccionar predefinida</span>
-                                        </DropdownMenuItem>
-                                      </DropdownMenuContent>
-                                    </DropdownMenu>
-                                  </div>
-                                </div>
+                                <AvatarPage onChange={field.onChange}/>
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
 
-                        {/* Este input está fuera del FormField, pero su onChange actualiza el estado del formulario */}
-                        <input
-                          type="file"
-                          ref={fileInputRef}
-                          className="hidden"
-                          accept="image/*"
-                          onChange={(event) => {
-                            const file = event.target.files?.[0];
-                            if (file) {
-                              const reader = new FileReader();
-                              reader.onloadend = () => {
-                                form.setValue("avatar", reader.result as string);
-                              };
-                              reader.readAsDataURL(file);
-                            }
-                          }}
-                        />
+
 
                         {/* campo firstname */}
                         <FormField
