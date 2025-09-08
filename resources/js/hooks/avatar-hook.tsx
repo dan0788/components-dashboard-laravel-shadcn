@@ -1,48 +1,45 @@
-import { useState, useEffect } from "react";
-import { createAvatar } from "@dicebear/core";
-import { bottts } from "@dicebear/bottts/dist/index.mjs";
+import { createAvatar } from '@dicebear/core';
+import { bottts } from '@dicebear/collection';
+import { avataaars } from '@dicebear/collection';
 
-// Define la estructura de un avatar con su URL y nombre
-interface PredefinedAvatar {
-  url: string;
-  name: string;
-}
+const botttsList = [
+  'Alexander', 'Wyatt', 'Caleb', 'Mackenzie', 'Brooklynn', 'Sadie', 'Mason', 'Maria', 'Aidan', 'Riley', 'Avery', 'Jack',
+]
 
-/**
- * Hook para obtener una lista de avatares predefinidos generados
- * localmente con la librería de DiceBear.
- * @returns {PredefinedAvatar[]}
- */
-export const usePredefinedAvatars = (): PredefinedAvatar[] => {
-  const [avatars, setAvatars] = useState<PredefinedAvatar[]>([]);
+const avataaarList = [
+  'Sara', 'Leo', 'Jocelyn', 'Jessica', 'Adrian', 'Liliana', 'Eden', 'Jameson', 'Alexander', 'Wyatt',
+  'Caleb', 'Mackenzie', 'Brooklynn', 'Sadie', 'Mason', 'Maria', 'Aidan', 'Riley', 'Avery', 'Jack',
+]
+const avatarBottts = createAvatar(bottts, {
+  "seed": "Alexander"
+});
 
-  useEffect(() => {
-    const getAvatars = () => {
-      // Lista de seeds (semillas) para generar avatares únicos
-      const seeds = [
-        "bot-1", "bot-2", "bot-3", "bot-4", "bot-5", "bot-6", "bot-7", "bot-8", "bot-9", "bot-10",
-        "bot-11", "bot-12", "bot-13", "bot-14", "bot-15", "bot-16", "bot-17", "bot-18", "bot-19", "bot-20",
-        "bot-21", "bot-22", "bot-23", "bot-24", "bot-25", "bot-26", "bot-27", "bot-28", "bot-29", "bot-30"
-      ];
+export const avatarAvataaars = async () => {
+  const shadcnAvatarPromise = Promise.resolve({
+    svg: 'https://github.com/shadcn.png',
+    seed: 'Shadcn avatar'
+  });
 
-      const generatedAvatars: PredefinedAvatar[] = seeds.map(seed => {
-        const avatar = createAvatar(bottts, {
-          seed: seed,
-        });
+  const generatedAvatarsPromises = avataaarList.map(async (value) => {
+    const avatar = createAvatar(avataaars, {
+      "seed": value
+    });
 
-        // Convierte el SVG a un Data URI para que se pueda usar como src de una imagen
-        const dataUri = avatar.toDataUriSync();
-        return {
-          url: dataUri,
-          name: `${seed}.svg`
-        };
-      });
+    // Espera a que la promesa de la URI se resuelva
+    const svg = await avatar.toDataUri();
 
-      setAvatars(generatedAvatars);
+    return {
+      svg: svg,
+      seed: value
     };
+  });
 
-    getAvatars();
-  }, []); // El array vacío asegura que la función se ejecute solo una vez al montar
+  // Usa Promise.all para esperar a que todas las promesas se resuelvan
+  const generatedAvatars = await Promise.all([
+    shadcnAvatarPromise,
+    ...generatedAvatarsPromises
+  ]);
 
-  return avatars;
-};
+  return generatedAvatars;
+
+}

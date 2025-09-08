@@ -1,13 +1,13 @@
 "use client"
 
-"use client"
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRef, ChangeEvent } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import * as React from "react"
 import { CameraIcon, PlusIcon, UploadIcon } from "lucide-react";
-import { usePredefinedAvatars } from "@/hooks/avatar-hook";
+import { avatarAvataaars } from "@/hooks/avatar-hook";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 
 interface AvatarPageProps {
   onChange: (fileName: string) => void;
@@ -19,7 +19,17 @@ export const AvatarPage = ({ onChange }: AvatarPageProps) => {
   const [avatarPreviewUrl, setAvatarPreviewUrl] = React.useState<string>("https://github.com/shadcn.png");
   const fileRef = useRef<File | null>(null);
   const [isAlertOpen, setIsAlertOpen] = React.useState(false);
-  console.log(usePredefinedAvatars());
+  const commandRef = useRef<HTMLDivElement>(null);
+  const [avatars, setAvatars] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    const fetchAvatars = async () => {
+      const fetchedAvatars = await avatarAvataaars();
+      setAvatars(fetchedAvatars);
+    };
+
+    fetchAvatars();
+  }, []);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -34,10 +44,16 @@ export const AvatarPage = ({ onChange }: AvatarPageProps) => {
   };
 
   const handlePredefinedImageSelect = () => {
-    console.log("Seleccionar imagen predefinida (lucide-chart, etc.)");
+    //console.log("Seleccionar imagen predefinida (lucide-chart, etc.)");
     // Lógica para el AlertDialog, que luego podría llamar a onChange con la URL de la imagen predefinida
     setIsAlertOpen(true);
-    
+
+  };
+
+  const handlePredefinedAvatarClick = (avatar: { svg: string; seed: string }) => {
+    setAvatarPreviewUrl(avatar.svg);
+    onChange(avatar.seed);
+    setIsAlertOpen(false);
   };
 
   return (
@@ -80,54 +96,59 @@ export const AvatarPage = ({ onChange }: AvatarPageProps) => {
         onChange={handleImageChange} // Llama a la nueva función local
       />
 
-{/* AlertDialog para la selección de imágenes predefinidas */}
-      {/* <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            <Command>
-                  <CommandInput placeholder="Find country..." />
-                  <CommandEmpty>Country not found</CommandEmpty>
-                  <CommandGroup>
-                    {countries.map((country) => (
-                      <CommandItem
-                        className="p-1"
-                        key={country.value}
-                        value={country.value}
-                        onSelect={(currentValue) => {
-                          field.onChange({ ...field.value, country: currentValue });
-                          setOpenPhone(false)
-                        }}
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            field.value.country === country.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                        <img
-                          src={country.flagUrl}
-                          alt={`Bandera de ${country.label}`}
-                          className="inline-block h-4 w-6 mr-2" />
-                        {country.label} ({country.prefix})
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </Command>
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog> */}
+      {/* AlertDialog para la selección de imágenes predefinidas */}
+      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Choose an avatar</AlertDialogTitle>
+          </AlertDialogHeader>
+
+          {/* El Command para la búsqueda de avatares */}
+          <Command>
+            <CommandInput placeholder="Choose by name..." />
+            <CommandGroup
+              ref={commandRef}
+              // Agrega un manejador de eventos para evitar que el scroll se propague
+              onWheel={(e) => {
+                e.stopPropagation();
+              }}
+              className="max-h-64 overflow-y-auto">
+              <CommandEmpty>Avatar no encontrado.</CommandEmpty>
+              {avatars.map((avatar, index) => (
+                <CommandItem
+                  key={index}
+                  value={avatar.seed}
+                  onSelect={() => handlePredefinedAvatarClick(avatar)}
+                >
+                  <img
+                    src={avatar.svg}
+                    alt={`Avatar de ${avatar.seed}`}
+                    className="inline-block h-8 w-8 rounded-full mr-2"
+                  />
+                  {avatar.seed}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+
+          {/* Cuadrícula visual de avatares para selección */}
+          {/* <div className="grid grid-cols-5 gap-2 overflow-y-auto max-h-[400px]">
+            {avatars.map((avatar, index) => (
+              <Avatar 
+                key={index} 
+                className="h-16 w-16 cursor-pointer" 
+                onClick={() => handlePredefinedAvatarClick(avatar)}
+              >
+                <AvatarImage src={avatar.svg} alt={avatar.seed} />
+              </Avatar>
+            ))}
+          </div> */}
+
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cerrar</AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };

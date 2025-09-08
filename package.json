@@ -24,7 +24,6 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "@dicebear/bottts": "^9.2.4",
         "@dicebear/collection": "^9.2.4",
         "@dicebear/core": "^9.2.4",
         "@hookform/resolvers": "^5.2.1",
