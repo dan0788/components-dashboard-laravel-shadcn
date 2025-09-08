@@ -101,6 +101,9 @@ export const AvatarPage = ({ onChange }: AvatarPageProps) => {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Choose an avatar</AlertDialogTitle>
+            <AlertDialogDescription>
+              Search or choose from the list
+            </AlertDialogDescription>
           </AlertDialogHeader>
 
           {/* El Command para la búsqueda de avatares */}

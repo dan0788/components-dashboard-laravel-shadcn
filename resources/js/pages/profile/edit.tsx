@@ -276,9 +276,9 @@ export default function Edit({
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
-                              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                              <AlertDialogTitle>Are you absolutely sure to save the data?</AlertDialogTitle>
                               <AlertDialogDescription>
-                                This action cannot be undone. This will permanently submit your data.
+                                This action cannot be undone. You can modify your data after the change.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
