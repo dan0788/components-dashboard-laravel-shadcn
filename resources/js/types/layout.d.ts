@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactNode } from "react";
+import { ControllerRenderProps, FieldPath, FieldValues } from "react-hook-form";
 
 // Interfaz para cada ítem del breadcrumb
 export interface BreadcrumbItemProps {
@@ -11,4 +12,8 @@ export interface BreadcrumbItemProps {
 export interface AuthenticatedLayoutProps extends PropsWithChildren, Record<string, any> {
   header?: ReactNode;
   breadcrumbs?: BreadcrumbItemProps[];
+}
+
+export interface FieldData<TFieldValues extends FieldValues> {
+  field: ControllerRenderProps<TFieldValues, FieldPath<TFieldValues>>;
 }

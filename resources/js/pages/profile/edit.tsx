@@ -65,14 +65,7 @@ import { AvatarPage } from "@/pages/profile/partials/avatar-form"
 import { InputNamePage } from "@/pages/profile/partials/input-name-form";
 import { DateBirthPage } from "@/pages/profile/partials/date-birth-form";
 import { RadioSexPage } from "@/pages/profile/partials/radio-sex-form";
-
-
-const countries = [
-  { value: "us", label: "Estados Unidos", prefix: "+1", flag: "🇺🇸" },
-  { value: "mx", label: "México", prefix: "+52", flag: "🇲🇽" },
-  { value: "ec", label: "Ecuador", prefix: "+593", flag: "🇪🇨" },
-  // Agrega más países según necesites
-];
+import { ContactsPage } from "@/pages/profile/partials/contacts-form";
 
 const FormSchema = z.object({
   avatar: z.string(),
@@ -101,7 +94,6 @@ export default function Edit({
   status,
 }: { mustVerifyEmail: boolean; status?: string }) {
   const pageData = usePageData();
-  const [openPhone, setOpenPhone] = React.useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -113,7 +105,7 @@ export default function Edit({
       sex: undefined,
       contact: {
         type: "cellphone",
-        country: "ec",
+        country: "Ecuador",
         number: "",
       },
       notifications: true,
@@ -122,10 +114,6 @@ export default function Edit({
 
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
-    const avatarFileName = formData.avatar
-      ? `imagen_seleccionada_${new Date().getTime()}.${formData.avatar.split(';')[0].split('/')[1]}`
-      : null;
-
     const formattedDate = formData.dateofbirth
       ? new Date(formData.dateofbirth).toLocaleDateString('es-ES', {
         day: '2-digit',
@@ -251,88 +239,9 @@ export default function Edit({
                           name="contact"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel htmlFor="sex" className="pl-1 text-text">Contact</FormLabel>
+                              
                               <FormControl>
-                                <div className="flex flex-col gap-3">
-                                  <div className="flex justify-start">
-                                    {/* Toggle Group para el tipo de teléfono */}
-                                    <ToggleGroup
-                                      type="single"
-                                      value={field.value.type}
-                                      onValueChange={(value) => field.onChange({ ...field.value, type: value })}
-                                    >
-                                      <ToggleGroupItem value="cellphone" aria-label="ellphone">
-                                        <Smartphone className="h-4 w-4" />
-                                      </ToggleGroupItem>
-                                      <ToggleGroupItem value="landphone" aria-label="Landphone">
-                                        <Phone className="h-4 w-4" />
-                                      </ToggleGroupItem>
-                                    </ToggleGroup>
-
-                                    {/* Input con el Combobox de país */}
-                                    <div className="flex w-fit px-3">
-                                      <div className="w-fit">
-                                        <Popover open={openPhone} onOpenChange={setOpenPhone}>
-                                          <PopoverTrigger asChild>
-                                            <Button
-                                              variant="outline"
-                                              role="combobox"
-                                              className="w-full justify-between rounded-r-none"
-                                            >
-                                              {field.value.country ? (
-                                                <>
-                                                  {countries.find((country) => country.value === field.value.country)?.flag}{" "}
-                                                  {countries.find((country) => country.value === field.value.country)?.prefix}
-                                                </>
-                                              ) : (
-                                                "Selecciona país"
-                                              )}
-                                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                            </Button>
-                                          </PopoverTrigger>
-                                          <PopoverContent className="w-[200px] p-0">
-                                            <Command>
-                                              <CommandInput placeholder="Buscar país..." />
-                                              <CommandEmpty>País no encontrado.</CommandEmpty>
-                                              <CommandGroup>
-                                                {countries.map((country) => (
-                                                  <CommandItem
-                                                    key={country.value}
-                                                    value={country.value}
-                                                    onSelect={(currentValue) => {
-                                                      field.onChange({ ...field.value, country: currentValue });
-                                                      setOpenPhone(false)
-                                                    }}
-                                                  >
-                                                    <Check
-                                                      className={cn(
-                                                        "mr-2 h-4 w-4",
-                                                        field.value.country === country.value
-                                                          ? "opacity-100"
-                                                          : "opacity-0"
-                                                      )}
-                                                    />
-                                                    {country.flag} {country.label} ({country.prefix})
-                                                  </CommandItem>
-                                                ))}
-                                              </CommandGroup>
-                                            </Command>
-                                          </PopoverContent>
-                                        </Popover>
-                                      </div>
-                                      <Input
-                                        className="flex-grow rounded-l-none"
-                                        id="number"
-                                        type="tel"
-                                        placeholder="Número de teléfono"
-                                        value={field.value.number}
-                                        onChange={(e) => field.onChange({ ...field.value, number: e.target.value })}
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-
-
+                                <ContactsPage field={field}/>
                               </FormControl>
                               <FormMessage />
                             </FormItem>

@@ -6,13 +6,10 @@ import { FormLabel } from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ChevronDownIcon } from 'lucide-react';
 import React from 'react'
-import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form';
+import { FieldData } from "@/types/layout";
 
-interface DateBirthData<TFieldValues extends FieldValues> {
-  field: ControllerRenderProps<TFieldValues, FieldPath<TFieldValues>>;
-}
-
-export const DateBirthPage = <TFieldValues extends FieldValues>({ field }: DateBirthData<TFieldValues>) => {
+export const DateBirthPage = <TFieldValues extends FieldValues>({ field }: FieldData<TFieldValues>) => {
   const [open, setOpen] = React.useState(false)
 
   return (

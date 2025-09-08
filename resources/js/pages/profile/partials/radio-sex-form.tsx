@@ -2,13 +2,10 @@
 
 import { FormLabel } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form';
+import { FieldValues } from 'react-hook-form';
+import { FieldData } from "@/types/layout";
 
-interface RadioSexData<TFieldValues extends FieldValues> {
-  field: ControllerRenderProps<TFieldValues, FieldPath<TFieldValues>>;
-}
-
-export const RadioSexPage = <TFieldValues extends FieldValues>({ field }: RadioSexData<TFieldValues>) => {
+export const RadioSexPage = <TFieldValues extends FieldValues>({ field }: FieldData<TFieldValues>) => {
   return (
     <RadioGroup
       onValueChange={field.onChange} // 💡 Conecta el onChange del campo al onValueChange del RadioGroup
