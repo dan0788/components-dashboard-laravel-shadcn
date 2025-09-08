@@ -4,7 +4,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Check, ChevronsUpDown, Phone, Smartphone } from "lucide-react";
 import { FieldData } from "@/types/layout";
 import { FieldValues } from "react-hook-form";
-import React from "react";
+import React, { useRef } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
@@ -16,6 +16,7 @@ import useFetchCountries from "@/hooks/country-hook"
 export const ContactsPage = <TFieldValues extends FieldValues>({ field }: FieldData<TFieldValues>) => {
   const [openPhone, setOpenPhone] = React.useState(false)
   const { countries, isLoading, error } = useFetchCountries();
+  const commandRef = useRef<HTMLDivElement>(null);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -77,7 +78,13 @@ export const ContactsPage = <TFieldValues extends FieldValues>({ field }: FieldD
                 <Command>
                   <CommandInput placeholder="Find country..." />
                   <CommandEmpty>Country not found</CommandEmpty>
-                  <CommandGroup>
+                  <CommandGroup
+                    ref={commandRef}
+                    // Agrega un manejador de eventos para evitar que el scroll se propague
+                    onWheel={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className="max-h-64 overflow-y-auto">
                     {countries.map((country) => (
                       <CommandItem
                         className="p-1"
