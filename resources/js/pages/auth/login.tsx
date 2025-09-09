@@ -33,6 +33,7 @@ export default function LoginPage({
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
+    
     post(route("login"));
   };
 
@@ -89,7 +90,7 @@ export default function LoginPage({
                       onChange={(e) => setData("email", e.target.value)}
                       required
                       autoFocus // Para que se enfoque al cargar
-                      autoComplete="username" // Buena práctica para accesibilidad
+                      autoComplete="email" // Buena práctica para accesibilidad
                     />
                     <InputError message={errors.email} />
                   </div>
