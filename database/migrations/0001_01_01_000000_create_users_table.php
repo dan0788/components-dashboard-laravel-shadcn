@@ -17,8 +17,22 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('pin');
+            $table->text('pin');
+            $table->string('avatar')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->date('dateofbirth')->nullable();
+            $table->boolean('notifications')->nullable();
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('contact_type');
+            $table->string('country');
+            $table->string('phone_number');
             $table->timestamps();
         });
 
@@ -43,6 +57,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('contacts');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

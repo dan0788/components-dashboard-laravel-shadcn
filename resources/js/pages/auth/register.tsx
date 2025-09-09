@@ -109,6 +109,7 @@ export default function Register() {
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="pin">Pin</Label>
+                                <Label>This pin will be used for two-step verification (to activate it you must log in to your account)</Label>
 
                                 <InputOTP
                                     maxLength={6}
