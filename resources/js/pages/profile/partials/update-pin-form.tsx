@@ -30,7 +30,6 @@ export default function UpdatePinForm({
 
     const updatePin: FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(data);
 
         put(route("pin.update"), {
             preserveScroll: true,
@@ -56,13 +55,13 @@ export default function UpdatePinForm({
                     <Label htmlFor="current_pin">Current Pin</Label>
 
                     <Input
+                        type='password'
                         id="current_pin"
                         ref={currentPinInput}
                         value={data.current_pin}
                         onChange={(e) =>
                             setData("current_pin", e.target.value)
                         }
-                        type="pin"
                         className="mt-1 block w-full"
                         autoComplete="current-pin"
                     />
@@ -78,10 +77,10 @@ export default function UpdatePinForm({
 
                     <Input
                         id="pin"
+                        type='password'
                         ref={pinInput}
                         value={data.pin}
                         onChange={(e) => setData("pin", e.target.value)}
-                        type="pin"
                         className="mt-1 block w-full"
                         autoComplete="new-pin"
                     />
@@ -96,11 +95,11 @@ export default function UpdatePinForm({
 
                     <Input
                         id="pin_confirmation"
+                        type='password'
                         value={data.pin_confirmation}
                         onChange={(e) =>
                             setData("pin_confirmation", e.target.value)
                         }
-                        type="pin"
                         className="mt-1 block w-full"
                         autoComplete="new-pin"
                     />
