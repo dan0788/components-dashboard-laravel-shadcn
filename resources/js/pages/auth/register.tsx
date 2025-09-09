@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { InputError } from "@/components/ui/input-error";
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -19,6 +20,7 @@ export default function Register() {
         email: "",
         password: "",
         password_confirmation: "",
+        pin: "",
     });
 
     useEffect(() => {
@@ -29,7 +31,7 @@ export default function Register() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
+        
         post(route("register"));
     };
 
@@ -104,6 +106,29 @@ export default function Register() {
                                 <InputError
                                     message={errors.password_confirmation}
                                 />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="pin">Pin</Label>
+
+                                <InputOTP
+                                    maxLength={6}
+                                    id="pin"
+                                    onChange={(value) => setData("pin", value)}
+                                    value={data.pin}
+                                >
+                                    <InputOTPGroup >
+                                        <InputOTPSlot index={0} />
+                                        <InputOTPSlot index={1} />
+                                        <InputOTPSlot index={2} />
+                                    </InputOTPGroup>
+                                    <InputOTPSeparator />
+                                    <InputOTPGroup>
+                                        <InputOTPSlot index={3} />
+                                        <InputOTPSlot index={4} />
+                                        <InputOTPSlot index={5} />
+                                    </InputOTPGroup>
+                                </InputOTP>
+                                <InputError message={errors.name} />
                             </div>
                             <Button type="submit" className="w-full">
                                 Create an account
