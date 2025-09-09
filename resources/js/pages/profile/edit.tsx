@@ -4,6 +4,7 @@ import AuthenticatedLayout from "@/layouts/authenticated-layout";
 import DeleteUserForm from "@/pages/profile/partials/delete-user-form";
 import UpdatePasswordForm from "@/pages/profile/partials/update-password-form";
 import UpdateProfileInformationForm from "@/pages/profile/partials/update-profile-information-form";
+import UpdatePinForm from "@/pages/profile/partials/update-pin-form";
 import { Head } from "@inertiajs/react";
 import {
   Card,
@@ -326,6 +327,20 @@ export default function Edit({
 
                 <CardContent>
                   <UpdatePasswordForm className="max-w-xl" />
+                </CardContent>
+              </Card>
+
+              <Card className="my-5">
+                <CardHeader>
+                  <CardTitle>Update Pin</CardTitle>
+                  <CardDescription>
+                    Ensure your account is using a long, random pin
+                    to stay secure.
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent>
+                  <UpdatePinForm className="max-w-xl" />
                 </CardContent>
               </Card>
 

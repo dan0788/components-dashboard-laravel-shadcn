@@ -30,6 +30,7 @@ export default function UpdatePinForm({
 
     const updatePin: FormEventHandler = (e) => {
         e.preventDefault();
+        console.log(data);
 
         put(route("pin.update"), {
             preserveScroll: true,
