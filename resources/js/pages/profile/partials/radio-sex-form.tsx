@@ -13,11 +13,11 @@ export const RadioSexPage = <TFieldValues extends FieldValues>({ field }: FieldD
       className="flex flex-col space-y-1"
     >
       <div className="flex items-center gap-3">
-        <RadioGroupItem value="male" id="r1" />
+        <RadioGroupItem value="Male" id="r1"/>
         <FormLabel htmlFor="r1" className="pl-1 text-text">Male</FormLabel>
       </div>
       <div className="flex items-center gap-3">
-        <RadioGroupItem value="female" id="r2" />
+        <RadioGroupItem value="Female" id="r2" />
         <FormLabel htmlFor="r2" className="pl-1 text-text">Female</FormLabel>
       </div>
     </RadioGroup>

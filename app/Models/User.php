@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Contact;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -21,6 +23,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'pin',
+        'avatar',
+        'firstname',
+        'lastname',
+        'dateofbirth',
+        'sex',
+        'notifications',
     ];
 
     /**
@@ -44,5 +52,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function contact(): HasOne
+    {
+        // Esto le dice a Laravel que este usuario tiene un único registro en la tabla 'contacts'
+        // y que la clave foránea en la tabla 'contacts' es 'user_id'.
+        return $this->hasOne(Contact::class);
     }
 }

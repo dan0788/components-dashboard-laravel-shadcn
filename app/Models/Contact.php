@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Contacts extends Model
+class Contact extends Model
 {
     use HasFactory, Notifiable;
 
@@ -18,9 +18,9 @@ class Contacts extends Model
      */
     protected $fillable = [
         'user_id',
-        'contact_type',
+        'type',
         'country',
-        'phone_number',
+        'number',
     ];
 
     /**

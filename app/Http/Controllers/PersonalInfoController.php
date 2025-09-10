@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Illuminate\Validation\Rule;
 
 class PersonalInfoController extends Controller
 {
@@ -36,9 +37,21 @@ class PersonalInfoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        $user = $request->user();
+        $userId = $request->user()->id;
+
+        $userContact = User::with('contact')->find($userId);
+
+        if (!$userContact->contact) {
+            $userContact->contact = new \stdClass();
+        }
+
+        return Inertia::render('Profile/Edit', [
+            'userContact' => $userContact,
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -54,8 +67,33 @@ class PersonalInfoController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request->all());
-        
+        //
+        // 1. Obtener el usuario autenticado.
+        // El Request ya tiene un método user() que devuelve el usuario
+        // autenticado si la ruta está protegida por middleware 'auth'.
+
+        $validatedData = $request->validate([
+            'firstname' => ['string', 'max:255', 'regex:/^[a-zA-Z0-9\s]*$/', 'nullable'],
+            'lastname' => ['string', 'max:255', 'regex:/^[a-zA-Z0-9\s]*$/', 'nullable'],
+            'avatar' => ['string', 'nullable'], // Suponiendo que el avatar es una URL o un path.
+            'dateofbirth' => ['date_format:Y-m-d', 'nullable'],
+            'sex' => ['string', 'nullable', Rule::in(['Male', 'Female'])],
+            'contact' => ['array', 'nullable'],
+            'contact.type' => ['string', 'nullable'],
+            'contact.country' => ['string', 'nullable'],
+            'contact.number' => ['string', 'nullable'],
+            'notifications' => ['boolean', 'nullable'],
+        ]);
+
+        $user = $request->user();
+        $contactData = $validatedData['contact'];
+        unset($validatedData['contact']);
+
+        $user->update($validatedData);
+
+        $user->contact()->update($contactData);
+
+        return Redirect::back()->with('status', 'profile-updated');
     }
 
     /**

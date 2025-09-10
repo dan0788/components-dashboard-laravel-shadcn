@@ -101,12 +101,9 @@ export default function Edit({
 
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
+
     const formattedDate = formData.dateofbirth
-      ? new Date(formData.dateofbirth).toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      })
+      ? `${formData.dateofbirth.getFullYear()}-${String(formData.dateofbirth.getMonth() + 1).padStart(2, '0')}-${String(formData.dateofbirth.getDate()).padStart(2, '0')}`
       : null;
 
     const dataForm = {
@@ -121,16 +118,23 @@ export default function Edit({
     console.log(dataForm);
 
     router.patch(route("personalInfo.update"), dataForm, {
-            preserveScroll: true,
-            onSuccess: () => {
-                // 🌈 ¡Arcoíris del éxito! 🌈
-                // Lógica a ejecutar si la solicitud es exitosa.
-                form.reset();
-            },
-            onError: (errors) => {
-                
-            },
-        });
+      preserveScroll: true,
+      onSuccess: () => {
+        // 🌈 ¡Arcoíris del éxito! 🌈
+        // Lógica a ejecutar si la solicitud es exitosa.
+        form.reset();
+      },
+      onError: (errors) => {
+        form.setError("firstname", { message: errors.firstname });
+        form.setError("lastname", { message: errors.lastname });
+        form.setError("dateofbirth", { message: errors.dateofbirth });
+        form.setError("sex", { message: errors.sex });
+        form.setError("contact.type", { message: errors["contact.type"] });
+        form.setError("contact.country", { message: errors["contact.country"] });
+        form.setError("contact.number", { message: errors["contact.number"] });
+        form.setError("notifications", { message: errors.notifications });
+      },
+    });
 
   }
 
