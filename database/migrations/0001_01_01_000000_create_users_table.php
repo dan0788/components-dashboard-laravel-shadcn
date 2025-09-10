@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->date('dateofbirth')->nullable();
+            $table->enum('sex', ['Male', 'Female']);
             $table->boolean('notifications')->nullable();
             $table->rememberToken();
             $table->timestamps();

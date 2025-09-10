@@ -5,7 +5,7 @@ import DeleteUserForm from "@/pages/profile/partials/delete-user-form";
 import UpdatePasswordForm from "@/pages/profile/partials/update-password-form";
 import UpdateProfileInformationForm from "@/pages/profile/partials/update-profile-information-form";
 import UpdatePinForm from "@/pages/profile/partials/update-pin-form";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 import {
   Card,
   CardContent,
@@ -23,7 +23,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { usePageData } from "@/hooks/get-page"
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -34,17 +33,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import * as React from "react"
-import { Phone, Smartphone } from "lucide-react"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/components/ui/radio-group"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -56,11 +44,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Label } from "@/components/ui/label";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { AvatarPage } from "@/pages/profile/partials/avatar-form"
 import { InputNamePage } from "@/pages/profile/partials/input-name-form";
@@ -96,6 +80,8 @@ export default function Edit({
 }: { mustVerifyEmail: boolean; status?: string }) {
   const pageData = usePageData();
 
+
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -123,7 +109,7 @@ export default function Edit({
       })
       : null;
 
-    const data = {
+    const dataForm = {
       avatar: formData.avatar,
       firstname: formData.firstname,
       lastname: formData.lastname,
@@ -132,7 +118,20 @@ export default function Edit({
       contact: formData.contact,
       notifications: formData.notifications,
     }
-    console.log(data);
+    console.log(dataForm);
+
+    router.patch(route("personalInfo.update"), dataForm, {
+            preserveScroll: true,
+            onSuccess: () => {
+                // 🌈 ¡Arcoíris del éxito! 🌈
+                // Lógica a ejecutar si la solicitud es exitosa.
+                form.reset();
+            },
+            onError: (errors) => {
+                
+            },
+        });
+
   }
 
   return (
@@ -227,7 +226,7 @@ export default function Edit({
                             <FormItem>
                               <FormLabel htmlFor="sex" className="pl-1 text-text">Sex</FormLabel>
                               <FormControl>
-                                <RadioSexPage field={field}/>
+                                <RadioSexPage field={field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -240,9 +239,9 @@ export default function Edit({
                           name="contact"
                           render={({ field }) => (
                             <FormItem>
-                              
+
                               <FormControl>
-                                <ContactsPage field={field}/>
+                                <ContactsPage field={field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
