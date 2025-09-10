@@ -54,15 +54,13 @@ import { ContactsPage } from "@/pages/profile/partials/contacts-form";
 import { UserProps, ContactProps } from "@/types/layout";
 
 const FormSchema = z.object({
-  avatar: z.string(),
-  firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/, {
-    message: "No special characters allowed"
-  })/* .min(2, {
+  avatar: z.string().optional(),
+  firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/).optional()
+  /* .min(2, {
         message: "First name must be at least 2 characters.",
     }) */,
-  lastname: z.string().regex(/^[a-zA-Z0-9\s]*$/, {
-    message: "No special characters allowed"
-  })/* .email({
+  lastname: z.string().regex(/^[a-zA-Z0-9\s]*$/).optional()
+  /* .email({
         message: "Invalid email address.",
     }) */,
   dateofbirth: z.date().optional(),
@@ -70,10 +68,20 @@ const FormSchema = z.object({
   contact: z.object({
     type: z.enum(["cellphone", "landphone"]).optional(),
     country: z.string().optional(),
-    number: z.string().optional(),
+    number: z.string().optional(), //incluye prefijo
   }),
   notifications: z.boolean(),
 })
+
+const parseDate = (dateString: string | null) => {
+  if (!dateString) return undefined;
+  const parts = dateString.split('-');
+  if (parts.length !== 3) return undefined;
+  const [year, month, day] = parts.map(Number);
+  // Nota: el mes en Date es 0-indexado
+  const date = new Date(year, month - 1, day);
+  return date;
+};
 
 export default function Edit({
   mustVerifyEmail,
@@ -89,17 +97,16 @@ export default function Edit({
       avatar: user['avatar'] || "https://github.com/shadcn.png",
       firstname: user['firstname'] || "",
       lastname: user['lastname'] || "",
-      dateofbirth: undefined,
-      sex: user['sex'] || undefined,
+      dateofbirth: parseDate(user['dateofbirth']),
+      sex: user['sex'] || "Male",
       contact: {
         type: "cellphone",
         country: "Ecuador",
         number: contact['number'] || "",
       },
-      notifications: true,
+      notifications: !!user['notifications'],
     },
   })
-
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
 

@@ -14,7 +14,7 @@ export const DateBirthPage = <TFieldValues extends FieldValues>({ field }: Field
 
   return (
     <div className="flex flex-col gap-3">
-      <FormLabel htmlFor={field.name} className="pl-1 text-text">Date of birth</FormLabel>
+      <FormLabel /* htmlFor={field.name} */ className="pl-1 text-text">Date of birth</FormLabel>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
 
