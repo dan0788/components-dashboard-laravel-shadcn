@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -18,9 +19,20 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $user = $request->user();
+        $userId = $request->user()->id;
+
+        $userContact = User::with('contact')->find($userId);
+
+        if (!$userContact->contact) {
+            $userContact->contact = new \stdClass();
+        }
+
         return Inertia::render('profile/edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'contact' => $userContact,
+            'user' => $user,
         ]);
     }
 

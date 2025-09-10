@@ -39,19 +39,7 @@ class PersonalInfoController extends Controller
      */
     public function show(Request $request)
     {
-        $user = $request->user();
-        $userId = $request->user()->id;
-
-        $userContact = User::with('contact')->find($userId);
-
-        if (!$userContact->contact) {
-            $userContact->contact = new \stdClass();
-        }
-
-        return Inertia::render('Profile/Edit', [
-            'userContact' => $userContact,
-            'user' => $user,
-        ]);
+        
     }
 
     /**

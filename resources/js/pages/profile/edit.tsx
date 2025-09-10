@@ -51,6 +51,7 @@ import { InputNamePage } from "@/pages/profile/partials/input-name-form";
 import { DateBirthPage } from "@/pages/profile/partials/date-birth-form";
 import { RadioSexPage } from "@/pages/profile/partials/radio-sex-form";
 import { ContactsPage } from "@/pages/profile/partials/contacts-form";
+import { UserProps, ContactProps } from "@/types/layout";
 
 const FormSchema = z.object({
   avatar: z.string(),
@@ -77,23 +78,23 @@ const FormSchema = z.object({
 export default function Edit({
   mustVerifyEmail,
   status,
-}: { mustVerifyEmail: boolean; status?: string }) {
+  user,
+  contact,
+}: { mustVerifyEmail: boolean; status?: string; user: UserProps, contact: ContactProps }) {
   const pageData = usePageData();
-
-
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      avatar: "https://github.com/shadcn.png",
-      firstname: "",
-      lastname: "",
+      avatar: user['avatar'] || "https://github.com/shadcn.png",
+      firstname: user['firstname'] || "",
+      lastname: user['lastname'] || "",
       dateofbirth: undefined,
-      sex: undefined,
+      sex: user['sex'] || undefined,
       contact: {
         type: "cellphone",
         country: "Ecuador",
-        number: "",
+        number: contact['number'] || "",
       },
       notifications: true,
     },
@@ -135,7 +136,6 @@ export default function Edit({
         form.setError("notifications", { message: errors.notifications });
       },
     });
-
   }
 
   return (
