@@ -19,16 +19,7 @@ export const usePageData = (): PageData => {
             title: 'Cargando...',
             breadcrumbs: [],
         };
-        /* return {
-            title: 'Página no encontrada',
-            breadcrumbs: [{ label: 'Dashboard', href: '/dashboard' }, { label: 'PageNotFound' }],
-        }; */
     }
 
     return data;
 }
-
-/* const { component } = usePage();
-    const pathParts = component.split('/');
-    const ROUTE_KEY = pathParts[pathParts.length - 1];
-    const myBreadcrumbs = routes[ROUTE_KEY].breadcrumbs; */

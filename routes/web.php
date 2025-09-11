@@ -24,14 +24,18 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
         return Inertia::render('home');
     })->name('home');
 
-    Route::get('/components/{component?}', function ($component = 'accordion') {
+    Route::get('/components', function () {
+        return Inertia::render('components/component-page');
+    })->name('components.index');
+
+    /* Route::get('/components/{component?}', function ($component = 'accordion') {
         $componentName = 'components/' . $component;
         if (!file_exists(resource_path('js/Pages/' . $componentName . '.tsx'))) {
             abort(404);
         }
 
         return Inertia::render($componentName);
-    })->name('components.show');
+    })->name('components.show'); */
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -40,7 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::patch('/profile', [PersonalInfoController::class, 'update'])->name('personalInfo.update');
-    
+    //ruta para eliminar cualquier usuario
+    //Route::delete('/profile', [PersonalInfoController::class, 'delete'])->name('personalInfo.delete');
+
 });
 
 

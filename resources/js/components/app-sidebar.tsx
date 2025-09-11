@@ -37,7 +37,7 @@ const data = {
   },
   navMain: [
     {
-      title: "Playground",
+      title: "Statistics ground",
       url: "#",
       icon: SquareTerminal,
       isActive: false,
@@ -47,7 +47,7 @@ const data = {
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Business",
           url: "#",
         },
         {
