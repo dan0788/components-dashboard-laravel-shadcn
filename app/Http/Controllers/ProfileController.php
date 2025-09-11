@@ -23,15 +23,12 @@ class ProfileController extends Controller
         $userId = $request->user()->id;
 
         $userContact = User::with('contact')->find($userId);
-
-        if (!$userContact->contact) {
-            $userContact->contact = new \stdClass();
-        }
-
+        $contactData = $userContact->contact ?? new \stdClass();
+        
         return Inertia::render('profile/edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'contact' => $userContact,
+            'contact' => $contactData,
             'user' => $user,
         ]);
     }

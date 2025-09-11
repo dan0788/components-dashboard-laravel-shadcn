@@ -20,6 +20,7 @@ class Contact extends Model
         'user_id',
         'type',
         'country',
+        'prefix',
         'number',
     ];
 
@@ -28,9 +29,7 @@ class Contact extends Model
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        
-    ];
+    protected $hidden = [];
 
     /**
      * Get the attributes that should be cast.
@@ -39,9 +38,7 @@ class Contact extends Model
      */
     protected function casts(): array
     {
-        return [
-            
-        ];
+        return [];
     }
 
     public function user(): BelongsTo

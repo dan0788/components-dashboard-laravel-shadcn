@@ -68,6 +68,7 @@ const FormSchema = z.object({
   contact: z.object({
     type: z.enum(["cellphone", "landphone"]).optional(),
     country: z.string().optional(),
+    prefix: z.string().optional(),
     number: z.string().optional(), //incluye prefijo
   }),
   notifications: z.boolean(),
@@ -100,8 +101,9 @@ export default function Edit({
       dateofbirth: parseDate(user['dateofbirth']),
       sex: user['sex'] || "Male",
       contact: {
-        type: "cellphone",
-        country: "Ecuador",
+        type: contact['type'] ? contact['type'] as "cellphone" | "landphone" : "cellphone",
+        country: contact['country'] || "Ecuador",
+        prefix: contact['prefix'] || '+593',
         number: contact['number'] || "",
       },
       notifications: !!user['notifications'],

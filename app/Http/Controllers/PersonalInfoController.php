@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -67,8 +67,9 @@ class PersonalInfoController extends Controller
             'dateofbirth' => ['date_format:Y-m-d', 'nullable'],
             'sex' => ['string', 'nullable', Rule::in(['Male', 'Female'])],
             'contact' => ['array', 'nullable'],
-            'contact.type' => ['string', 'nullable'],
+            'contact.type' => ['string', 'nullable', Rule::in(['cellphone', 'landphone'])],
             'contact.country' => ['string', 'nullable'],
+            'contact.prefix' => ['string', 'nullable'],
             'contact.number' => ['string', 'nullable'],
             'notifications' => ['boolean', 'nullable'],
         ]);
@@ -79,6 +80,10 @@ class PersonalInfoController extends Controller
 
         $user->update($validatedData);
 
+        Contact::updateOrCreate(
+            ['user_id' => $user->id], // Criterio de búsqueda: el id del usuario
+            $contactData             // Datos a crear o actualizar
+        );
         $user->contact()->update($contactData);
 
         return Redirect::back()->with('status', 'profile-updated');

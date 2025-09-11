@@ -17,7 +17,7 @@ export const ContactsPage = <TFieldValues extends FieldValues>({ field }: FieldD
   const [openPhone, setOpenPhone] = React.useState(false)
   const { countries, isLoading, error } = useFetchCountries();
   const commandRef = useRef<HTMLDivElement>(null);
-
+  
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -91,8 +91,13 @@ export const ContactsPage = <TFieldValues extends FieldValues>({ field }: FieldD
                         key={country.value}
                         value={country.value}
                         onSelect={(currentValue) => {
-                          field.onChange({ ...field.value, country: currentValue });
-                          setOpenPhone(false)
+                          const selectedCountry = countries.find((country) => country.value === currentValue);
+                          field.onChange({
+                            ...field.value,
+                            country: currentValue,
+                            prefix: selectedCountry ? selectedCountry.prefix : '',
+                          });
+                          setOpenPhone(false);
                         }}
                       >
                         <Check

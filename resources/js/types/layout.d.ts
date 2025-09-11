@@ -38,5 +38,6 @@ export interface ContactProps {
     user_id: number;
     type: string;
     country: string;
+    prefix: string;
     number: string;
 }

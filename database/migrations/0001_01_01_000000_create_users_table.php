@@ -31,8 +31,9 @@ return new class extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('type');
+            $table->enum('type', ['cellphone', 'landphone']);
             $table->string('country');
+            $table->string('prefix');
             $table->string('number');
             $table->timestamps();
         });
