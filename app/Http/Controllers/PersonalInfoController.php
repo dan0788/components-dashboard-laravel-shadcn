@@ -84,7 +84,7 @@ class PersonalInfoController extends Controller
             ['user_id' => $user->id], // Criterio de búsqueda: el id del usuario
             $contactData             // Datos a crear o actualizar
         );
-        $user->contact()->update($contactData);
+        //$user->contact()->update($contactData);
 
         return Redirect::back()->with('status', 'profile-updated');
     }

@@ -52,6 +52,9 @@ import { DateBirthPage } from "@/pages/profile/partials/date-birth-form";
 import { RadioSexPage } from "@/pages/profile/partials/radio-sex-form";
 import { ContactsPage } from "@/pages/profile/partials/contacts-form";
 import { UserProps, ContactProps } from "@/types/layout";
+import { toast, Toaster } from "sonner";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { CheckCircle2Icon } from "lucide-react";
 
 const FormSchema = z.object({
   avatar: z.string().optional(),
@@ -130,9 +133,10 @@ export default function Edit({
     router.patch(route("personalInfo.update"), dataForm, {
       preserveScroll: true,
       onSuccess: () => {
-        // 🌈 ¡Arcoíris del éxito! 🌈
-        // Lógica a ejecutar si la solicitud es exitosa.
-        form.reset();
+        toast(<div className="flex justify-between ">
+          <CheckCircle2Icon className="mr-4" />Personal information has been correctly updated
+        </div>)
+        //form.reset();
       },
       onError: (errors) => {
         form.setError("firstname", { message: errors.firstname });
@@ -159,6 +163,7 @@ export default function Edit({
               <TabsTrigger value="Account Information">Account Information</TabsTrigger>
             </TabsList>
 
+            <Toaster dir="ltr" />
             <TabsContent value="Personal Information">
 
               <Card className="my-5">
