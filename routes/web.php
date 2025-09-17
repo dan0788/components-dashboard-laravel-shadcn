@@ -25,17 +25,8 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     })->name('home');
 
     Route::get('/components', function () {
-        return Inertia::render('components/component-page');
-    })->name('components.index');
-
-    /* Route::get('/components/{component?}', function ($component = 'accordion') {
-        $componentName = 'components/' . $component;
-        if (!file_exists(resource_path('js/Pages/' . $componentName . '.tsx'))) {
-            abort(404);
-        }
-
-        return Inertia::render($componentName);
-    })->name('components.show'); */
+        return Inertia::render('components');
+    })->name('components.show');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

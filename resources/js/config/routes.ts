@@ -20,10 +20,17 @@ const routes: Record<string, PageData> = {
             { label: "Edit" },
         ],
     },
+    components: {
+        title: "Components",
+        breadcrumbs: [
+            { label: "Home", href: "/home" },
+            { label: "Components" },
+        ],
+    },
 };
 
 // Arreglo de los nombres de los componentes con guiones (para las claves)
-const componentKeys = [
+export const componentKeys = [
     "accordion",
     "alert",
     "alert-dialog",
@@ -75,7 +82,7 @@ const componentKeys = [
 ];
 
 // Función para formatear el título y el breadcrumb a partir del nombre
-const formatName = (key: string): string => {
+export const formatName = (key: string): string => {
     // Convierte 'alert-dialog' a 'Alert Dialog' y 'button' a 'Button'
     return key
         .split("-")
@@ -83,19 +90,17 @@ const formatName = (key: string): string => {
         .join(" ");
 };
 
-// Itera sobre el arreglo para generar las rutas dinámicamente
-componentKeys.forEach((key) => {
+/* componentKeys.forEach((key) => {
     const formattedName = formatName(key);
 
-    // Asigna la información al objeto de rutas
     routes[key] = {
-        title: formattedName.replace(/\s/g, ""), // Título sin espacios
+        title: formattedName.replace(/\s/g, ""),
         breadcrumbs: [
             { label: "Home", href: "/home" },
             { label: "Components" },
             { label: formattedName },
         ],
     };
-});
+}); */
 
 export default routes;
