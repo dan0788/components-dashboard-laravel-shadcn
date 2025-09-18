@@ -94,3 +94,5 @@ export const TabsPage = () => {
     </>
   );
 }
+
+TabsPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

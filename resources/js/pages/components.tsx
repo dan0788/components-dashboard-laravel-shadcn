@@ -48,6 +48,7 @@ import { SliderPage } from '@/pages/components/Slider'
 import { SonnerPage } from '@/pages/components/Sonner'
 import { SwitchPage } from '@/pages/components/Switch'
 import { TablePage } from '@/pages/components/Table'
+import { TabsPage } from '@/pages/components/Tabs'
 import { TextAreaPage } from '@/pages/components/TextArea'
 import { ToggleGroupPage } from '@/pages/components/ToggleGroup'
 import { TooglePage } from '@/pages/components/Toogle'
@@ -92,7 +93,6 @@ export default function ComponentsPage({ children, title }: ComponentProps) {
                 <TabsContent value='Accordion'>
                     <AccordionPage />
                 </TabsContent>
-
                 <TabsContent value='Alert'>
                     <AlertPage />
                 </TabsContent>
@@ -215,6 +215,9 @@ export default function ComponentsPage({ children, title }: ComponentProps) {
                 </TabsContent>
                 <TabsContent value='Table'>
                     <TablePage />
+                </TabsContent>
+                <TabsContent value='Tabs'>
+                    <TabsPage />
                 </TabsContent>
                 <TabsContent value='TextArea'>
                     <TextAreaPage />
