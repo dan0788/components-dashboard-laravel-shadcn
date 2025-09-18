@@ -10,6 +10,8 @@ import { usePageData } from "@/hooks/get-page"
 import { ReactNode } from "react";
 import ComponentsPage from '@/pages/components';
 
+const title = 'Alert'
+
 export const AlertPage = () => {
 
   const pageData = usePageData();
@@ -18,7 +20,7 @@ export const AlertPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-card p-6">
           <div className="grid w-full max-w-xl items-start gap-4">
             <Alert>
@@ -53,4 +55,4 @@ export const AlertPage = () => {
   );
 }
 
-AlertPage.components = (page:ReactNode)=> <ComponentsPage title="Alert" children={page}/>
+AlertPage.components = (page:ReactNode)=> <ComponentsPage title={title} children={page}/>

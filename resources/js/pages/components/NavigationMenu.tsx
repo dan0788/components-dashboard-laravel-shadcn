@@ -53,6 +53,8 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
+const title = 'NavigationMenu'
+
 export const NavigationMenuPage = () => {
   const pageData = usePageData();
 
@@ -60,7 +62,7 @@ export const NavigationMenuPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <NavigationMenu >
@@ -224,4 +226,4 @@ function ListItem({
   )
 }
 
-NavigationMenuPage.components = (page: ReactNode) => <ComponentsPage title="NavigationMenu" children={page} />
+NavigationMenuPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

@@ -16,6 +16,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'HoverCard'
+
 export const HoverCardPage = () => {
   const pageData = usePageData();
 
@@ -23,7 +25,7 @@ export const HoverCardPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <HoverCard>
@@ -55,4 +57,4 @@ export const HoverCardPage = () => {
   );
 }
 
-HoverCardPage.components = (page: ReactNode) => <ComponentsPage title="HoverCard" children={page} />
+HoverCardPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

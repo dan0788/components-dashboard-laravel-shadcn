@@ -14,6 +14,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'DatePicker'
+
 export const DatePickerPage = () => {
   const pageData = usePageData();
   const [open, setOpen] = React.useState(false)
@@ -23,7 +25,7 @@ export const DatePickerPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <div className="flex flex-col gap-3">
@@ -61,4 +63,4 @@ export const DatePickerPage = () => {
   );
 }
 
-DatePickerPage.components = (page: ReactNode) => <ComponentsPage title="DatePicker" children={page} />
+DatePickerPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

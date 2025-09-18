@@ -11,6 +11,8 @@ const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
 )
 
+const title = 'ScrollArea'
+
 export const ScrollAreaPage = () => {
   const pageData = usePageData();
 
@@ -18,7 +20,7 @@ export const ScrollAreaPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <ScrollArea className="h-72 w-48 rounded-md border">
@@ -39,4 +41,4 @@ export const ScrollAreaPage = () => {
   );
 }
 
-ScrollAreaPage.components = (page: ReactNode) => <ComponentsPage title="ScrollArea" children={page} />
+ScrollAreaPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

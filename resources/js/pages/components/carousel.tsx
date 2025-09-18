@@ -14,6 +14,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'Carousel'
+
 export const CarouselPage = () => {
   const pageData = usePageData();
 
@@ -29,7 +31,7 @@ export const CarouselPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <Carousel className="w-full max-w-xs">
@@ -62,4 +64,4 @@ export const CarouselPage = () => {
   );
 }
 
-CarouselPage.components = (page: ReactNode) => <ComponentsPage title="Carousel" children={page} />
+CarouselPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

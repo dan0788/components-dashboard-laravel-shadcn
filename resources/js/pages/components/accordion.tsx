@@ -11,6 +11,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
+const title = 'Accordion'
+
 export const AccordionPage =()=> {
   const pageData = usePageData();
 
@@ -19,7 +21,7 @@ export const AccordionPage =()=> {
     <div>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: Accordion{/* {pageData.title} */}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
           <Accordion
             type="single"
@@ -77,4 +79,4 @@ export const AccordionPage =()=> {
   );
 }
 
-AccordionPage.components = (page:ReactNode)=> <ComponentsPage title="Accordion" children={page}/>
+AccordionPage.components = (page:ReactNode)=> <ComponentsPage title={title} children={page}/>

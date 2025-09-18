@@ -6,6 +6,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'Progress'
+
 export const ProgressPage = () => {
   const pageData = usePageData();
   const [progress, setProgress] = React.useState(13)
@@ -18,7 +20,7 @@ export const ProgressPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <Progress value={progress} className="w-[80%]" />
@@ -29,4 +31,4 @@ export const ProgressPage = () => {
   );
 }
 
-ProgressPage.components = (page: ReactNode) => <ComponentsPage title="Progress" children={page} />
+ProgressPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

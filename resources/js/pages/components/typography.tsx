@@ -4,6 +4,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'Typography'
+
 export const TypographyPage = () => {
   const pageData = usePageData();
 
@@ -11,7 +13,7 @@ export const TypographyPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex-col-1 w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance m-5">
@@ -51,4 +53,4 @@ export const TypographyPage = () => {
   );
 }
 
-TypographyPage.components = (page: ReactNode) => <ComponentsPage title="Typography" children={page} />
+TypographyPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

@@ -5,6 +5,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'Button'
+
 export const ButtonPage = () => {
   const pageData = usePageData();
 
@@ -13,7 +15,7 @@ export const ButtonPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg flex justify-center shadow-md bg-card text-card-foreground p-6">
 
             <Button>Button</Button>
@@ -24,4 +26,4 @@ export const ButtonPage = () => {
   );
 }
 
-ButtonPage.components = (page: ReactNode) => <ComponentsPage title="Button" children={page} />
+ButtonPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

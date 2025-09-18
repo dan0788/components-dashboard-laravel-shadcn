@@ -60,6 +60,8 @@ const data = [
   },
 ]
 
+const title = 'Drawer'
+
 export const DrawerPage = () => {
   const pageData = usePageData();
 
@@ -72,7 +74,7 @@ export const DrawerPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <Drawer>
@@ -148,4 +150,4 @@ export const DrawerPage = () => {
   );
 }
 
-DrawerPage.components = (page: ReactNode) => <ComponentsPage title="Drawer" children={page} />
+DrawerPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

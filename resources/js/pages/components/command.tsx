@@ -22,6 +22,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'Command'
+
 export const CommandPage = () => {
   const pageData = usePageData();
 
@@ -29,7 +31,7 @@ export const CommandPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <Command className="rounded-lg border shadow-md md:min-w-[450px]">
@@ -77,4 +79,4 @@ export const CommandPage = () => {
   );
 }
 
-CommandPage.components = (page: ReactNode) => <ComponentsPage title="Command" children={page} />
+CommandPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

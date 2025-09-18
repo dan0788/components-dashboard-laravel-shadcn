@@ -8,6 +8,8 @@ import { ReactNode } from "react";
 
 type SliderProps = React.ComponentProps<typeof Slider>
 
+const title = 'Slider'
+
 export const SliderPage = () => {
   const pageData = usePageData();
 
@@ -15,7 +17,7 @@ export const SliderPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <Slider
@@ -32,4 +34,4 @@ export const SliderPage = () => {
   );
 }
 
-SliderPage.components = (page: ReactNode) => <ComponentsPage title="Slider" children={page} />
+SliderPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />

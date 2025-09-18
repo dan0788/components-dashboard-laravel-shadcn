@@ -6,6 +6,8 @@ import { usePageData } from "@/hooks/get-page"
 import ComponentsPage from '@/pages/components'
 import { ReactNode } from "react";
 
+const title = 'Sonner'
+
 export const SonnerPage = () => {
   const pageData = usePageData();
 
@@ -13,7 +15,7 @@ export const SonnerPage = () => {
     <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: {title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
           <Toaster position="top-center"/>
@@ -38,4 +40,4 @@ export const SonnerPage = () => {
   );
 }
 
-SonnerPage.components = (page: ReactNode) => <ComponentsPage title="Sonner" children={page} />
+SonnerPage.components = (page: ReactNode) => <ComponentsPage title={title} children={page} />
