@@ -28,6 +28,7 @@ class CompanyFactory extends Factory
             'first_aid_kit' => fake()->boolean(),
             'sign_language' => fake()->boolean(),
             'private_transportation' => fake()->boolean(),
+            'information_places' => fake()->boolean(),
         ];
     }
 }

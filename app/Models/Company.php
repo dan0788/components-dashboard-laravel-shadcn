@@ -25,6 +25,7 @@ class Company extends Model
         'first_aid_kit',
         'sign_language',
         'private_transportation',
+        'information_places',
     ];
 
     protected $hidden = [];
