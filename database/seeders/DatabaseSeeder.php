@@ -27,5 +27,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'asd@asd.asd',
             'pin' => Crypt::encryptString('987654'),
         ]);
+
+        $this->call(ClientSeeder::class);
+        $this->call(CompanyTypeSeeder::class);
+        $this->call(CompanySeeder::class);
     }
 }
