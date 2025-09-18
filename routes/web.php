@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/components', function () {
         return Inertia::render('components');
     })->name('components.show');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

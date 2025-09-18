@@ -15,6 +15,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
 const data = [
   {
@@ -58,7 +60,7 @@ const data = [
   },
 ]
 
-export default function Page() {
+export const DrawerPage = () => {
   const pageData = usePageData();
 
   const [goal, setGoal] = React.useState(350)
@@ -67,7 +69,7 @@ export default function Page() {
   }
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -142,6 +144,8 @@ export default function Page() {
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+DrawerPage.components = (page: ReactNode) => <ComponentsPage title="Drawer" children={page} />

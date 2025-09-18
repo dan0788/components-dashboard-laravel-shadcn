@@ -1,25 +1,26 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
 import { Head } from "@inertiajs/react";
-import { Bold } from "lucide-react"
-import { Toggle } from "@/components/ui/toggle"
+import { Textarea } from "@/components/ui/textarea"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
-export default function Page() {
+export const TextAreaPage = () => {
   const pageData = usePageData();
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
         <div className="flex justify-center w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
 
-          <Toggle aria-label="Toggle italic">
-            <Bold className="h-4 w-4" />
-          </Toggle>
+          <Textarea placeholder="Type your message here." />
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+TextAreaPage.components = (page: ReactNode) => <ComponentsPage title="TextArea" children={page} />

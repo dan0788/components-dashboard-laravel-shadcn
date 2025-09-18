@@ -11,6 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
 const invoices = [
   {
@@ -57,11 +59,11 @@ const invoices = [
   },
 ]
 
-export default function Page() {
+export const TablePage = () => {
   const pageData = usePageData();
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -97,6 +99,8 @@ export default function Page() {
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+TablePage.components = (page: ReactNode) => <ComponentsPage title="Table" children={page} />

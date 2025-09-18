@@ -41,6 +41,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
 export const descriptionPie = "A simple pie chart"
 
@@ -260,7 +262,7 @@ const chartConfigBar = {
   },
 } satisfies ChartConfig
 
-export default function Page() {
+export const ChartPage = () => {
   const pageData = usePageData();
 
   const [timeRange, setTimeRange] = React.useState("90d")
@@ -280,7 +282,7 @@ export default function Page() {
   })
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center min-h-[100vh] flex-1 rounded-xl md:min-h-min">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -508,6 +510,8 @@ export default function Page() {
           </Card>
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+ChartPage.components = (page: ReactNode) => <ComponentsPage title="Chart" children={page} />

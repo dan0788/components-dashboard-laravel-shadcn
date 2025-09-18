@@ -35,6 +35,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
 const data: Payment[] = [
   {
@@ -166,7 +168,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export default function Page() {
+export const DataTablePage = () => {
   const pageData = usePageData();
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -196,7 +198,7 @@ export default function Page() {
   })
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -317,6 +319,8 @@ export default function Page() {
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+DataTablePage.components = (page: ReactNode) => <ComponentsPage title="DataTable" children={page} />

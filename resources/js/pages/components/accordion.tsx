@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
+import { ReactNode } from "react";
 import { Head } from "@inertiajs/react";
 import {
   Accordion,
@@ -7,16 +8,18 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-export default function Page() {
+export const AccordionPage =()=> {
   const pageData = usePageData();
 
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <div>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
+        <h1 className="text-3xl font-bold mb-8">Component: Accordion{/* {pageData.title} */}</h1>
         <div className="w-full max-w-xl mx-auto rounded-lg shadow-md bg-card text-card-foreground p-6">
           <Accordion
             type="single"
@@ -70,6 +73,8 @@ export default function Page() {
           </Accordion>
         </div>
       </div>
-    </AuthenticatedLayout>
+    </div>
   );
 }
+
+AccordionPage.components = (page:ReactNode)=> <ComponentsPage title="Accordion" children={page}/>

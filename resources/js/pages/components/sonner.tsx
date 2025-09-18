@@ -3,12 +3,14 @@ import { Head } from "@inertiajs/react";
 import { Toaster, toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
-export default function Page() {
+export const SonnerPage = () => {
   const pageData = usePageData();
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -32,6 +34,8 @@ export default function Page() {
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+SonnerPage.components = (page: ReactNode) => <ComponentsPage title="Sonner" children={page} />

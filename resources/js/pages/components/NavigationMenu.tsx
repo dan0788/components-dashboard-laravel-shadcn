@@ -12,6 +12,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -51,11 +53,11 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export default function Page() {
+export const NavigationMenuPage = () => {
   const pageData = usePageData();
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -198,7 +200,7 @@ export default function Page() {
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
 
@@ -221,3 +223,5 @@ function ListItem({
     </li>
   )
 }
+
+NavigationMenuPage.components = (page: ReactNode) => <ComponentsPage title="NavigationMenu" children={page} />

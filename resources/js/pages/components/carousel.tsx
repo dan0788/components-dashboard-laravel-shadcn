@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/carousel"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
-export default function Page() {
+export const CarouselPage = () => {
   const pageData = usePageData();
 
   const images = [
@@ -24,7 +26,7 @@ export default function Page() {
   ];
 
   return (
-    <AuthenticatedLayout breadcrumbs={pageData.breadcrumbs}>
+    <>
       <Head title={pageData.title} />
       <div className="flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl font-bold mb-8">Component: {pageData.title}</h1>
@@ -56,6 +58,8 @@ export default function Page() {
 
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+CarouselPage.components = (page: ReactNode) => <ComponentsPage title="Carousel" children={page} />

@@ -13,8 +13,10 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { usePageData } from "@/hooks/get-page"
+import ComponentsPage from '@/pages/components'
+import { ReactNode } from "react";
 
-export default function Page() {
+export const AlertDialogPage = () => {
 
   const pageData = usePageData();
 
@@ -54,3 +56,5 @@ export default function Page() {
     </AuthenticatedLayout>
   );
 }
+
+AlertDialogPage.components = (page: ReactNode) => <ComponentsPage title="AlertDialog" children={page} />
