@@ -14,7 +14,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreHorizontal, Check, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -23,7 +23,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -36,33 +40,47 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { capitalLetters } from "@/hooks/get-page";
 
-interface SearchClientProps {
-  document: string;
-}
-
-export type Payment = {
-  id: string
-  uid: string
-  company_name: string
-  direction: string
-  owner: string
-  email: string
-}
-
+interface SearchClientProps { document: string; }
 interface CompanyData {
-  uid: string
+  uid: string;
   company_name: string;
   direction: string;
+  ramp: boolean;
+  braille_language: boolean;
+  elevator: boolean;
+  first_aid_kit: boolean;
+  sign_language: boolean;
+  private_transportation: boolean;
+  information_places: boolean;
   client: {
-    id: string;
+    id: number;
     firstname: string;
     lastname: string;
     email: string;
   };
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export type Payment = {
+  id: number;
+  uid: string;
+  company_name: string;
+  direction: string;
+  owner: string;
+  email: string;
+  accesibility: {
+    ramp: boolean;
+    braille_language: boolean;
+    elevator: boolean;
+    first_aid_kit: boolean;
+    sign_language: boolean;
+    private_transportation: boolean;
+    information_places: boolean;
+  };
+};
+
+const columns: ColumnDef<Payment>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -94,9 +112,9 @@ export const columns: ColumnDef<Payment>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Company Name
-          <ArrowUpDown />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="text-right font-medium">{row.getValue("company_name")}</div>,
   },
@@ -109,9 +127,9 @@ export const columns: ColumnDef<Payment>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Direction
-          <ArrowUpDown />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="">{row.getValue("direction")}</div>,
   },
@@ -124,9 +142,9 @@ export const columns: ColumnDef<Payment>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Owner
-          <ArrowUpDown />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="text-right font-medium">{row.getValue("owner")}</div>,
   },
@@ -139,9 +157,9 @@ export const columns: ColumnDef<Payment>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Email
-          <ArrowUpDown />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
   },
@@ -149,14 +167,14 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const payment = row.original;
 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
+              <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -167,53 +185,59 @@ export const columns: ColumnDef<Payment>[] = [
               Copy company UID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              View accesibility
-            </DropdownMenuItem>
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>View accesibility</DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent>
+                  {Object.entries(row.original.accesibility).map(([key, value]) => (
+                    <DropdownMenuItem key={key}>
+                      <div className="flex items-center space-x-2">
+                        <span>{capitalLetters(key, '_')}:</span>
+                        {value ? <Check className="h-4 w-4 text-green-500" /> : <X className="h-4 w-4 text-red-500" />}
+                      </div>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
+            <DropdownMenuItem>Update</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
 
 export default function SearchClient({ document }: SearchClientProps) {
   const breadcrumbs = routes[document].breadcrumbs;
+  const { companies } = usePage<{ companies: CompanyData[] }>().props;
   const [selectValue, setSelectValue] = useState('company_name');
 
-  const { companies } = usePage<{ companies: CompanyData[] }>().props;
+  // Mapeamos los datos para incluír la accesibilidad
   const payments: Payment[] = useMemo(() => {
     return companies.map(company => ({
-      id: company.client.id, // O el id de la compañía, dependiendo de lo que necesites
+      id: company.client.id,
       uid: company.uid,
       company_name: company.company_name,
       direction: company.direction,
       owner: `${company.client.firstname} ${company.client.lastname}`,
       email: company.client.email,
+      accesibility: {
+        ramp: company.ramp,
+        braille_language: company.braille_language,
+        elevator: company.elevator,
+        first_aid_kit: company.first_aid_kit,
+        sign_language: company.sign_language,
+        private_transportation: company.private_transportation,
+        information_places: company.information_places,
+      }
     }));
   }, [companies]);
 
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
-
-  // Función para manejar el cambio del Select y resetear el filtro
-  const handleSelectChange = (item: string) => {
-    setSelectValue(item);
-    setColumnFilters([]);
-  };
-
-  // Función para manejar el input de búsqueda
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    table.getColumn(selectValue)?.setFilterValue(value);
-  };
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data: payments,
@@ -232,12 +256,21 @@ export default function SearchClient({ document }: SearchClientProps) {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
+
+  const handleSelectChange = (item: string) => {
+    setSelectValue(item);
+    setColumnFilters([]);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    table.getColumn(selectValue)?.setFilterValue(value);
+  };
 
   return (
     <AuthenticatedLayout breadcrumbs={breadcrumbs}>
       <Head title='Clients' />
-
       <div className="w-full">
         <div className="flex items-center py-4">
           <Select defaultValue="company_name" onValueChange={handleSelectChange}>
@@ -263,27 +296,25 @@ export default function SearchClient({ document }: SearchClientProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown />
+                Columns <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  )
-                })}
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -292,18 +323,16 @@ export default function SearchClient({ document }: SearchClientProps) {
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                      </TableHead>
-                    )
-                  })}
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                    </TableHead>
+                  ))}
                 </TableRow>
               ))}
             </TableHeader>
@@ -362,8 +391,6 @@ export default function SearchClient({ document }: SearchClientProps) {
           </div>
         </div>
       </div>
-
-
     </AuthenticatedLayout>
-  )
+  );
 }

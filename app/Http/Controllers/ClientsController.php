@@ -14,7 +14,19 @@ class ClientsController extends Controller
     {
         $document = 'searchClient';
         $companies = Company::with('client:id,firstname,lastname,email')
-            ->select('uid', 'company_name', 'direction', 'client_id')
+            ->select(
+                'uid',
+                'company_name',
+                'direction',
+                'ramp',
+                'braille_language',
+                'elevator',
+                'first_aid_kit',
+                'sign_language',
+                'private_transportation',
+                'information_places',
+                'client_id',
+            )
             ->get();
 
         return Inertia::render('clients/searchClient', [

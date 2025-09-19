@@ -23,3 +23,15 @@ export const usePageData = (): PageData => {
 
     return data;
 }
+
+export function capitalLetters(frase: string, delimeter: string): string {
+    const arrayFrases = frase.split(delimeter)
+    const capitalFrases = arrayFrases.map((item) => {
+        if (item.length === 0) {
+            return '';
+        }
+        return item.charAt(0).toUpperCase() + item.slice(1);
+    })
+    
+    return capitalFrases.join(' ')
+}
