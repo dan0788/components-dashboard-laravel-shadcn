@@ -13,24 +13,7 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        Company::factory()->create([
-            'client_id' => 1,
-            'company_type_id' => 1,
-            'avatar' => 'shadcn.png',
-        ]);
-        Company::factory()->create([
-            'client_id' => 2,
-            'company_type_id' => 4,
-            'avatar' => 'shadcn.png',
-        ]);
-        Company::factory()->create([
-            'client_id' => 3,
-            'company_type_id' => 3,
-            'avatar' => 'shadcn.png',
-        ]);
-        Company::factory()->create([
-            'client_id' => 4,
-            'company_type_id' => 6,
+        Company::factory(25)->create([
             'avatar' => 'shadcn.png',
         ]);
     }

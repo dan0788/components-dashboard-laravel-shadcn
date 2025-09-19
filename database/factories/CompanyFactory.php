@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Client;
+use App\Models\CompanyType;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
@@ -17,6 +19,9 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
+            'uid' => fake()->regexify('[A-Za-z0-9\-_!@#$%^&*()]{10}'),
+            'client_id' => Client::all()->random()->id,
+            'company_type_id' => CompanyType::all()->random()->id,
             'company_name' => fake()->company(),
             'direction' => fake()->streetAddress(),
             'country' => fake()->country(),

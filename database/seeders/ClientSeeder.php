@@ -13,20 +13,7 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::factory()->create([
-            
-            'avatar' => 'shadcn.png',
-        ]);
-        Client::factory()->create([
-            
-            'avatar' => 'shadcn.png',
-        ]);
-        Client::factory()->create([
-            
-            'avatar' => 'shadcn.png',
-        ]);
-        Client::factory()->create([
-            
+        Client::factory(25)->create([
             'avatar' => 'shadcn.png',
         ]);
     }

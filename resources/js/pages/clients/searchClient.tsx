@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import routes from "@/config/routes";
 import { Head, usePage } from "@inertiajs/react";
 import {
@@ -35,6 +35,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface SearchClientProps {
   document: string;
@@ -42,6 +43,7 @@ interface SearchClientProps {
 
 export type Payment = {
   id: string
+  uid: string
   company_name: string
   direction: string
   owner: string
@@ -49,10 +51,11 @@ export type Payment = {
 }
 
 interface CompanyData {
+  uid: string
   company_name: string;
   direction: string;
   client: {
-    id: string; // Esto es crucial para la unión
+    id: string;
     firstname: string;
     lastname: string;
     email: string;
@@ -87,7 +90,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Company Name
@@ -117,7 +120,7 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Owner
@@ -159,11 +162,14 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(payment.uid)}
             >
-              Copy payment ID
+              Copy company UID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              View accesibility
+            </DropdownMenuItem>
             <DropdownMenuItem>View customer</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
@@ -175,11 +181,13 @@ export const columns: ColumnDef<Payment>[] = [
 
 export default function SearchClient({ document }: SearchClientProps) {
   const breadcrumbs = routes[document].breadcrumbs;
+  const [selectValue, setSelectValue] = useState('company_name');
 
   const { companies } = usePage<{ companies: CompanyData[] }>().props;
   const payments: Payment[] = useMemo(() => {
     return companies.map(company => ({
       id: company.client.id, // O el id de la compañía, dependiendo de lo que necesites
+      uid: company.uid,
       company_name: company.company_name,
       direction: company.direction,
       owner: `${company.client.firstname} ${company.client.lastname}`,
@@ -194,6 +202,18 @@ export default function SearchClient({ document }: SearchClientProps) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+
+  // Función para manejar el cambio del Select y resetear el filtro
+  const handleSelectChange = (item: string) => {
+    setSelectValue(item);
+    setColumnFilters([]);
+  };
+
+  // Función para manejar el input de búsqueda
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    table.getColumn(selectValue)?.setFilterValue(value);
+  };
 
   const table = useReactTable({
     data: payments,
@@ -218,16 +238,27 @@ export default function SearchClient({ document }: SearchClientProps) {
     <AuthenticatedLayout breadcrumbs={breadcrumbs}>
       <Head title='Clients' />
 
-
       <div className="w-full">
         <div className="flex items-center py-4">
+          <Select defaultValue="company_name" onValueChange={handleSelectChange}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select a filter" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Fields</SelectLabel>
+                <SelectItem value="company_name">Company Name</SelectItem>
+                <SelectItem value="direction">Direction</SelectItem>
+                <SelectItem value="owner">Owner</SelectItem>
+                <SelectItem value="email">Email</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
           <Input
-            placeholder="Filter emails..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
+            placeholder={`Filter ${selectValue.replace('_', ' ')}...`}
+            value={(table.getColumn(selectValue)?.getFilterValue() as string) ?? ""}
+            onChange={handleInputChange}
+            className="max-w-sm ml-5"
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
