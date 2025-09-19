@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Clients;
+use App\Models\Client;
+use App\Models\Company;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ClientsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $document = 'searchClient';
+        $companies = Company::with('client:id,firstname,lastname,email')
+            ->select('company_name', 'direction', 'client_id')
+            ->get();
+
+        return Inertia::render('clients/searchClient', [
+            'document' => $document,
+            'companies' => $companies,
+        ]);
     }
 
     /**
@@ -34,7 +42,7 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Clients $clients)
+    public function show(Client $client)
     {
         //
     }
@@ -42,7 +50,7 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Clients $clients)
+    public function edit(Client $client)
     {
         //
     }
@@ -50,7 +58,7 @@ class ClientsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Clients $clients)
+    public function update(Request $request, Client $client)
     {
         //
     }
@@ -58,7 +66,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clients $clients)
+    public function destroy(Client $client)
     {
         //
     }

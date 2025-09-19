@@ -17,7 +17,7 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name_company' => fake()->company(),
+            'company_name' => fake()->company(),
             'direction' => fake()->streetAddress(),
             'country' => fake()->country(),
             'province' => fake()->randomElement(['Pichincha', 'Guayas']),

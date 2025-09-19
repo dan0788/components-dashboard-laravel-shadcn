@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PersonalInfoController;
+use App\Http\Controllers\ClientsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,6 +29,8 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
         return Inertia::render('components');
     })->name('components.show');
 
+    Route::get('/clients-info', [ClientsController::class, 'index'])->name('client.index');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -36,6 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::patch('/profile', [PersonalInfoController::class, 'update'])->name('personalInfo.update');
+
+    
     //ruta para eliminar cualquier usuario
     //Route::delete('/profile', [PersonalInfoController::class, 'delete'])->name('personalInfo.delete');
 

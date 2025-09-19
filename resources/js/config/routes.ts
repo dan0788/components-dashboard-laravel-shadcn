@@ -12,7 +12,7 @@ const routes: Record<string, PageData> = {
         title: "Home",
         breadcrumbs: [{ label: "Home" }],
     },
-    edit: {
+    editProfile: {
         title: "Profile",
         breadcrumbs: [
             { label: "Home", href: "/home" },
@@ -25,6 +25,13 @@ const routes: Record<string, PageData> = {
         breadcrumbs: [
             { label: "Home", href: "/home" },
             { label: "Components" },
+        ],
+    },
+    searchClient: {
+        title: "Clients",
+        breadcrumbs: [
+            { label: "Home", href: "/home" },
+            { label: "Clients" },
         ],
     },
 };

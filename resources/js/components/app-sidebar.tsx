@@ -3,7 +3,7 @@
 import * as React from "react"
 import {
   BookOpen,
-  Bot,
+  CircleUserRound,
   Command,
   Frame,
   LifeBuoy,
@@ -58,13 +58,13 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "Clients Information",
       url: "#",
-      icon: Bot,
+      icon: CircleUserRound,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Search",
+          url: route('client.index'),
         },
         {
           title: "Explorer",

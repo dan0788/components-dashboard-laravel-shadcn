@@ -128,7 +128,6 @@ export default function Edit({
       contact: formData.contact,
       notifications: formData.notifications,
     }
-    console.log(dataForm);
 
     router.patch(route("personalInfo.update"), dataForm, {
       preserveScroll: true,

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->foreignId('company_type_id')->constrained()->onDelete('cascade');
             $table->string('avatar')->nullable();
-            $table->string('name_company');
+            $table->string('company_name');
             $table->string('direction');
             $table->string('country');
             $table->string('province');

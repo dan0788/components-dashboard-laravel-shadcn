@@ -14,7 +14,7 @@ class Company extends Model
         'client_id',
         'company_type_id',
         'avatar',
-        'name_company',
+        'company_name',
         'direction',
         'country',
         'province',
