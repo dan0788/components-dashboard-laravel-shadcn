@@ -41,3 +41,7 @@ export interface ContactProps {
     prefix: string;
     number: string;
 }
+
+export interface LayoutProps {
+    children: ReactNode;
+}

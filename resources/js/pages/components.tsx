@@ -5,7 +5,6 @@ import { usePageData } from "@/hooks/get-page"
 import { Tabs, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { MultilineTabsList } from "@/pages/components/multiline-tabs-list";
 import { componentKeys, formatName } from '@/config/routes';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { AccordionPage } from '@/pages/components/Accordion'
 import { AlertPage } from '@/pages/components/Alert'
 import { AlertDialogPage } from '@/pages/components/AlertDialog'
@@ -54,7 +53,6 @@ import { ToggleGroupPage } from '@/pages/components/ToggleGroup'
 import { TooglePage } from '@/pages/components/Toogle'
 import { TooltipPage } from '@/pages/components/Tooltip'
 import { TypographyPage } from '@/pages/components/Typography'
-
 
 interface ComponentProps {
     children: ReactNode;

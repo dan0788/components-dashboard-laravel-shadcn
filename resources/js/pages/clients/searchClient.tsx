@@ -1,7 +1,5 @@
-import AuthenticatedLayout from "@/layouts/authenticated-layout";
-import React, { useMemo, useState } from 'react'
-import routes from "@/config/routes";
-import { Head, usePage } from "@inertiajs/react";
+import React, { ReactNode, useMemo, useState } from 'react'
+import { Head, Link, usePage } from "@inertiajs/react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -40,9 +38,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { capitalLetters } from "@/hooks/get-page";
+import { detachInCapitalWords } from "@/hooks/get-page";
+import { Layout } from "@/pages/clients/layout";
 
-interface SearchClientProps { document: string; }
+
 interface CompanyData {
   uid: string;
   company_name: string;
@@ -192,7 +191,7 @@ const columns: ColumnDef<Payment>[] = [
                   {Object.entries(row.original.accesibility).map(([key, value]) => (
                     <DropdownMenuItem key={key}>
                       <div className="flex items-center space-x-2">
-                        <span>{capitalLetters(key, '_')}:</span>
+                        <span>{detachInCapitalWords(key, '_', true)}:</span>
                         {value ? <Check className="h-4 w-4 text-green-500" /> : <X className="h-4 w-4 text-red-500" />}
                       </div>
                     </DropdownMenuItem>
@@ -200,7 +199,8 @@ const columns: ColumnDef<Payment>[] = [
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
             </DropdownMenuSub>
-            <DropdownMenuItem>Update</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={route('client.edit')}>Edit Client</Link></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -208,11 +208,11 @@ const columns: ColumnDef<Payment>[] = [
   },
 ];
 
-export default function SearchClient({ document }: SearchClientProps) {
-  const breadcrumbs = routes[document].breadcrumbs;
-  const { companies } = usePage<{ companies: CompanyData[] }>().props;
-  const [selectValue, setSelectValue] = useState('company_name');
+export default function SearchClient() {
 
+  const { companies, head } = usePage<{ companies: CompanyData[], head: string }>().props;
+  const [selectValue, setSelectValue] = useState('company_name');
+  
   // Mapeamos los datos para incluír la accesibilidad
   const payments: Payment[] = useMemo(() => {
     return companies.map(company => ({
@@ -269,8 +269,8 @@ export default function SearchClient({ document }: SearchClientProps) {
   };
 
   return (
-    <AuthenticatedLayout breadcrumbs={breadcrumbs}>
-      <Head title='Clients' />
+    <>
+      <Head title={head} />
       <div className="w-full">
         <div className="flex items-center py-4">
           <Select defaultValue="company_name" onValueChange={handleSelectChange}>
@@ -391,6 +391,9 @@ export default function SearchClient({ document }: SearchClientProps) {
           </div>
         </div>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
+
+SearchClient.layout = (page: ReactNode) => <Layout children={page} />
+

@@ -12,7 +12,7 @@ class ClientsController extends Controller
 
     public function index()
     {
-        $document = 'searchClient';
+        $head = 'Search Client';
         $companies = Company::with('client:id,firstname,lastname,email')
             ->select(
                 'uid',
@@ -30,7 +30,7 @@ class ClientsController extends Controller
             ->get();
 
         return Inertia::render('clients/searchClient', [
-            'document' => $document,
+            'head' => $head,
             'companies' => $companies,
         ]);
     }
@@ -62,9 +62,9 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit(/* Client $client */)
     {
-        //
+        return Inertia::render('clients/editClient');
     }
 
     /**

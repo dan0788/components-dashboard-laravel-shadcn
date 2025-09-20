@@ -24,14 +24,34 @@ export const usePageData = (): PageData => {
     return data;
 }
 
-export function capitalLetters(frase: string, delimeter: string): string {
+export function detachInCapitalWords(frase: string, delimeter: string, firstWordCapital: boolean): string {
     const arrayFrases = frase.split(delimeter)
-    const capitalFrases = arrayFrases.map((item) => {
+    const capitalFrases = arrayFrases.map((item, index) => {
         if (item.length === 0) {
             return '';
         }
+        if (!firstWordCapital && index == 0) {
+            return item.charAt(0).toLowerCase() + item.slice(1);
+        }
         return item.charAt(0).toUpperCase() + item.slice(1);
     })
-    
+
     return capitalFrases.join(' ')
+}
+
+export function joinInCapitalWords(frase: string, delimeter: string, firstWordCapital: boolean): string {
+    
+    const arrayFrases = frase.split(delimeter)
+    
+    const capitalFrases = arrayFrases.map((item, index) => {
+        if (item.length === 0) {
+            return '';
+        }
+        if (!firstWordCapital && index == 0) {
+            return item.charAt(0).toLowerCase() + item.slice(1);
+        }
+        return item.charAt(0).toUpperCase() + item.slice(1);
+    })
+
+    return capitalFrases.join('')
 }

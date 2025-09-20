@@ -30,7 +30,8 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     })->name('components.show');
 
     Route::get('/clients-info', [ClientsController::class, 'index'])->name('client.index');
-
+    Route::get('/clients-info/edit', [ClientsController::class, 'edit'])->name('client.edit');
+    
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
