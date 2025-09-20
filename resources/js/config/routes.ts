@@ -28,10 +28,18 @@ const routes: Record<string, PageData> = {
         ],
     },
     searchClient: {
-        title: "Clients",
+        title: "Search Client",
         breadcrumbs: [
             { label: "Home", href: "/home" },
             { label: "Clients" },
+        ],
+    },
+    editClient: {
+        title: "Edit Client",
+        breadcrumbs: [
+            { label: "Home", href: "/home" },
+            { label: "Clients", href: "/home/clients-info" },
+            { label: "Edit" },
         ],
     },
 };

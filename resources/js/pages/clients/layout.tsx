@@ -5,10 +5,8 @@ import routes from "@/config/routes";
 import { PageProps } from '@/types';
 import { joinInCapitalWords } from "@/hooks/get-page";
 
-export const Layout = ({ children }: LayoutProps) => {
-  const { props } = usePage<PageProps>();
-  const documentName = props.head as string;
-  const title = documentName ? joinInCapitalWords(documentName, ' ', false) : ''
+export const Layout = ({ children, documentName }: LayoutProps) => {
+  const title = joinInCapitalWords(documentName, ' ', false)
   const breadcrumbs = title ? routes[title].breadcrumbs : []
 
   return (

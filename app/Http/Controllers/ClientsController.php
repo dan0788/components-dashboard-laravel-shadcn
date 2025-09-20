@@ -12,7 +12,6 @@ class ClientsController extends Controller
 
     public function index()
     {
-        $head = 'Search Client';
         $companies = Company::with('client:id,firstname,lastname,email')
             ->select(
                 'uid',
@@ -30,7 +29,6 @@ class ClientsController extends Controller
             ->get();
 
         return Inertia::render('clients/searchClient', [
-            'head' => $head,
             'companies' => $companies,
         ]);
     }
@@ -62,9 +60,36 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(/* Client $client */)
+    public function edit(Client $client)
     {
-        return Inertia::render('clients/editClient');
+        $head = 'Edit Client';
+        $company = Company::where('client_id', $client->id)
+            ->with('company_type:id,type')
+            ->select(
+                'id',
+                'company_type_id',
+                'company_name',
+                'direction',
+                'ramp',
+                'braille_language',
+                'elevator',
+                'first_aid_kit',
+                'sign_language',
+                'private_transportation',
+                'information_places',
+            )
+            ->first();
+
+        return Inertia::render('clients/editClient', [
+            'head' => $head,
+            'client' => $client->only([
+                'id',
+                'firstname',
+                'lastname',
+                'email',
+            ]),
+            'company' => $company,
+        ]);
     }
 
     /**

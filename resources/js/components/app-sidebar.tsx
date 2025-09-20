@@ -193,8 +193,3 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   )
 }
-
-const getComponentName = (title: String) => {
-    // Convierte el título a minúsculas y reemplaza los espacios con guiones
-    return title.toLowerCase().replace(/\s/g, '-');
-};

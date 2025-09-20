@@ -30,8 +30,7 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     })->name('components.show');
 
     Route::get('/clients-info', [ClientsController::class, 'index'])->name('client.index');
-    Route::get('/clients-info/edit', [ClientsController::class, 'edit'])->name('client.edit');
-    
+    Route::get('/clients-info/edit/{client}', [ClientsController::class, 'edit'])->name('client.edit');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -41,7 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::patch('/profile', [PersonalInfoController::class, 'update'])->name('personalInfo.update');
 
-    
+
     //ruta para eliminar cualquier usuario
     //Route::delete('/profile', [PersonalInfoController::class, 'delete'])->name('personalInfo.delete');
 

@@ -4,7 +4,7 @@ import { BreadcrumbItemProps } from "@/types/layout";
 
 interface PageData {
     title: string;
-    breadcrumbs: BreadcrumbItemProps[];
+    breadcrumbs?: BreadcrumbItemProps[];
 }
 
 export const usePageData = (): PageData => {
@@ -40,9 +40,9 @@ export function detachInCapitalWords(frase: string, delimeter: string, firstWord
 }
 
 export function joinInCapitalWords(frase: string, delimeter: string, firstWordCapital: boolean): string {
-    
+
     const arrayFrases = frase.split(delimeter)
-    
+
     const capitalFrases = arrayFrases.map((item, index) => {
         if (item.length === 0) {
             return '';
@@ -54,4 +54,22 @@ export function joinInCapitalWords(frase: string, delimeter: string, firstWordCa
     })
 
     return capitalFrases.join('')
+}
+
+export function detachFrasesCapitalWords(frase: string, firstWordCapital: boolean): string {
+    const arrayFrases = frase.split('')
+    const capitalFrases = arrayFrases.map((item, index) => {
+        if (firstWordCapital && index == 0) {
+            return item.charAt(0).toUpperCase();
+        } else if (!firstWordCapital && index == 0){
+            return item.charAt(0).toLowerCase();
+        }
+        if (item === item.toLowerCase() && index !== 0) {
+            return item.charAt(0);
+        }
+        if (item === item.toUpperCase() && index !== 0) {
+            return ' ' + item;
+        }
+    })
+    return capitalFrases.join(' ');
 }

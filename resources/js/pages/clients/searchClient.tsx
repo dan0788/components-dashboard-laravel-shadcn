@@ -40,7 +40,9 @@ import {
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { detachInCapitalWords } from "@/hooks/get-page";
 import { Layout } from "@/pages/clients/layout";
-
+import { Toaster } from '@/components/ui/sonner';
+import { toast } from 'sonner';
+import { usePageData, joinInCapitalWords } from "@/hooks/get-page"
 
 interface CompanyData {
   uid: string;
@@ -179,7 +181,8 @@ const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.uid)}
+              className='cursor-pointer'
+              onClick={() => handleUIDClick(payment.uid)}
             >
               Copy company UID
             </DropdownMenuItem>
@@ -190,7 +193,7 @@ const columns: ColumnDef<Payment>[] = [
                 <DropdownMenuSubContent>
                   {Object.entries(row.original.accesibility).map(([key, value]) => (
                     <DropdownMenuItem key={key}>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 cursor-pointer">
                         <span>{detachInCapitalWords(key, '_', true)}:</span>
                         {value ? <Check className="h-4 w-4 text-green-500" /> : <X className="h-4 w-4 text-red-500" />}
                       </div>
@@ -200,7 +203,10 @@ const columns: ColumnDef<Payment>[] = [
               </DropdownMenuPortal>
             </DropdownMenuSub>
             <DropdownMenuItem asChild>
-              <Link href={route('client.edit')}>Edit Client</Link></DropdownMenuItem>
+              <Link
+                href={route('client.edit', { id: row.original.id })}
+                className='cursor-pointer'
+              >Edit Client</Link></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -208,11 +214,13 @@ const columns: ColumnDef<Payment>[] = [
   },
 ];
 
+const title = 'Search Client';
+
 export default function SearchClient() {
 
-  const { companies, head } = usePage<{ companies: CompanyData[], head: string }>().props;
+  const { companies } = usePage<{ companies: CompanyData[] }>().props;
   const [selectValue, setSelectValue] = useState('company_name');
-  
+
   // Mapeamos los datos para incluír la accesibilidad
   const payments: Payment[] = useMemo(() => {
     return companies.map(company => ({
@@ -270,7 +278,8 @@ export default function SearchClient() {
 
   return (
     <>
-      <Head title={head} />
+      <Head title={title} />
+      <Toaster position="top-center" />
       <div className="w-full">
         <div className="flex items-center py-4">
           <Select defaultValue="company_name" onValueChange={handleSelectChange}>
@@ -395,5 +404,15 @@ export default function SearchClient() {
   );
 }
 
-SearchClient.layout = (page: ReactNode) => <Layout children={page} />
+function handleUIDClick(uid: string) {
+  navigator.clipboard.writeText(uid);
+  const toastId = toast("UID has been copied to clipboard", {
+    action: {
+      label: "Close",
+      onClick: () => { toast.dismiss(toastId) },
+    },
+  })
+}
+
+SearchClient.layout = (page: ReactNode) => <Layout children={page} documentName={title} />
 
