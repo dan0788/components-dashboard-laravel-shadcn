@@ -38,14 +38,14 @@ interface CompanyProps {
   company_type_id: number
   company_name: string
   direction: string
-  ramp: boolean
-  braille_language: boolean
-  elevator: boolean
-  first_aid_kit: boolean
-  sign_language: boolean
-  accessible_bathroom: boolean
-  private_transportation: boolean
-  information_places: boolean
+  ramp: number
+  braille_language: number
+  elevator: number
+  first_aid_kit: number
+  sign_language: number
+  accessible_bathroom: number
+  private_transportation: number
+  information_places: number
   company_type: {
     type: string
   }
@@ -59,32 +59,30 @@ interface EditClientProps extends PageProps {
 const radioNames = ['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services']
 const references = radioNames.map(ref => {
   const arrayFrases = ref.split(' ')
-
-  const capitalFrases = arrayFrases.map((item, index) => {
+  const capitalFrases = arrayFrases.map((item) => {
     if (item.length === 0) {
       return '';
     }
     return item.charAt(0).toLowerCase() + item.slice(1);
   })
-
   return capitalFrases.join('_')
 });
 
 const FormSchema = z.object({
-  firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'El nombre es obligatorio.'),
-  lastname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'El nombre es obligatorio.'),
-  email: z.string().email(),
+  firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'The name is required'),
+  lastname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'The lastname is required'),
+  email: z.string().email('Invalid email address').min(1, 'The email is required'),
 
-  company_name: z.string().min(1, 'El nombre es obligatorio.'),
-  direction: z.string().min(1, 'El nombre es obligatorio.'),
-  ramp: z.boolean(),
-  braille_language: z.boolean(),
-  elevator: z.boolean(),
-  first_aid_kit: z.boolean(),
-  accessible_bathroom: z.boolean(),
-  sign_language: z.boolean(),
-  private_transportation: z.boolean(),
-  information_places: z.boolean(),
+  company_name: z.string().min(1, 'The company name is required'),
+  direction: z.string().min(1, 'The direction is required'),
+  ramp: z.number(),
+  braille_language: z.number(),
+  elevator: z.number(),
+  first_aid_kit: z.number(),
+  accessible_bathroom: z.number(),
+  sign_language: z.number(),
+  private_transportation: z.number(),
+  information_places: z.number(),
   type: z.enum(['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services']),
 })
 
@@ -93,7 +91,7 @@ const title = 'Edit Client';
 export default function editClient() {
 
   const { client, company } = usePage<EditClientProps>().props;
-  console.log(company.company_type.type);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -104,13 +102,13 @@ export default function editClient() {
       company_name: company.company_name || '',
       direction: company.direction || '',
       ramp: company.ramp,
-      braille_language: company.braille_language || false,
-      elevator: company.elevator || false,
-      first_aid_kit: company.first_aid_kit || false,
-      accessible_bathroom: company.accessible_bathroom || false,
-      sign_language: company.sign_language || false,
-      private_transportation: company.private_transportation || false,
-      information_places: company.information_places || false,
+      braille_language: company.braille_language,
+      elevator: company.elevator,
+      first_aid_kit: company.first_aid_kit,
+      accessible_bathroom: company.accessible_bathroom,
+      sign_language: company.sign_language,
+      private_transportation: company.private_transportation,
+      information_places: company.information_places,
       type: (company.company_type.type || 'Entertainment') as "Entertainment" | "Food" | "Transportation" | "Beverage" | "General trade" | "Services",
     },
   })
@@ -134,11 +132,11 @@ export default function editClient() {
       type: formData.type,
     }
 
-    router.patch(route("personalInfo.update"), dataForm, {
+    router.patch(route("client.update", client.id), dataForm, {
       preserveScroll: true,
       onSuccess: () => {
         toast(<div className="flex justify-between ">
-          <CheckCircle2Icon className="mr-4" />Personal information has been correctly updated
+          <CheckCircle2Icon className="mr-4" />Client information has been correctly updated
         </div>)
         //form.reset();
       },
@@ -173,9 +171,9 @@ export default function editClient() {
 
           <Card className="my-5">
             <CardHeader>
-              <CardTitle className="!ml-3">Personal Information</CardTitle>
+              <CardTitle className="!ml-3">Client Information</CardTitle>
               <CardDescription className="!ml-3">
-                Update your personal's profile information.
+                Update client information. All fields are required.
               </CardDescription>
             </CardHeader>
 
