@@ -5,7 +5,7 @@ import routes from "@/config/routes";
 import { joinInCapitalWords } from "@/hooks/get-page";
 
 export const Layout = ({ children, documentName }: LayoutProps) => {
-  const title = joinInCapitalWords(documentName, ' ', false)
+  const title = joinInCapitalWords(documentName, ' ', '', false)
   const breadcrumbs = title ? routes[title].breadcrumbs : []
 
   return (

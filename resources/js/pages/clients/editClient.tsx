@@ -4,21 +4,26 @@ import { Head, usePage, router } from '@inertiajs/react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 import { Toaster, toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { InputNamePage } from "@/pages/profile/partials/input-name-form";
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2Icon } from 'lucide-react'
 import { detachInCapitalWords } from '@/hooks/get-page'
+import { RadioGroupFormBoolean, RadioGroupFormArray } from '@/hooks/get-components'
 import { Input } from '@/components/ui/input'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { FieldValues } from 'react-hook-form';
-import { FieldData } from "@/types/layout";
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { PageProps } from '@/types'
 
 interface ClientProps {
@@ -46,10 +51,24 @@ interface CompanyProps {
   }
 }
 
-interface EditClientProps extends PageProps{
+interface EditClientProps extends PageProps {
   client: ClientProps
   company: CompanyProps
 }
+
+const radioNames = ['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services']
+const references = radioNames.map(ref => {
+  const arrayFrases = ref.split(' ')
+
+  const capitalFrases = arrayFrases.map((item, index) => {
+    if (item.length === 0) {
+      return '';
+    }
+    return item.charAt(0).toLowerCase() + item.slice(1);
+  })
+
+  return capitalFrases.join('_')
+});
 
 const FormSchema = z.object({
   firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'El nombre es obligatorio.'),
@@ -74,7 +93,7 @@ const title = 'Edit Client';
 export default function editClient() {
 
   const { client, company } = usePage<EditClientProps>().props;
-  console.log(company.ramp);
+  console.log(company.company_type.type);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -295,7 +314,7 @@ export default function editClient() {
                             {detachInCapitalWords('ramp', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -312,7 +331,7 @@ export default function editClient() {
                             {detachInCapitalWords('braille_language', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -329,7 +348,7 @@ export default function editClient() {
                             {detachInCapitalWords('elevator', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -346,7 +365,7 @@ export default function editClient() {
                             {detachInCapitalWords('first_aid_kit', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -363,7 +382,7 @@ export default function editClient() {
                             {detachInCapitalWords('accessible_bathroom', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -380,7 +399,7 @@ export default function editClient() {
                             {detachInCapitalWords('sign_language', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -397,7 +416,7 @@ export default function editClient() {
                             {detachInCapitalWords('private_transportation', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -414,7 +433,7 @@ export default function editClient() {
                             {detachInCapitalWords('information_places', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <RadioGroupBoolean field={field} />
+                            <RadioGroupFormBoolean field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -431,7 +450,10 @@ export default function editClient() {
                             {detachInCapitalWords('type', '_', true)}
                           </FormLabel>
                           <FormControl>
-
+                            <RadioGroupFormArray
+                              field={field}
+                              references={references}
+                              radioNames={radioNames} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -467,27 +489,6 @@ export default function editClient() {
         </div>
       </div>
     </>
-  )
-}
-
-function RadioGroupBoolean<TFieldValues extends FieldValues>({ field }: FieldData<TFieldValues>) {
-  const valueAsString = field.value ? 'yes' : 'no';
-
-  return (
-    <RadioGroup
-      onValueChange={(value) => field.onChange(value === 'yes')}
-      defaultValue={valueAsString}
-      className="flex flex-col space-y-1"
-    >
-      <div className="flex items-center gap-3">
-        <RadioGroupItem value="yes" id="r1" />
-        <FormLabel htmlFor="r1" className="pl-1 text-text">Yes</FormLabel>
-      </div>
-      <div className="flex items-center gap-3">
-        <RadioGroupItem value="no" id="r2" />
-        <FormLabel htmlFor="r2" className="pl-1 text-text">No</FormLabel>
-      </div>
-    </RadioGroup>
   )
 }
 

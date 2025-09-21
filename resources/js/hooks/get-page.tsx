@@ -39,7 +39,7 @@ export function detachInCapitalWords(frase: string, delimeter: string, firstWord
     return capitalFrases.join(' ')
 }
 
-export function joinInCapitalWords(frase: string, delimeter: string, firstWordCapital: boolean): string {
+export function joinInCapitalWords(frase: string, delimeter: string, union: string, firstWordCapital: boolean): string {
 
     const arrayFrases = frase.split(delimeter)
 
@@ -53,7 +53,7 @@ export function joinInCapitalWords(frase: string, delimeter: string, firstWordCa
         return item.charAt(0).toUpperCase() + item.slice(1);
     })
 
-    return capitalFrases.join('')
+    return capitalFrases.join(union)
 }
 
 export function detachFrasesCapitalWords(frase: string, firstWordCapital: boolean): string {

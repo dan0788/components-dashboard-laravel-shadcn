@@ -46,3 +46,9 @@ export interface LayoutProps {
     children: ReactNode;
     documentName: string;
 }
+
+export interface RadioGroupFormArrayProps<TFieldValues extends FieldValues> {
+    field: FieldData<TFieldValues>["field"];
+    references: string[];
+    radioNames: string[];
+}
