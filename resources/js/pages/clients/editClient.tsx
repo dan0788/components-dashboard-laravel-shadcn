@@ -38,6 +38,9 @@ interface CompanyProps {
   company_type_id: number
   company_name: string
   direction: string
+  country: string
+  province: string
+  city: string
   ramp: number
   braille_language: number
   elevator: number
@@ -75,6 +78,9 @@ const FormSchema = z.object({
 
   company_name: z.string().min(1, 'The company name is required'),
   direction: z.string().min(1, 'The direction is required'),
+  country: z.string().min(1, 'The country is required'),
+  province: z.string().min(1, 'The province is required'),
+  city: z.string().min(1, 'The city is required'),
   ramp: z.number(),
   braille_language: z.number(),
   elevator: z.number(),
@@ -101,6 +107,9 @@ export default function editClient() {
 
       company_name: company.company_name || '',
       direction: company.direction || '',
+      country: company.country || '',
+      province: company.province || '',
+      city: company.city || '',
       ramp: company.ramp,
       braille_language: company.braille_language,
       elevator: company.elevator,
@@ -121,6 +130,9 @@ export default function editClient() {
       email: formData.email,
       company_name: formData.company_name,
       direction: formData.direction,
+      country: formData.country,
+      province: formData.province,
+      city: formData.city,
       ramp: formData.ramp,
       braille_language: formData.braille_language,
       elevator: formData.elevator,
@@ -146,6 +158,9 @@ export default function editClient() {
         form.setError("email", { message: errors.email });
         form.setError("company_name", { message: errors.company_name });
         form.setError("direction", { message: errors.direction });
+        form.setError("country", { message: errors.country });
+        form.setError("province", { message: errors.province });
+        form.setError("city", { message: errors.city });
         form.setError("ramp", { message: errors.ramp });
         form.setError("braille_language", { message: errors.braille_language });
         form.setError("elevator", { message: errors.elevator });
@@ -296,6 +311,90 @@ export default function editClient() {
                               id="direction"
                               placeholder="Insert company name"
                               {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* country */}
+                    <FormField
+                      control={form.control}
+                      name="country"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="country" className="pl-1 text-text">
+                            {detachInCapitalWords('country', '_', true)}
+                          </FormLabel>
+                          <FormControl>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Input className="w-64 mt-2"
+                                  type="text"
+                                  id="country"
+                                  placeholder="Insert country"
+                                  {...field} />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>No special characters allowed</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* province */}
+                    <FormField
+                      control={form.control}
+                      name="province"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="province" className="pl-1 text-text">
+                            {detachInCapitalWords('province', '_', true)}
+                          </FormLabel>
+                          <FormControl>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Input className="w-64 mt-2"
+                                  type="text"
+                                  id="province"
+                                  placeholder="Insert province"
+                                  {...field} />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>No special characters allowed</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* city */}
+                    <FormField
+                      control={form.control}
+                      name="city"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="city" className="pl-1 text-text">
+                            {detachInCapitalWords('city', '_', true)}
+                          </FormLabel>
+                          <FormControl>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Input className="w-64 mt-2"
+                                  type="text"
+                                  id="city"
+                                  placeholder="Insert city"
+                                  {...field} />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>No special characters allowed</p>
+                              </TooltipContent>
+                            </Tooltip>
                           </FormControl>
                           <FormMessage />
                         </FormItem>

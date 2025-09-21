@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class ClientsController extends Controller
 {
@@ -71,6 +72,9 @@ class ClientsController extends Controller
                 'company_type_id',
                 'company_name',
                 'direction',
+                'country',
+                'province',
+                'city',
                 'ramp',
                 'braille_language',
                 'elevator',
@@ -99,7 +103,54 @@ class ClientsController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        dd($client);
+        //carga la relación de client con company para poder actualizarla
+        //$client->load('company');
+        $validator = Validator::make($request->all(), [
+            "firstname" => 'string|required',
+            "lastname" => 'string|required',
+            "email" => 'string|required',
+            "company_name" => 'string|required',
+            "country" => 'string|required',
+            "province" => 'string|required',
+            "city" => 'string|required',
+            "direction" => 'string|required',
+            "ramp" => 'boolean|required',
+            "braille_language" => 'boolean|required',
+            "elevator" => 'boolean|required',
+            "first_aid_kit" => 'boolean|required',
+            "accessible_bathroom" => 'boolean|required',
+            "sign_language" => 'boolean|required',
+            "private_transportation" => 'boolean|required',
+            "information_places" => 'boolean|required',
+            "type" => 'in:Entertainment,Food,Transportation,Beverage,General trade,Services',
+        ]);
+        if ($validator->fails()) {
+            // Return the validation errors
+            //print('error');
+            return response()->json($validator->errors(), 422);
+        }
+        $client->update($request->only(['firstname', 'lastname', 'email']));
+        
+        // Prepara los datos de la compañía
+        $companyData = $request->only([
+            'company_name',
+            'direction',
+            'country',
+            'province',
+            'city',
+            'ramp',
+            'braille_language',
+            'elevator',
+            'first_aid_kit',
+            'sign_language',
+            'accessible_bathroom',
+            'private_transportation',
+            'information_places',
+        ]);
+
+        $client->company->update($companyData);
+        $client->company->company_type->update($request->only(['type' ]));
+        dd($request);
     }
 
     /**

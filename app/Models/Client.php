@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Company;
 
 class Client extends Model
 {
@@ -17,4 +19,9 @@ class Client extends Model
         'avatar',
         'notifications',
     ];
+
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class, 'client_id', 'id');
+    }
 }
