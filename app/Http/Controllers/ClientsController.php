@@ -22,6 +22,7 @@ class ClientsController extends Controller
                 'elevator',
                 'first_aid_kit',
                 'sign_language',
+                'accessible_bathroom',
                 'private_transportation',
                 'information_places',
                 'client_id',
@@ -75,6 +76,7 @@ class ClientsController extends Controller
                 'elevator',
                 'first_aid_kit',
                 'sign_language',
+                'accessible_bathroom',
                 'private_transportation',
                 'information_places',
             )

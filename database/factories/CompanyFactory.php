@@ -32,6 +32,7 @@ class CompanyFactory extends Factory
             'elevator' => fake()->boolean(),
             'first_aid_kit' => fake()->boolean(),
             'sign_language' => fake()->boolean(),
+            'accessible_bathroom' => fake()->boolean(),
             'private_transportation' => fake()->boolean(),
             'information_places' => fake()->boolean(),
         ];

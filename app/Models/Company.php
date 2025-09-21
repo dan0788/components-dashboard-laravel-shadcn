@@ -25,6 +25,7 @@ class Company extends Model
         'elevator',
         'first_aid_kit',
         'sign_language',
+        'accessible_bathroom',
         'private_transportation',
         'information_places',
     ];

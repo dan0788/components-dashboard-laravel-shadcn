@@ -42,7 +42,6 @@ import { detachInCapitalWords } from "@/hooks/get-page";
 import { Layout } from "@/pages/clients/layout";
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
-import { usePageData, joinInCapitalWords } from "@/hooks/get-page"
 
 interface CompanyData {
   uid: string;
@@ -53,6 +52,7 @@ interface CompanyData {
   elevator: boolean;
   first_aid_kit: boolean;
   sign_language: boolean;
+  accessible_bathroom: boolean;
   private_transportation: boolean;
   information_places: boolean;
   client: {
@@ -76,6 +76,7 @@ export type Payment = {
     elevator: boolean;
     first_aid_kit: boolean;
     sign_language: boolean;
+    accessible_bathroom: boolean;
     private_transportation: boolean;
     information_places: boolean;
   };
@@ -236,6 +237,7 @@ export default function SearchClient() {
         elevator: company.elevator,
         first_aid_kit: company.first_aid_kit,
         sign_language: company.sign_language,
+        accessible_bathroom: company.accessible_bathroom,
         private_transportation: company.private_transportation,
         information_places: company.information_places,
       }

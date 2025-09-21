@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('elevator');
             $table->boolean('first_aid_kit');
             $table->boolean('sign_language');
+            $table->boolean('accessible_bathroom');
             $table->boolean('private_transportation');
             $table->boolean('information_places');
             $table->timestamps();

@@ -2,7 +2,6 @@ import { Head, Link, usePage } from '@inertiajs/react'
 import AuthenticatedLayout from "@/layouts/authenticated-layout"
 import { LayoutProps } from '@/types/layout';
 import routes from "@/config/routes";
-import { PageProps } from '@/types';
 import { joinInCapitalWords } from "@/hooks/get-page";
 
 export const Layout = ({ children, documentName }: LayoutProps) => {
