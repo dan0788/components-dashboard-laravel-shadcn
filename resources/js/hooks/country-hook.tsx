@@ -27,7 +27,23 @@ interface UseFetchCountriesResult {
   error: string | null;
 }
 
-const useFetchCountries = (): UseFetchCountriesResult => {
+interface OnlyCountryData{
+  name: {
+    common: string;
+  }
+}
+
+interface FormOnlyCountryOption {
+  value: string;
+}
+
+interface UseFetchOnlyCountriesResult {
+  onlyCountries: FormOnlyCountryOption[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+export const useFetchCountries = (): UseFetchCountriesResult => {
   const [countries, setCountries] = useState<FormCountryOption[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -65,10 +81,36 @@ const useFetchCountries = (): UseFetchCountriesResult => {
   return { countries, isLoading, error };
 };
 
-export default useFetchCountries;
+export const useFetchOnlyCountries = (): UseFetchOnlyCountriesResult => {
+  const [onlyCountries, setOnlyCountries] = useState<FormOnlyCountryOption[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-/* const countries = [
-  { value: "us", label: "Estados Unidos", prefix: "+1", flag: "🇺🇸" },
-  { value: "mx", label: "México", prefix: "+52", flag: "🇲🇽" },
-  { value: "ec", label: "Ecuador", prefix: "+593", flag: "🇪🇨" },
-]; */
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all?fields=name");
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos de países.");
+        }
+        const data: OnlyCountryData[] = await response.json();
+
+        const formattedCountries: FormOnlyCountryOption[] = data.map(country => {
+          return {
+            value: country.name.common,
+          };
+        }).sort((a, b) => a.value.localeCompare(b.value));
+
+        setOnlyCountries(formattedCountries);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  return { onlyCountries, isLoading, error };
+};

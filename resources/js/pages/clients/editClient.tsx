@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useRef } from 'react'
 import { Layout } from './layout'
 import { Head, usePage, router } from '@inertiajs/react'
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,12 +19,14 @@ import { Toaster, toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { CheckCircle2Icon } from 'lucide-react'
+import { Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
 import { detachInCapitalWords } from '@/hooks/get-page'
-import { RadioGroupFormBoolean, RadioGroupFormArray } from '@/hooks/get-components'
+import { RadioGroupFormBoolean } from '@/pages/components/RadioGroupFormBoolean'
+import { RadioGroupFormArray } from '@/pages/components/RadioGroupFormArray'
 import { Input } from '@/components/ui/input'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { PageProps } from '@/types'
+import { CountryComboboxPage } from '@/pages/components/CountryCombobox'
 
 interface ClientProps {
   id: number
@@ -174,13 +176,15 @@ export default function editClient() {
     });
   }
 
+  /* if (isLoading) return <div>Cargando países...</div>;
+  if (error) return <div>Error: {error}</div>; */
+
   return (
     <>
       <Head title={title} />
       <div className="[--header-height:calc(theme(spacing.14))]">
 
         <div className="space-y-6">
-
 
           <Toaster dir="ltr" />
 
@@ -322,23 +326,12 @@ export default function editClient() {
                       control={form.control}
                       name="country"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className='flex flex-col'>
                           <FormLabel htmlFor="country" className="pl-1 text-text">
                             {detachInCapitalWords('country', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Input className="w-64 mt-2"
-                                  type="text"
-                                  id="country"
-                                  placeholder="Insert country"
-                                  {...field} />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>No special characters allowed</p>
-                              </TooltipContent>
-                            </Tooltip>
+                            <CountryComboboxPage field={field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -580,7 +573,6 @@ export default function editClient() {
                   </form>
                 </Form>
               </CardDescription>
-
             </CardHeader>
           </Card>
         </div>
