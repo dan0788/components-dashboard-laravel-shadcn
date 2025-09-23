@@ -1,5 +1,4 @@
 import { RadioGroupFormArrayProps } from "@/types/layout";
-import { FieldData } from "@/types/layout";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { FormLabel } from "@/components/ui/form"
 import { FieldValues } from "react-hook-form";

@@ -39,23 +39,9 @@ const data = {
   navMain: [
     {
       title: "Statistics ground",
-      url: "#",
+      url: route('statistics.index'),
       icon: SquareTerminal,
       isActive: false,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Business",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
     },
     {
       title: "Clients Information",

@@ -32,6 +32,10 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/clients-info', [ClientsController::class, 'index'])->name('client.index');
     Route::get('/clients-info/edit/{client}', [ClientsController::class, 'edit'])->name('client.edit');
     Route::patch('/clients-info/edit/{client}', [ClientsController::class, 'update'])->name('client.update');
+
+    Route::get("/statistics", function () {
+        return Inertia::render('statistics');
+    })->name('statistics.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

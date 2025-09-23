@@ -42,6 +42,13 @@ const routes: Record<string, PageData> = {
             { label: "Edit" },
         ],
     },
+    statistics: {
+        title: "Statistics",
+        breadcrumbs: [
+            { label: "Home", href: "/home" },
+            { label: "Statistics" },
+        ],
+    },
 };
 
 // Arreglo de los nombres de los componentes con guiones (para las claves)

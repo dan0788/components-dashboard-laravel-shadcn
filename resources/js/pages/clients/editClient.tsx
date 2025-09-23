@@ -21,14 +21,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Button } from '@/components/ui/button'
 import { Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
 import { detachInCapitalWords } from '@/hooks/get-page'
-import { RadioGroupFormBoolean } from '@/pages/components/sub-components/RadioGroupFormBoolean'
-import { RadioGroupFormArray } from '@/pages/components/sub-components/RadioGroupFormArray'
+import { RadioGroupFormBoolean } from '@/pages/components/form/RadioGroupFormBoolean'
+import { RadioGroupFormArray } from '@/pages/components/form/RadioGroupFormArray'
 import { Input } from '@/components/ui/input'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { PageProps } from '@/types'
-import { CountryComboboxPage } from '@/pages/components/sub-components/CountryCombobox'
-import { StateComboboxPage } from '../components/sub-components/StateCombobox'
+import { CountryComboboxPage } from '@/pages/components/form/CountryCombobox'
+import { StateComboboxPage } from '../components/form/StateCombobox'
 import { joinInCapitalWords } from '@/hooks/get-page'
+import { Label } from 'recharts'
 
 interface ClientProps {
   id: number
@@ -154,7 +155,7 @@ export default function editClient() {
       preserveScroll: true,
       onSuccess: () => {
         toast(<div className="flex justify-between ">
-          <CheckCircle2Icon className="mr-4" />Client information has been correctly updated
+          <CheckCircle2Icon className="mr-4" />Company information has been correctly updated
         </div>)
         //form.reset();
       },
@@ -192,7 +193,7 @@ export default function editClient() {
 
           <Card className="my-5">
             <CardHeader>
-              <CardTitle className="!ml-3">Client Information</CardTitle>
+              <CardTitle className="!ml-3">Company Information</CardTitle>
               <CardDescription className="!ml-3">
                 Update client information. All fields are required.
               </CardDescription>
@@ -211,7 +212,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel htmlFor="firstname" className="pl-1 text-text">
-                            {detachInCapitalWords('first_name', '_', true)}
+                            {detachInCapitalWords('client_first_name', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <Tooltip>
@@ -239,7 +240,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel htmlFor="lastname" className="pl-1 text-text">
-                            {detachInCapitalWords('last_name', '_', true)}
+                            {detachInCapitalWords('client_last_name', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <Tooltip>
@@ -267,7 +268,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel htmlFor="email" className="pl-1 text-text">
-                            {detachInCapitalWords('email', '_', true)}
+                            {detachInCapitalWords('client_email', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <Input className="w-64 mt-2"
@@ -309,7 +310,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel htmlFor="direction" className="pl-1 text-text">
-                            {detachInCapitalWords('direction', '_', true)}
+                            {detachInCapitalWords('company_direction', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <Input className="w-64 mt-2"
@@ -330,7 +331,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem className='flex flex-col'>
                           <FormLabel htmlFor="country" className="pl-1 text-text">
-                            {detachInCapitalWords('country', '_', true)}
+                            {detachInCapitalWords('company_country', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <CountryComboboxPage field={field} />
@@ -347,7 +348,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem className='flex flex-col'>
                           <FormLabel htmlFor="province" className="pl-1 text-text">
-                            {detachInCapitalWords('province', '_', true)}
+                            {detachInCapitalWords('company_province', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <StateComboboxPage field={field} countryName={selectedCountry} />
@@ -364,7 +365,7 @@ export default function editClient() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel htmlFor="city" className="pl-1 text-text">
-                            {detachInCapitalWords('city', '_', true)}
+                            {detachInCapitalWords('company_city', '_', true)}
                           </FormLabel>
                           <FormControl>
                             <Tooltip>
@@ -384,6 +385,10 @@ export default function editClient() {
                         </FormItem>
                       )}
                     />
+
+                    <div>
+                      <FormLabel className='pl-1 text-text'>Types of accesibility</FormLabel>
+                    </div>
 
                     {/* ramp */}
                     <FormField
