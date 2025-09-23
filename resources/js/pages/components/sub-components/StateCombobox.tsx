@@ -20,8 +20,6 @@ export const StateComboboxPage = <TFieldValues extends FieldValues>({
     
   }, [onlyStates]);
 
-  console.log(countryName);
-  console.log(onlyStates);
   if (isLoading) {
     return <p>Loading...</p>;
   }

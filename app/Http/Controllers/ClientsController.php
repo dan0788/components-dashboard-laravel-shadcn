@@ -150,7 +150,8 @@ class ClientsController extends Controller
 
         $client->company->update($companyData);
         $client->company->company_type->update($request->only(['type' ]));
-        dd($request);
+        
+        return redirect()->route('client.edit', $client->id)->with('success', 'Client and Company updated successfully.');
     }
 
     /**
