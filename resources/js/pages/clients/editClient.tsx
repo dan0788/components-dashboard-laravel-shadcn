@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef } from 'react'
-import { Layout } from './layout'
+import { Layout } from '@/pages/layout'
 import { Head, usePage, router } from '@inertiajs/react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormProvider, useForm, useWatch } from "react-hook-form"

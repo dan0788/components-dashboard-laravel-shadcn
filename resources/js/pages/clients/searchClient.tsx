@@ -39,7 +39,7 @@ import {
 } from "@/components/ui/table"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { detachInCapitalWords } from "@/hooks/get-page";
-import { Layout } from "@/pages/clients/layout";
+import { Layout } from "@/pages/layout";
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 
