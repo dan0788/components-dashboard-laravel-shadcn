@@ -28,8 +28,8 @@ interface UseFetchCountriesResult {
 }
 
 interface OnlyCountryData{
-  name: {
-    common: string;
+  countryName: {
+    eng: string;
   }
 }
 
@@ -41,6 +41,39 @@ interface UseFetchOnlyCountriesResult {
   onlyCountries: FormOnlyCountryOption[];
   isLoading: boolean;
   error: string | null;
+}
+
+interface ProvinceData {
+  id: number;
+  name: string;
+  capital: string;
+}
+
+interface FetchedCountryData {
+  id: string;
+  name: {
+    eng: string;
+    spa: string;
+  };
+  prefix: string;
+  languages: string[];
+  numberProvinces: number;
+  capital: string;
+  provinces: ProvinceData[];
+}
+
+interface FormOnlyStateOptionFinal {
+  value: string;
+}
+
+interface UseFetchOnlyStatesResult {
+  onlyStates: FormOnlyStateOptionFinal[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+interface StatesProps extends UseFetchOnlyStatesResult{
+  state: string
 }
 
 export const useFetchCountries = (): UseFetchCountriesResult => {
@@ -89,7 +122,7 @@ export const useFetchOnlyCountries = (): UseFetchOnlyCountriesResult => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all?fields=name");
+        const response = await fetch("https://raw.githubusercontent.com/dan0788/repocountries/main/countries.json");
         if (!response.ok) {
           throw new Error("Error al obtener los datos de países.");
         }
@@ -97,7 +130,7 @@ export const useFetchOnlyCountries = (): UseFetchOnlyCountriesResult => {
 
         const formattedCountries: FormOnlyCountryOption[] = data.map(country => {
           return {
-            value: country.name.common,
+            value: country.countryName.eng,
           };
         }).sort((a, b) => a.value.localeCompare(b.value));
 
@@ -113,4 +146,40 @@ export const useFetchOnlyCountries = (): UseFetchOnlyCountriesResult => {
   }, []);
 
   return { onlyCountries, isLoading, error };
+};
+
+export const useFetchOnlyStates = (countryName:string): UseFetchOnlyStatesResult => {
+  const [onlyStates, setOnlyStates] = useState<FormOnlyStateOptionFinal[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchStates = async () => {
+      try {
+        const response = await fetch(`https://raw.githubusercontent.com/dan0788/repocountries/main/${countryName}.json`);
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos de estados.");
+        }
+        
+        const data: FetchedCountryData = await response.json();
+
+        const formattedStates: FormOnlyStateOptionFinal[] = data.provinces.map(province => {
+          return {
+            value: province.name,
+          };
+        }).sort((a, b) => a.value.localeCompare(b.value));
+
+        setOnlyStates(formattedStates);
+        
+      } catch (err: any) {
+        setError("Error: " + err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStates();
+  }, [countryName]);
+
+  return { onlyStates, isLoading, error };
 };

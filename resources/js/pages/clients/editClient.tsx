@@ -2,7 +2,7 @@ import React, { ReactNode, useRef } from 'react'
 import { Layout } from './layout'
 import { Head, usePage, router } from '@inertiajs/react'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { FormProvider, useForm, useWatch } from "react-hook-form"
 import { z } from "zod"
 import {
   AlertDialog,
@@ -21,12 +21,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Button } from '@/components/ui/button'
 import { Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
 import { detachInCapitalWords } from '@/hooks/get-page'
-import { RadioGroupFormBoolean } from '@/pages/components/RadioGroupFormBoolean'
-import { RadioGroupFormArray } from '@/pages/components/RadioGroupFormArray'
+import { RadioGroupFormBoolean } from '@/pages/components/sub-components/RadioGroupFormBoolean'
+import { RadioGroupFormArray } from '@/pages/components/sub-components/RadioGroupFormArray'
 import { Input } from '@/components/ui/input'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { PageProps } from '@/types'
-import { CountryComboboxPage } from '@/pages/components/CountryCombobox'
+import { CountryComboboxPage } from '@/pages/components/sub-components/CountryCombobox'
+import { StateComboboxPage } from '../components/sub-components/StateCombobox'
+import { joinInCapitalWords } from '@/hooks/get-page'
 
 interface ClientProps {
   id: number
@@ -99,6 +101,8 @@ const title = 'Edit Client';
 export default function editClient() {
 
   const { client, company } = usePage<EditClientProps>().props;
+
+  //const [ selectedCountry, setSelectedCountry ] = React.useState(joinInCapitalWords(company.country, ' ', '_', false).toLowerCase());
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -175,9 +179,7 @@ export default function editClient() {
       },
     });
   }
-
-  /* if (isLoading) return <div>Cargando países...</div>;
-  if (error) return <div>Error: {error}</div>; */
+  const selectedCountry = joinInCapitalWords(form.watch("country"), " ", "_", false).toLowerCase();
 
   return (
     <>
@@ -343,23 +345,12 @@ export default function editClient() {
                       control={form.control}
                       name="province"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className='flex flex-col'>
                           <FormLabel htmlFor="province" className="pl-1 text-text">
                             {detachInCapitalWords('province', '_', true)}
                           </FormLabel>
                           <FormControl>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Input className="w-64 mt-2"
-                                  type="text"
-                                  id="province"
-                                  placeholder="Insert province"
-                                  {...field} />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>No special characters allowed</p>
-                              </TooltipContent>
-                            </Tooltip>
+                            <StateComboboxPage field={field} countryName={selectedCountry} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
