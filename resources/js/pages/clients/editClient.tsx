@@ -103,8 +103,6 @@ export default function editClient() {
 
   const { client, company } = usePage<EditClientProps>().props;
 
-  //const [ selectedCountry, setSelectedCountry ] = React.useState(joinInCapitalWords(company.country, ' ', '_', false).toLowerCase());
-
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -125,12 +123,12 @@ export default function editClient() {
       sign_language: company.sign_language,
       private_transportation: company.private_transportation,
       information_places: company.information_places,
-      type: (company.company_type.type || 'Entertainment') as "Entertainment" | "Food" | "Transportation" | "Beverage" | "General trade" | "Services",
+      type: company.company_type.type as "Entertainment" | "Food" | "Transportation" | "Beverage" | "General trade" | "Services",
     },
   })
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
-
+    
     const dataForm = {
       firstname: formData.firstname,
       lastname: formData.lastname,

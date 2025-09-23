@@ -105,6 +105,7 @@ class ClientsController extends Controller
     {
         //carga la relación de client con company para poder actualizarla
         //$client->load('company');
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             "firstname" => 'string|required',
             "lastname" => 'string|required',
