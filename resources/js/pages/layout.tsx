@@ -4,7 +4,7 @@ import { LayoutProps } from '@/types/layout';
 import routes from "@/config/routes";
 import { joinInCapitalWords } from "@/hooks/get-page";
 
-export const Layout = ({ children, documentName }: LayoutProps) => {
+export const Layout = ({ children, documentName, className }: LayoutProps) => {
   const title = joinInCapitalWords(documentName, ' ', '', false)
   const breadcrumbs = title ? routes[title].breadcrumbs : []
 
@@ -12,7 +12,9 @@ export const Layout = ({ children, documentName }: LayoutProps) => {
 
     <AuthenticatedLayout breadcrumbs={breadcrumbs}>
       <Head title={documentName} />
-      {children}
+      <div className={className}>
+        {children}
+      </div>
     </AuthenticatedLayout>
   )
 }

@@ -44,6 +44,7 @@ export interface ContactProps {
 
 export interface LayoutProps {
     children: ReactNode;
+    className?: string;
     documentName: string;
 }
 
