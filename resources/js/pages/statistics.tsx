@@ -7,23 +7,19 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 const title = 'Statistics'
 
 export default function Statistics() {
-  const images = [
-    "/images/nilou.jpg",
-    "/images/sacarosa.jpg",
-    "/images/laila.jpg",
-    "/images/keching.jpg",
-    "/images/ganyu.jpg",
+  const charts = [
+    <LinearChart />
   ];
   return (
 
     <div className="flex flex-col items-center justify-center px-8 w-[600px]">
       <Carousel className="w-full">
         <CarouselContent className="">
-          {images.map((image, index) => (
+          {charts.map((chart, index) => (
             <CarouselItem key={index}>
-              
+              {chart}
                 
-                    <LinearChart />
+                    
 
             </CarouselItem>
           ))}
