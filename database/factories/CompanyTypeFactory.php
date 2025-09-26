@@ -17,7 +17,7 @@ class CompanyTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => fake()->randomElement(['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services'])
+            //'type' => fake()->randomElement(['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services'])
         ];
     }
 }

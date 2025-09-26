@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PersonalInfoController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,9 +34,7 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::get('/clients-info/edit/{client}', [ClientsController::class, 'edit'])->name('client.edit');
     Route::patch('/clients-info/edit/{client}', [ClientsController::class, 'update'])->name('client.update');
 
-    Route::get("/statistics", function () {
-        return Inertia::render('statistics');
-    })->name('statistics.index');
+    Route::get("/statistics", [StatisticsController::class, 'typeStatistics'])->name('statistics.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

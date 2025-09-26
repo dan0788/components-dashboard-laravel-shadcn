@@ -2,7 +2,6 @@
 
 import { TrendingUp } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-
 import {
     Card,
     CardContent,
@@ -14,42 +13,42 @@ import {
 import {
     ChartConfig,
     ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export const description = "A linear area chart"
-
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-]
+interface LinearChartProps {
+    linearChartData?: { type: string; desktop: number }[]
+}
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "yellow",
-    },
+  desktop: {
+    label: "Desktop",
+    color: "var(--chart-5)",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "var(--chart-2)",
+  },
 } satisfies ChartConfig
 
-export function LinearChart() {
+export function LinearChart({ linearChartData }: LinearChartProps) {
+    
     return (
         <Card className="p-0 m-0 w-full h-full">
             <CardHeader>
-                <CardTitle>Area Chart - Linear</CardTitle>
+                <CardTitle>Services Types</CardTitle>
                 <CardDescription>
-                    Showing total visitors for the last 6 months
+                    Count of companies of each type
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="w-full h-full">
                     <AreaChart
                         accessibilityLayer
-                        data={chartData}
+                        data={linearChartData}
                         margin={{
                             left: 12,
                             right: 12,
@@ -57,11 +56,14 @@ export function LinearChart() {
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis
-                            dataKey="month"
-                            tickLine={false}
-                            axisLine={false}
+                            dataKey="type"
+                            tickLine={true}
+                            axisLine={true}
                             tickMargin={8}
-                            tickFormatter={(value) => value.slice(0, 3)}
+                            tickFormatter={(value) => value}
+                            angle={90}
+                            textAnchor="start"
+                            height={70}
                         />
                         <ChartTooltip
                             cursor={false}
@@ -77,19 +79,6 @@ export function LinearChart() {
                     </AreaChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter>
-                <div className="flex w-full items-start gap-2 text-sm">
-                    <div className="grid gap-2">
-                        <div className="flex items-center gap-2 leading-none font-medium">
-                            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                        </div>
-                        <div className="text-muted-foreground flex items-center gap-2 leading-none">
-                            January - June 2024
-                        </div>
-                    </div>
-                </div>
-            </CardFooter>
         </Card>
     )
 }
-

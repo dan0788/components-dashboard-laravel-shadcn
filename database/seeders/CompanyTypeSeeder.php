@@ -13,6 +13,23 @@ class CompanyTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        CompanyType::factory(10)->create();
+        CompanyType::factory()->create([
+            'type' => 'Entertainment'
+        ]);
+        CompanyType::factory()->create([
+            'type' => 'Food'
+        ]);
+        CompanyType::factory()->create([
+            'type' => 'Transportation'
+        ]);
+        CompanyType::factory()->create([
+            'type' => 'Beverage'
+        ]);
+        CompanyType::factory()->create([
+            'type' => 'General trade'
+        ]);
+        CompanyType::factory()->create([
+            'type' => 'Services'
+        ]);
     }
 }

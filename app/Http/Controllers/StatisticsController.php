@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CompanyType;
+use Illuminate\Support\Facades\DB;
+use App\Models\Company;
 
 class StatisticsController extends Controller
 {
@@ -60,5 +63,28 @@ class StatisticsController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function typeStatistics()
+    {
+        $companyTypeNameArray = CompanyType::pluck('type')->toArray();
+
+        foreach ($companyTypeNameArray as $type) {
+            $companyType = CompanyType::where('type', $type)->first();
+            $desktop = 0;
+            if ($companyType) {
+                $desktop = Company::where('company_type_id', $companyType->id)->count();
+            }
+            $linearChartData[] = [
+                'type' => $type,
+                'desktop' => $desktop
+            ];
+        }
+
+        return inertia('statistics', [
+            'linearChartProps' => [
+                'data' => $linearChartData,
+            ]
+        ]);
     }
 }

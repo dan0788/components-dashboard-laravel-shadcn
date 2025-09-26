@@ -64,7 +64,6 @@ class ClientsController extends Controller
      */
     public function edit(Client $client)
     {
-        $head = 'Edit Client';
         $company = Company::where('client_id', $client->id)
             ->with('company_type:id,type')
             ->select(
@@ -87,7 +86,6 @@ class ClientsController extends Controller
             ->first();
 
         return Inertia::render('clients/editClient', [
-            'head' => $head,
             'client' => $client->only([
                 'id',
                 'firstname',

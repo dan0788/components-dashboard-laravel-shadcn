@@ -1,14 +1,21 @@
 import React, { ReactNode } from 'react'
 import { Layout } from '@/pages/layout'
-import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { LinearChart } from '@/pages/components/charts/linearChart';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
+import { LinearChart } from '@/pages/components/charts/typeLinearChart';
+import { ChartConfig } from '@/components/ui/chart';
+
 const title = 'Statistics'
 
-export default function Statistics() {
+interface StatisticsProps {
+  linearChartProps: {
+        data?: { type: string; desktop: number }[];
+    };
+}
+
+export default function Statistics({linearChartProps}: StatisticsProps) {
+  
   const charts = [
-    <LinearChart />
+    <LinearChart linearChartData={linearChartProps?.data} />,
   ];
   return (
 
@@ -18,9 +25,6 @@ export default function Statistics() {
           {charts.map((chart, index) => (
             <CarouselItem key={index}>
               {chart}
-                
-                    
-
             </CarouselItem>
           ))}
         </CarouselContent>
