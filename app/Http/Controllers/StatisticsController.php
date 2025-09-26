@@ -81,9 +81,17 @@ class StatisticsController extends Controller
             ];
         }
 
+        $linearChartConfig = [
+            'desktop' => [
+                'label' => 'Desktop',
+                'color' => 'var(--chart-2)',
+            ]
+        ];
+
         return inertia('statistics', [
             'linearChartProps' => [
                 'data' => $linearChartData,
+                'config' => $linearChartConfig
             ]
         ]);
     }

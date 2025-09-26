@@ -21,6 +21,7 @@ import {
 
 interface LinearChartProps {
     linearChartData?: { type: string; desktop: number }[]
+    linearChartConfig: ChartConfig
 }
 
 const chartConfig = {
@@ -34,8 +35,10 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function LinearChart({ linearChartData }: LinearChartProps) {
-    
+export function LinearChart({ linearChartData, linearChartConfig }: LinearChartProps) {
+console.log(linearChartConfig);
+    //const desktopColor = linearChartConfig.desktop?.color || "hsl(var(--primary))"
+
     return (
         <Card className="p-0 m-0 w-full h-full">
             <CardHeader>
@@ -45,7 +48,7 @@ export function LinearChart({ linearChartData }: LinearChartProps) {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={chartConfig} className="w-full h-full">
+                <ChartContainer config={linearChartConfig} className="w-full h-full">
                     <AreaChart
                         accessibilityLayer
                         data={linearChartData}

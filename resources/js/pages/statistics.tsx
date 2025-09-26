@@ -9,17 +9,19 @@ const title = 'Statistics'
 interface StatisticsProps {
   linearChartProps: {
         data?: { type: string; desktop: number }[];
+        config: ChartConfig;
     };
 }
 
 export default function Statistics({linearChartProps}: StatisticsProps) {
   
   const charts = [
-    <LinearChart linearChartData={linearChartProps?.data} />,
+    <LinearChart linearChartData={linearChartProps?.data} linearChartConfig={linearChartProps.config} />,
   ];
   return (
 
-    <div className="flex flex-col items-center justify-center px-8 w-[600px]">
+    <div style={{ maxWidth: '800px' }} className="w-full h-full flex flex-col items-center justify-center space-y-8">
+      <div className="flex flex-col items-center justify-center px-8 w-full">
       <Carousel className="w-full">
         <CarouselContent className="">
           {charts.map((chart, index) => (
@@ -31,6 +33,7 @@ export default function Statistics({linearChartProps}: StatisticsProps) {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+    </div>
     </div>
 
   )
