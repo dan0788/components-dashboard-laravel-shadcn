@@ -1,7 +1,6 @@
 import * as React from "react";
 import { TabsList } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import type { TabsListProps } from "@radix-ui/react-tabs";
 
 const MultilineTabsList = React.forwardRef<
   React.ElementRef<typeof TabsList>,

@@ -36,9 +36,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function LinearChart({ linearChartData, linearChartConfig }: LinearChartProps) {
-console.log(linearChartConfig);
-    //const desktopColor = linearChartConfig.desktop?.color || "hsl(var(--primary))"
-
+    
     return (
         <Card className="p-0 m-0 w-full h-full">
             <CardHeader>
