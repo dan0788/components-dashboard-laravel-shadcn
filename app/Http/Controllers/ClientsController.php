@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Company;
+use App\Models\CompanyType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,8 @@ class ClientsController extends Controller
                 'client_id',
             )
             ->get();
+
+        
 
         return Inertia::render('clients/searchClient', [
             'companies' => $companies,
@@ -126,7 +129,7 @@ class ClientsController extends Controller
             return response()->json($validator->errors(), 422);
         }
         $client->update($request->only(['firstname', 'lastname', 'email']));
-        
+
         // Prepara los datos de la compañía
         $companyData = $request->only([
             'company_name',
@@ -145,8 +148,8 @@ class ClientsController extends Controller
         ]);
 
         $client->company->update($companyData);
-        $client->company->company_type->update($request->only(['type' ]));
-        
+        $client->company->company_type->update($request->only(['type']));
+
         return redirect()->route('client.edit', $client->id)->with('success', 'Client and Company updated successfully.');
     }
 

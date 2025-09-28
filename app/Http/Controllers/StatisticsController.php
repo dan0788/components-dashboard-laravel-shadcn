@@ -67,7 +67,7 @@ class StatisticsController extends Controller
 
     public function typeStatistics()
     {
-        $companyTypeNameArray = CompanyType::pluck('type')->toArray();
+        $companyTypeNameArray = $this->getListCompanyType();
 
         foreach ($companyTypeNameArray as $type) {
             $companyType = CompanyType::where('type', $type)->first();
@@ -88,11 +88,51 @@ class StatisticsController extends Controller
             ]
         ];
 
+        $accessibilitiesList = $this->getListAccessibilities();
+
+        foreach ($accessibilitiesList as $access) {
+
+            $count = 0;
+            $accessArray = ['accessibility' => $access];
+
+            foreach ($companyTypeNameArray as $type) {
+
+                $companyType = CompanyType::where('type', $type)->first();
+                $count = Company::where([
+                    'company_type_id' => $companyType->id,
+                    $access => true,
+                ])
+                    ->count();
+                $accessArray[$type] = $count;
+            }
+            $interactiveAreaChartData[] = $accessArray;
+        }
+
+        $count = 0;
+
+        foreach ($companyTypeNameArray as $type) {
+            $count++;
+            
+            $interactiveAreaChartConfig[] = [
+                $type => [
+                    'label' => $type,
+                    'color' => "var(--chart-$count)",
+                ]
+            ];
+            if ($count >= 10) {
+                $count = 0;
+            }
+        }
+
         return inertia('statistics', [
             'linearChartProps' => [
                 'data' => $linearChartData,
                 'config' => $linearChartConfig
-            ]
+            ],
+            'interactiveAreaChartProps' => [
+                'data' => $interactiveAreaChartData,
+                'config' => $interactiveAreaChartConfig
+            ],
         ]);
     }
 }

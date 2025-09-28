@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo, useState } from 'react'
+import React, { ReactNode, useEffect, useMemo, useState } from 'react'
 import { Head, Link, usePage } from "@inertiajs/react";
 import {
   ColumnDef,
@@ -44,6 +44,17 @@ import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Label } from '@/components/ui/label';
 
 interface CompanyData {
   uid: string;
@@ -196,7 +207,7 @@ const columns: ColumnDef<Payment>[] = [
             variant="outline"
             className="bg-red-500 text-white dark:bg-red-600"
           >
-            <CircleX  className='mx-1' />
+            <CircleX className='mx-1' />
             Email Not verified
           </Badge>)
           }
@@ -260,6 +271,8 @@ export default function SearchClient() {
 
   const { companies } = usePage<{ companies: CompanyData[] }>().props;
   const [selectValue, setSelectValue] = useState('company_name');
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [selectedRowData, setSelectedRowData] = useState(null);
 
   // Mapeamos los datos para incluír la accesibilidad
   const payments: Payment[] = useMemo(() => {
@@ -316,6 +329,11 @@ export default function SearchClient() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     table.getColumn(selectValue)?.setFilterValue(value);
+  };
+
+  const handleRowClick = (rowData: string) => {
+    /* setSelectedRowData(rowData); */
+    setIsSheetOpen(true);
   };
 
   return (
@@ -393,6 +411,7 @@ export default function SearchClient() {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
+                    onClick={() => { handleRowClick(row.original.direction) }}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
@@ -442,8 +461,41 @@ export default function SearchClient() {
           </div>
         </div>
       </div>
+
+      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+        <SheetTrigger asChild>
+          <Button variant="outline">Open</Button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Edit profile</SheetTitle>
+            <SheetDescription>
+              Make changes to your profile here. Click save when you&apos;re done.
+            </SheetDescription>
+          </SheetHeader>
+          <div className="grid flex-1 auto-rows-min gap-6 px-4">
+            <div className="grid gap-3">
+              <Label htmlFor="sheet-demo-name">Name</Label>
+              <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="sheet-demo-username">Username</Label>
+              <Input id="sheet-demo-username" defaultValue="@peduarte" />
+            </div>
+          </div>
+          <SheetFooter>
+            <Button type="submit">Save changes</Button>
+            <SheetClose asChild>
+              <Button variant="outline">Close</Button>
+            </SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </>
   );
+
+
+
 }
 
 function handleUIDClick(uid: string) {
@@ -455,6 +507,8 @@ function handleUIDClick(uid: string) {
     },
   })
 }
+
+
 
 SearchClient.layout = (page: ReactNode) => <Layout children={page} documentName={title} />
 

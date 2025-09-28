@@ -130,9 +130,6 @@ const chartData = [
 ]
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   desktop: {
     label: "Desktop",
     color: "var(--chart-1)",
