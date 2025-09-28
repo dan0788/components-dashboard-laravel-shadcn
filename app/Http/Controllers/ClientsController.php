@@ -13,7 +13,7 @@ class ClientsController extends Controller
 
     public function index()
     {
-        $companies = Company::with('client:id,firstname,lastname,email')
+        $companies = Company::with('client:id,firstname,lastname,email,email_verified_at')
             ->select(
                 'uid',
                 'company_name',

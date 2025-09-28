@@ -12,7 +12,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal, Check, X } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreHorizontal, Check, X, BadgeCheckIcon, CircleCheck, CircleX } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -42,6 +42,8 @@ import { detachInCapitalWords } from "@/hooks/get-page";
 import { Layout } from "@/pages/layout";
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface CompanyData {
   uid: string;
@@ -60,6 +62,7 @@ interface CompanyData {
     firstname: string;
     lastname: string;
     email: string;
+    email_verified_at: string | null;
   };
 }
 
@@ -70,6 +73,7 @@ export type Payment = {
   direction: string;
   owner: string;
   email: string;
+  email_verified_at: string | null;
   accesibility: {
     ramp: boolean;
     braille_language: boolean;
@@ -104,6 +108,16 @@ const columns: ColumnDef<Payment>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "avatar",
+    header: "",
+    cell: ({ row }) => <div className="">
+      <Avatar className="h-8 w-8 rounded-lg">
+        <AvatarImage src="https://github.com/shadcn.png" alt="" />
+        <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+      </Avatar>
+    </div>,
   },
   {
     accessorKey: "company_name",
@@ -164,6 +178,31 @@ const columns: ColumnDef<Payment>[] = [
       );
     },
     cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
+  },
+  {
+    accessorKey: "email_verified_at",
+    header: "",
+    cell: ({ row }) => {
+      const emailVerifiedDate = row.original.email_verified_at;
+      return (
+        <div className="">
+          {emailVerifiedDate ? (<Badge
+            variant="outline"
+            className="bg-green-500 text-white dark:bg-blue-600"
+          >
+            <CircleCheck className='px-1' />
+            Email Verified
+          </Badge>) : (<Badge
+            variant="outline"
+            className="bg-red-500 text-white dark:bg-red-600"
+          >
+            <CircleX  className='mx-1' />
+            Email Not verified
+          </Badge>)
+          }
+        </div>
+      )
+    },
   },
   {
     id: "actions",
@@ -231,6 +270,7 @@ export default function SearchClient() {
       direction: company.direction,
       owner: `${company.client.firstname} ${company.client.lastname}`,
       email: company.client.email,
+      email_verified_at: company.client.email_verified_at,
       accesibility: {
         ramp: company.ramp,
         braille_language: company.braille_language,

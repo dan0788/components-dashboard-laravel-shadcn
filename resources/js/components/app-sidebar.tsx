@@ -45,12 +45,12 @@ const data = {
     },
     {
       title: "Clients Information",
-      url: "#",
+      url: route('client.index'),
       icon: CircleUserRound,
       items: [
         {
-          title: "Search",
-          url: route('client.index'),
+          title: "Other option",
+          url: "#",
         },
         {
           title: "Explorer",
