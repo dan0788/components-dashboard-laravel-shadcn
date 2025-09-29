@@ -272,7 +272,7 @@ export default function SearchClient() {
   const { companies } = usePage<{ companies: CompanyData[] }>().props;
   const [selectValue, setSelectValue] = useState('company_name');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [selectedRowData, setSelectedRowData] = useState(null);
+  const [selectedRow, setSelectedRow] = useState<Payment>();
 
   // Mapeamos los datos para incluír la accesibilidad
   const payments: Payment[] = useMemo(() => {
@@ -331,8 +331,8 @@ export default function SearchClient() {
     table.getColumn(selectValue)?.setFilterValue(value);
   };
 
-  const handleRowClick = (rowData: string) => {
-    /* setSelectedRowData(rowData); */
+  const handleRowClick = (paymentData: Payment) => {
+    setSelectedRow(paymentData);
     setIsSheetOpen(true);
   };
 
@@ -411,10 +411,10 @@ export default function SearchClient() {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
-                    onClick={() => { handleRowClick(row.original.direction) }}
+                    onClick={() => { handleRowClick(row.original) }}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                      <TableCell key={cell.id} className='cursor-pointer'>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -463,28 +463,35 @@ export default function SearchClient() {
       </div>
 
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-        <SheetTrigger asChild>
-          <Button variant="outline">Open</Button>
-        </SheetTrigger>
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Edit profile</SheetTitle>
             <SheetDescription>
-              Make changes to your profile here. Click save when you&apos;re done.
+              Make changes to respected profile here. Click open to edit.
             </SheetDescription>
           </SheetHeader>
           <div className="grid flex-1 auto-rows-min gap-6 px-4">
             <div className="grid gap-3">
-              <Label htmlFor="sheet-demo-name">Name</Label>
-              <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
+              <Label htmlFor="sheet-demo-name">Owner</Label>
+              <Input id="sheet-demo-name" value={selectedRow?.owner} disabled />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="sheet-demo-username">Username</Label>
-              <Input id="sheet-demo-username" defaultValue="@peduarte" />
+              <Label htmlFor="sheet-demo-name">Company Name</Label>
+              <Input id="sheet-demo-name" value={selectedRow?.company_name} disabled />
             </div>
+            {Object.entries(selectedRow?.accesibility || []).map(([key, value]) => {
+              return (
+                <div className="flex items-center space-x-2 cursor-pointer">
+                  <Label>{detachInCapitalWords(key, '_', true)}:</Label>
+                  {value ? <Check className="h-4 w-4 text-green-500" /> : <X className="h-4 w-4 text-red-500" />}
+                </div>
+              )
+            })}
           </div>
           <SheetFooter>
-            <Button type="submit">Save changes</Button>
+            <Button>
+              <Link href={route('client.edit', { id: selectedRow?.id || 1 })}>Edit profile</Link>
+            </Button>
             <SheetClose asChild>
               <Button variant="outline">Close</Button>
             </SheetClose>

@@ -107,7 +107,7 @@ class StatisticsController extends Controller
                 $accessArray[$normalizedType] = $count;
             }
             $interactiveAreaChartData[] = $accessArray;
-        }
+        }dd($interactiveAreaChartData);
 
         $normalizedType = "";
         $interactiveAreaChartConfig = [];
