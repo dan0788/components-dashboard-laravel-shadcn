@@ -13,8 +13,6 @@ import {
 import {
     ChartConfig,
     ChartContainer,
-    ChartLegend,
-    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart"
@@ -23,17 +21,6 @@ interface LinearChartProps {
     linearChartData?: { type: string; desktop: number }[]
     linearChartConfig: ChartConfig
 }
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-5)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
-} satisfies ChartConfig
 
 export function LinearChart({ linearChartData, linearChartConfig }: LinearChartProps) {
     

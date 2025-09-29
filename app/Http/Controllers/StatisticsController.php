@@ -103,21 +103,22 @@ class StatisticsController extends Controller
                     $access => true,
                 ])
                     ->count();
-                $accessArray[$type] = $count;
+                $normalizedType = str_replace(' ', '_', $type);
+                $accessArray[$normalizedType] = $count;
             }
             $interactiveAreaChartData[] = $accessArray;
         }
 
+        $normalizedType = "";
+        $interactiveAreaChartConfig = [];
         $count = 0;
 
         foreach ($companyTypeNameArray as $type) {
+            $normalizedType = str_replace(' ', '_', $type);
             $count++;
-            
-            $interactiveAreaChartConfig[] = [
-                $type => [
-                    'label' => $type,
-                    'color' => "var(--chart-$count)",
-                ]
+            $interactiveAreaChartConfig[$normalizedType] = [
+                'label' => $normalizedType,
+                'color' => "var(--chart-$count)",
             ];
             if ($count >= 10) {
                 $count = 0;

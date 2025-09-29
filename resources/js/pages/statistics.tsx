@@ -9,33 +9,44 @@ const title = 'Statistics'
 
 interface StatisticsProps {
   linearChartProps: {
-        data?: { type: string; desktop: number }[];
-        config: ChartConfig;
-    };
+    data?: { type: string; desktop: number }[];
+    config: ChartConfig;
+  };
+  interactiveAreaChartProps: {
+    data?: {
+      accessibility: string;
+      [companyType: string]: number | string;
+    }[];
+    config: ChartConfig;
+  };
 }
 
-export default function Statistics({linearChartProps}: StatisticsProps) {
-  
+export default function Statistics({ linearChartProps, interactiveAreaChartProps }: StatisticsProps) {
+
   const charts = [
-    <LinearChart linearChartData={linearChartProps?.data} linearChartConfig={linearChartProps.config} />,
-    <TypeAccesibilityAreaChart />
+    <LinearChart
+      linearChartData={linearChartProps?.data}
+      linearChartConfig={linearChartProps.config} />,
+    <TypeAccesibilityAreaChart
+      interactiveAreaChartData={interactiveAreaChartProps?.data}
+      interactiveAreaChartConfig={interactiveAreaChartProps.config} />
   ];
   return (
 
     <div style={{ width: '800px' }} className="w-full h-full flex flex-col items-center justify-center space-y-8">
       <div className="flex flex-col items-center justify-center px-8 w-full">
-      <Carousel className="w-full">
-        <CarouselContent className="">
-          {charts.map((chart, index) => (
-            <CarouselItem key={index}>
-              {chart}
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+        <Carousel className="w-full">
+          <CarouselContent className="">
+            {charts.map((chart, index) => (
+              <CarouselItem key={index}>
+                {chart}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
     </div>
 
   )
