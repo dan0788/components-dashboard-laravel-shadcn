@@ -31,7 +31,7 @@ class ClientsController extends Controller
             )
             ->get();
 
-        
+
 
         return Inertia::render('clients/searchClient', [
             'companies' => $companies,
@@ -130,7 +130,21 @@ class ClientsController extends Controller
         }
         $client->update($request->only(['firstname', 'lastname', 'email']));
 
-        // Prepara los datos de la compañía
+        //obtener viejo id type
+        $oldCompanyTypeID = Company::where('client_id', $client->id)
+            ->with('company_type:id,type')
+            ->select(
+                'id',
+                'company_type_id',
+            )
+            ->first();
+        //obtener nuevo id type
+        $newCompanyTypeID = CompanyType::where('type', $request->type)
+            ->select('id')
+            ->firstOrFail();
+        Company::where('company_type_id', $oldCompanyTypeID->id)
+            ->update(['company_type_id' => $newCompanyTypeID->id]);
+
         $companyData = $request->only([
             'company_name',
             'direction',
@@ -148,7 +162,6 @@ class ClientsController extends Controller
         ]);
 
         $client->company->update($companyData);
-        $client->company->company_type->update($request->only(['type']));
 
         return redirect()->route('client.edit', $client->id)->with('success', 'Client and Company updated successfully.');
     }
