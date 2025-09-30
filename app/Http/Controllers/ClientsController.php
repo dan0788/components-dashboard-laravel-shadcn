@@ -43,7 +43,7 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('clients/createClient');
     }
 
     /**
@@ -142,7 +142,7 @@ class ClientsController extends Controller
         $newCompanyTypeID = CompanyType::where('type', $request->type)
             ->select('id')
             ->firstOrFail();
-        Company::where('company_type_id', $oldCompanyTypeID->id)
+        Company::where('company_type_id', $oldCompanyTypeID->company_type_id)
             ->update(['company_type_id' => $newCompanyTypeID->id]);
 
         $companyData = $request->only([

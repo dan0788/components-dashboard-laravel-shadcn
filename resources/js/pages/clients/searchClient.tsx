@@ -12,7 +12,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal, Check, X, BadgeCheckIcon, CircleCheck, CircleX } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreHorizontal, Check, X, BadgeCheckIcon, CircleCheck, CircleX, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -55,6 +55,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Label } from '@/components/ui/label';
+import LinkButton from '../components/buttons/linkButton';
 
 interface CompanyData {
   uid: string;
@@ -341,6 +342,12 @@ export default function SearchClient() {
       <Head title={title} />
       <Toaster position="top-center" />
       <div className="w-full">
+        <div className='w-full justify-end flex'>
+          <LinkButton className="w-9 h-9 bg-green-500 rounded-full text-white flex items-center justify-center"
+          routeName='client.create' children={<Plus />}
+        ></LinkButton>
+        </div>
+
         <div className="flex items-center py-4">
           <Select defaultValue="company_name" onValueChange={handleSelectChange}>
             <SelectTrigger className="w-[180px]">

@@ -42,6 +42,14 @@ const routes: Record<string, PageData> = {
             { label: "Edit" },
         ],
     },
+    createClient: {
+        title: "Create Client",
+        breadcrumbs: [
+            { label: "Home", href: "/home" },
+            { label: "Clients", href: "/home/clients-info" },
+            { label: "Create" },
+        ],
+    },
     statistics: {
         title: "Statistics",
         breadcrumbs: [
