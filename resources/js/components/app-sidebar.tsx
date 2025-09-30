@@ -3,6 +3,7 @@
 import * as React from "react"
 import {
   BookOpen,
+  BookUser,
   CircleUserRound,
   Command,
   Frame,
@@ -47,6 +48,25 @@ const data = {
       title: "Clients Information",
       url: route('client.index'),
       icon: CircleUserRound,
+      items: [
+        {
+          title: "Other option",
+          url: "#",
+        },
+        {
+          title: "Explorer",
+          url: "#",
+        },
+        {
+          title: "Quantum",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Users Information",
+      url: '#',
+      icon: BookUser,
       items: [
         {
           title: "Other option",

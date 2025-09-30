@@ -19,10 +19,10 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'uid' => fake()->regexify('[A-Za-z0-9\-_!@#$%^&*()]{10}'),
+            'uid' => fake()->unique()->regexify('[A-Za-z0-9\-_!@#$%^&*()]{10}'),
             'client_id' => Client::all()->random()->id,
             'company_type_id' => CompanyType::all()->random()->id,
-            'company_name' => fake()->company(),
+            'company_name' => fake()->unique()->company(),
             'direction' => fake()->streetAddress(),
             'country' => fake()->country(),
             'province' => fake()->randomElement(['Pichincha', 'Guayas']),

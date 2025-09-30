@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 abstract class Controller
 {
+    private const CODE_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\-_!@#$%^&*()';
+    private const CODE_LENGTH = 10;
     protected function getListCompanyType()
     {
         $companyTypeNameArray = CompanyType::pluck('type')->toArray();
@@ -24,5 +26,19 @@ abstract class Controller
         $count = $endIndex - $startIndex + 1;
         $subsetColumns = array_slice($allColumns, $startIndex, $count);
         return $subsetColumns;
+    }
+
+    protected function generateRandomCode(): string
+    {
+        $chars = self::CODE_CHARS;
+        $charLength = strlen($chars);
+        $code = '';
+
+        for ($i = 0; $i < self::CODE_LENGTH; $i++) {
+            // Selecciona un carácter aleatorio del conjunto
+            $code .= $chars[rand(0, $charLength - 1)]; 
+        }
+
+        return $code;
     }
 }

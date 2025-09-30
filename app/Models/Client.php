@@ -15,7 +15,6 @@ class Client extends Model
         'lastname',
         'email',
         'email_verified_at',
-        'password',
         'avatar',
         'notifications',
     ];

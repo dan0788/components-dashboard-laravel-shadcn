@@ -19,7 +19,7 @@ import { Toaster, toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
+import { Ban, Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
 import { detachInCapitalWords } from '@/hooks/get-page'
 import { RadioGroupFormBoolean } from '@/pages/components/form/RadioGroupFormBoolean'
 import { RadioGroupFormArray } from '@/pages/components/form/RadioGroupFormArray'
@@ -30,6 +30,8 @@ import { CountryComboboxPage } from '@/pages/components/form/CountryCombobox'
 import { StateComboboxPage } from '../components/form/StateCombobox'
 import { joinInCapitalWords } from '@/hooks/get-page'
 import { Label } from 'recharts'
+import { AvatarPage } from '../profile/partials/avatar-form'
+import { Switch } from '@/components/ui/switch'
 
 const radioNames = ['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services']
 const references = radioNames.map(ref => {
@@ -44,24 +46,27 @@ const references = radioNames.map(ref => {
 });
 
 const FormSchema = z.object({
+  clientavatar: z.string().optional(),
   firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'The name is required'),
   lastname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'The lastname is required'),
   email: z.string().email('Invalid email address').min(1, 'The email is required'),
 
+  companyavatar: z.string().optional(),
   company_name: z.string().min(1, 'The company name is required'),
   direction: z.string().min(1, 'The direction is required'),
   country: z.string().min(1, 'The country is required'),
   province: z.string().min(1, 'The province is required'),
   city: z.string().min(1, 'The city is required'),
-  ramp: z.number(),
-  braille_language: z.number(),
-  elevator: z.number(),
-  first_aid_kit: z.number(),
-  accessible_bathroom: z.number(),
-  sign_language: z.number(),
-  private_transportation: z.number(),
-  information_places: z.number(),
+  ramp: z.boolean(),
+  braille_language: z.boolean(),
+  elevator: z.boolean(),
+  first_aid_kit: z.boolean(),
+  accessible_bathroom: z.boolean(),
+  sign_language: z.boolean(),
+  private_transportation: z.boolean(),
+  information_places: z.boolean(),
   type: z.enum(['Entertainment', 'Food', 'Transportation', 'Beverage', 'General trade', 'Services']),
+  notifications: z.boolean(),
 })
 
 const title = 'Create Client';
@@ -71,33 +76,38 @@ export default function CreateClient() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
+      clientavatar: 'https://github.com/shadcn.png',
       firstname: '',
       lastname: '',
       email: '',
 
+      companyavatar: 'https://github.com/shadcn.png',
       company_name: '',
       direction: '',
       country: 'Ecuador',
       province: 'Pichincha',
       city: '',
-      ramp: 0,
-      braille_language: 0,
-      elevator: 0,
-      first_aid_kit: 0,
-      accessible_bathroom: 0,
-      sign_language: 0,
-      private_transportation: 0,
-      information_places: 0,
+      ramp: false,
+      braille_language: false,
+      elevator: false,
+      first_aid_kit: false,
+      accessible_bathroom: false,
+      sign_language: false,
+      private_transportation: false,
+      information_places: false,
       type: "Services",
+      notifications: true,
     },
   })
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
 
     const dataForm = {
+      clientavatar: formData.clientavatar,
       firstname: formData.firstname,
       lastname: formData.lastname,
       email: formData.email,
+      companyavatar: formData.companyavatar,
       company_name: formData.company_name,
       direction: formData.direction,
       country: formData.country,
@@ -112,34 +122,26 @@ export default function CreateClient() {
       private_transportation: formData.private_transportation,
       information_places: formData.information_places,
       type: formData.type,
+      notifications: formData.notifications,
     }
 
-    router.patch(route("client.create"), dataForm, {
+    router.patch(route("client.store"), dataForm, {
       preserveScroll: true,
       onSuccess: () => {
-        toast(<div className="flex justify-between ">
-          <CheckCircle2Icon className="mr-4" />Company information has been correctly created
-        </div>)
+        toast(
+          <div className="flex justify-between ">
+            <CheckCircle2Icon className="mr-4" />New client with company has been correctly created
+          </div>
+        )
         //form.reset();
       },
       onError: (errors) => {
-        form.setError("firstname", { message: errors.firstname });
-        form.setError("lastname", { message: errors.lastname });
-        form.setError("email", { message: errors.email });
-        form.setError("company_name", { message: errors.company_name });
-        form.setError("direction", { message: errors.direction });
-        form.setError("country", { message: errors.country });
-        form.setError("province", { message: errors.province });
-        form.setError("city", { message: errors.city });
-        form.setError("ramp", { message: errors.ramp });
-        form.setError("braille_language", { message: errors.braille_language });
-        form.setError("elevator", { message: errors.elevator });
-        form.setError("first_aid_kit", { message: errors.first_aid_kit });
-        form.setError("accessible_bathroom", { message: errors.accessible_bathroom });
-        form.setError("sign_language", { message: errors.sign_language });
-        form.setError("private_transportation", { message: errors.private_transportation });
-        form.setError("information_places", { message: errors.information_places });
-        form.setError("type", { message: errors.type });
+        const errorMessages = Object.values(errors).join(' ');
+        toast(
+          <div className="flex justify-between ">
+            <Ban className="mr-4" />{errorMessages}
+          </div>
+        )
       },
     });
   }
@@ -167,6 +169,21 @@ export default function CreateClient() {
               <CardDescription className="!m-3">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+
+                    {/* clientavatar */}
+                    <FormField
+                      control={form.control}
+                      name="clientavatar"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="avatar" className="pl-1 text-text">Client Avatar</FormLabel>
+                          <FormControl>
+                            <AvatarPage onChange={field.onChange} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
                     {/* firstname */}
                     <FormField
@@ -239,6 +256,21 @@ export default function CreateClient() {
                               id="email"
                               placeholder="Insert email"
                               {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* companyavatar */}
+                    <FormField
+                      control={form.control}
+                      name="companyavatar"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="avatar" className="pl-1 text-text">Company Avatar</FormLabel>
+                          <FormControl>
+                            <AvatarPage onChange={field.onChange} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -503,6 +535,28 @@ export default function CreateClient() {
                               field={field}
                               references={references}
                               radioNames={radioNames} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* notifications */}
+                    <FormField
+                      control={form.control}
+                      name="notifications"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="pl-1 text-text">Notifications</FormLabel>
+                          <FormControl>
+                            <div className="flex items-center space-x-2">
+                              <Switch
+                                id="notifications"
+                                checked={field.value}
+                                onCheckedChange={field.onChange} />
+                              <FormLabel htmlFor="notifications">Do you want to receive email notifications?</FormLabel>
+                            </div>
+
                           </FormControl>
                           <FormMessage />
                         </FormItem>

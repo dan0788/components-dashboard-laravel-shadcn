@@ -14,7 +14,7 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         Company::factory(100)->create([
-            'avatar' => 'shadcn.png',
+            'avatar' => 'https://github.com/shadcn.png',
         ]);
     }
 }

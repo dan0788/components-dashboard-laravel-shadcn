@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->prefix('home')->group(function () {
     Route::patch('/clients-info/edit/{client}', [ClientsController::class, 'update'])->name('client.update');
 
     Route::get('/clients-info/create', [ClientsController::class, 'create'])->name('client.create');
+    Route::patch('/clients-info/create', [ClientsController::class, 'store'])->name('client.store');
 
     Route::get("/statistics", [StatisticsController::class, 'typeStatistics'])->name('statistics.index');
 });

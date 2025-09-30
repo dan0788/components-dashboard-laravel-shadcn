@@ -19,7 +19,7 @@ import { Toaster, toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
+import { Ban, Check, CheckCircle2Icon, ChevronsUpDown, Command } from 'lucide-react'
 import { detachInCapitalWords } from '@/hooks/get-page'
 import { RadioGroupFormBoolean } from '@/pages/components/form/RadioGroupFormBoolean'
 import { RadioGroupFormArray } from '@/pages/components/form/RadioGroupFormArray'
@@ -27,12 +27,13 @@ import { Input } from '@/components/ui/input'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { PageProps } from '@/types'
 import { CountryComboboxPage } from '@/pages/components/form/CountryCombobox'
-import { StateComboboxPage } from '../components/form/StateCombobox'
+import { StateComboboxPage } from '@/pages/components/form/StateCombobox'
 import { joinInCapitalWords } from '@/hooks/get-page'
-import { Label } from 'recharts'
+import { AvatarPage } from '@/pages/profile/partials/avatar-form'
 
 interface ClientProps {
   id: number
+  avatar: string
   firstname: string
   lastname: string
   email: string
@@ -41,6 +42,7 @@ interface ClientProps {
 interface CompanyProps {
   id: number
   company_type_id: number
+  avatar: string
   company_name: string
   direction: string
   country: string
@@ -77,6 +79,7 @@ const references = radioNames.map(ref => {
 });
 
 const FormSchema = z.object({
+  avatar: z.string().optional(),
   firstname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'The name is required'),
   lastname: z.string().regex(/^[a-zA-Z0-9\s]*$/).min(1, 'The lastname is required'),
   email: z.string().email('Invalid email address').min(1, 'The email is required'),
@@ -106,6 +109,7 @@ export default function editClient() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
+      avatar: client.avatar || 'https://github.com/shadcn.png',
       firstname: client.firstname || '',
       lastname: client.lastname || '',
       email: client.email || '',
@@ -128,8 +132,9 @@ export default function editClient() {
   })
 
   function onSubmit(formData: z.infer<typeof FormSchema>) {
-    
+
     const dataForm = {
+      avatar: formData.avatar,
       firstname: formData.firstname,
       lastname: formData.lastname,
       email: formData.email,
@@ -158,23 +163,10 @@ export default function editClient() {
         //form.reset();
       },
       onError: (errors) => {
-        form.setError("firstname", { message: errors.firstname });
-        form.setError("lastname", { message: errors.lastname });
-        form.setError("email", { message: errors.email });
-        form.setError("company_name", { message: errors.company_name });
-        form.setError("direction", { message: errors.direction });
-        form.setError("country", { message: errors.country });
-        form.setError("province", { message: errors.province });
-        form.setError("city", { message: errors.city });
-        form.setError("ramp", { message: errors.ramp });
-        form.setError("braille_language", { message: errors.braille_language });
-        form.setError("elevator", { message: errors.elevator });
-        form.setError("first_aid_kit", { message: errors.first_aid_kit });
-        form.setError("accessible_bathroom", { message: errors.accessible_bathroom });
-        form.setError("sign_language", { message: errors.sign_language });
-        form.setError("private_transportation", { message: errors.private_transportation });
-        form.setError("information_places", { message: errors.information_places });
-        form.setError("type", { message: errors.type });
+        const errorMessages = Object.values(errors).join(' ');
+        toast(<div className="flex justify-between ">
+          <Ban className="mr-4" />{errorMessages}
+        </div>)
       },
     });
   }
@@ -202,6 +194,21 @@ export default function editClient() {
               <CardDescription className="!m-3">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+
+                    {/* avatar */}
+                    <FormField
+                      control={form.control}
+                      name="avatar"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="avatar" className="pl-1 text-text">Avatar</FormLabel>
+                          <FormControl>
+                            <AvatarPage onChange={field.onChange} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
                     {/* firstname */}
                     <FormField
