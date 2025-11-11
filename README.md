@@ -2,6 +2,7 @@
 
 ![Laravel + shadcn/ui + InertiaJS Starter Template](https://raw.githubusercontent.com/mahmudz/laravel-shadcn-app-panel/main/public/repository-cover.png)
 
+This is a project dedicated to people with disabilities to find tourist places that have accessibility according to their needs.
 This is a template to start building a custom user/admin panel quickly.
 Feel free to customize this template to fit the specific needs of your Laravel application!
 
